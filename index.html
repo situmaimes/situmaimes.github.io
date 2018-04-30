@@ -80,7 +80,7 @@
     root: '/',
     scheme: 'Mist',
     version: '6.2.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -301,9 +301,9 @@
     <link itemprop="mainEntityOfPage" href="https://situmaimes.github.io/2018/04/28/2018/nginx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Jingkang">
+      <meta itemprop="name" content="未雪君">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -318,7 +318,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2018/04/28/2018/nginx/" itemprop="url">
-                  Nginx Uwsgi Anaconda 配置
+                  Nginx Uwsgi Flask Anaconda Python3 配置
                 </a>
               
             
@@ -361,7 +361,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-04-30 01:15:32" itemprop="dateModified" datetime="2018-04-30T01:15:32+08:00">2018-04-30</time>
+                <time title="修改时间：2018-04-30 11:37:42" itemprop="dateModified" datetime="2018-04-30T11:37:42+08:00">2018-04-30</time>
               
             
           </span>
@@ -392,6 +392,17 @@
 
           
           
+             <span id="/2018/04/28/2018/nginx/" class="leancloud_visitors" data-flag-title="Nginx Uwsgi Flask Anaconda Python3 配置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -414,37 +425,22 @@
       
         
           
-            <p><em>本文假设读者具有一定的Linux命令行和python基础</em><br>运行环境</p>
-<pre><code>Centos-7.4
+          本文假设读者具有一定的Linux命令行和python基础运行环境
+Centos-7.4
 Anaconda3-5.0.1
 nginx-1.12.2
 Python-3.6.4
 Flask-1.0
 uwsgi-2.0.17
-</code></pre><p>首先安装nginx和gcc编译器，gcc为安装uwsgi所必须，且必须在uwsgi之前安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc</span><br><span class="line">yum install nginx</span><br><span class="line">nginx -v</span><br><span class="line">nginx</span><br></pre></td></tr></table></figure></p>
-<p>访问ip地址，可以看到Welcome to nginx on Fedora!表明nginx启动成功<br>nginx的管理命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service nginx start</span><br><span class="line">service nginx stop</span><br><span class="line">service nginx restart</span><br></pre></td></tr></table></figure></p>
-<p>Anaconda3-5.1.0版本pip安装uwsgi后启动uwsgi会出现错误<br>错误信息如下<br>uwsgi: error while loading shared libraries: libicui18n.so.58: cannot open shared object file: No such file or directory<br>因此选择Anaconda3-5.0.1版<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /data</span><br><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-5.0.1-Linux-x86_64.sh</span><br><span class="line">bash Anaconda3-5.1.0-Linux-x86_64.sh</span><br></pre></td></tr></table></figure></p>
-<p>添加到环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ./root/.bashrc</span><br></pre></td></tr></table></figure></p>
-<p>添加一行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/root/anaconda3/bin:$PATH</span><br></pre></td></tr></table></figure></p>
-<p>使配置起作用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">. /root/.bashrc</span><br></pre></td></tr></table></figure></p>
-<p>必须在主环境安装一次，不然也会出现上述缺少libicui18n.so.58的错误，虽然可以通过find / -name解决一个但是实测缺少一堆<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install uwsgi</span><br><span class="line">pip uninstall uwsgi</span><br><span class="line">`</span><br></pre></td></tr></table></figure></p>
-<p>conda添加清华源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure></p>
-<p>python3.6.5版本在uwsgi启动的时候会出现ImportError<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ImportError: /root/anaconda3/envs/flask/lib/python3.6/lib-dynload/_posixsubprocess.cpython-36m-x86_64-linux-gnu.so: undefined symbol: _Py_set_inheritable_async_safe</span><br></pre></td></tr></table></figure></p>
-<p>选用python3.6.4不会出现问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conda create -n flask python=3.6.4</span><br><span class="line">source activate flask</span><br><span class="line">pip install flask</span><br><span class="line">pip install uwsgi</span><br></pre></td></tr></table></figure></p>
-<p>我的网站根目录在/home/flask,文件目录如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">|-- app</span><br><span class="line">|   |-- __init__.py</span><br><span class="line">|   |-- main</span><br><span class="line">|   |   |-- errors.py</span><br><span class="line">|   |   `-- views.py</span><br><span class="line">|   |-- static</span><br><span class="line">|   |   `-- assets</span><br><span class="line">|   |       |-- css</span><br><span class="line">|   |       |-- fonts</span><br><span class="line">|   |       |-- js</span><br><span class="line">|   |       `-- sass</span><br><span class="line">|   `-- templates</span><br><span class="line">|       |-- 404.html</span><br><span class="line">|       `-- index.html</span><br><span class="line">|-- config.py</span><br><span class="line">|-- httpserver.log</span><br><span class="line">|-- manage.py</span><br><span class="line">|-- requirements.txt</span><br><span class="line">`-- uwsgi.ini</span><br></pre></td></tr></table></figure></p>
-<p>uwsgi.ini文件如下，启动文件名为manage，app为启动之后的程序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line">socket=127.0.0.1:5000</span><br><span class="line">chdir=/home/flask</span><br><span class="line">wsgi-file=flask/manage.py</span><br><span class="line">pythonpath=/home/flask</span><br><span class="line">module=manage</span><br><span class="line">callable=app</span><br><span class="line">processes=4</span><br><span class="line">threads=2</span><br><span class="line">stats=127.0.0.1:9191</span><br><span class="line">daemonize = httpserver.log</span><br><span class="line">master=true</span><br></pre></td></tr></table></figure></p>
-<p>使用http启动，检测配置是否成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --http 0.0.0.0:80 uwsgi.ini</span><br></pre></td></tr></table></figure></p>
-<p>访问ip地址发现成功</p>
-<p>下面配置nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/nginx/nginx.conf</span><br></pre></td></tr></table></figure></p>
-<p>修改location部分如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">        include      uwsgi_params;</span><br><span class="line">        uwsgi_pass   127.0.0.1:5000;</span><br><span class="line">        uwsgi_param UWSGI_PYHOME /root/anaconda3/envs/flask/bin/python;</span><br><span class="line">        uwsgi_param UWSGI_CHDIR  /home/flask;</span><br><span class="line">        uwsgi_param UWSGI_SCRIPT manage:app;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>注意uwsgi_pass的端口必须与ini中的socket相同，这样请求才会被转到uwsgi</p>
-<p>检查nginx.conf的配置是否正确<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nginx -t</span><br><span class="line">nginx: the configuration file /etc/nginx/nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file /etc/nginx/nginx.conf test is successful</span><br></pre></td></tr></table></figure></p>
-<p>表明正确</p>
-<p>最后杀死现有占用端口的uwsgi程序，重新启动uwsgi，重新启动nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lsof -i:80</span><br><span class="line">COMMAND  PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME</span><br><span class="line">uwsgi   5125 root    3u  IPv4  31666      0t0  TCP *:http (LISTEN)</span><br><span class="line">uwsgi   5131 root    3u  IPv4  31666      0t0  TCP *:http (LISTEN)</span><br></pre></td></tr></table></figure></p>
-<p>在虚拟环境内运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kill -9 5125</span><br><span class="line">uwsgi /home/flask/uwsgi.ini</span><br><span class="line">service nginx restart</span><br></pre></td></tr></table></figure></p>
-<p>访问ip地址，成功</p>
-
-          
+首先安装nginx和gcc编译器，gcc为安装uwsgi所必须，且必须在uwsgi
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/28/2018/nginx/#更多" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -499,9 +495,9 @@ uwsgi-2.0.17
     <link itemprop="mainEntityOfPage" href="https://situmaimes.github.io/2018/04/27/2018/books/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Jingkang">
+      <meta itemprop="name" content="未雪君">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -578,6 +574,17 @@ uwsgi-2.0.17
 
           
           
+             <span id="/2018/04/27/2018/books/" class="leancloud_visitors" data-flag-title="books">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -600,133 +607,26 @@ uwsgi-2.0.17
       
         
           
-            <p>机器学习</p>
-<ul>
-<li>数学之美</li>
-<li>稀疏统计学习与应用</li>
-<li>应用随机过程概率模型导论</li>
-<li>数据挖掘导论</li>
-<li>深度学习 中文版(pdf)</li>
-<li>Python数据科学手册(pdf)</li>
-<li>Python机器学习基础教程(pdf)</li>
-<li>机器学习实战(pdf)</li>
-<li>deep learning(English)(pdf)</li>
-<li><a href="https://jakevdp.github.io/PythonDataScienceHandbook/" target="_blank" rel="noopener">python数据科学手册(在线版)(English)</a></li>
-<li><a href="https://github.com/wesm/pydata-book" target="_blank" rel="noopener">利用python进行数据分析(在线版)(English)</a></li>
-</ul>
-<p>数学</p>
-<ul>
-<li>程序员的数学(pdf)</li>
-<li>程序员的数学2概率统计(pdf)</li>
-<li>程序员的数学3线性代数(pdf)</li>
-<li>具体数学-计算机科学基础(pdf)</li>
-<li>统计学七支柱(pdf)</li>
-</ul>
-<p>Python</p>
-<ul>
-<li>Python袖珍指南</li>
-<li>用Python写网络爬虫</li>
-<li>Python数据分析与挖掘实战</li>
-<li>Python数据分析</li>
-<li>Python基础教程(第二版)</li>
-<li>Python编程实战 运用设计模式、并发和程序库创建高质量程序</li>
-<li>编写高质量代码 改善Python程序的91个建议</li>
-<li>Python Cookbook(pdf)</li>
-<li>Flask Web开发：基于Python的Web应用开发实战(pdf)</li>
-<li>Head First Python(pdf)</li>
-<li>Python编程：从入门到实践(pdf)</li>
-<li>Python基础教程(第三版)(pdf)</li>
-<li>Python网络数据采集(pdf)</li>
-<li>流畅的Python(pdf)</li>
-</ul>
-<p>c</p>
-<ul>
-<li>C++ Primer Plus(pdf)</li>
-<li>C和指针(pdf)</li>
-<li>C陷阱与缺陷(pdf)</li>
-<li>C专家编程(pdf)</li>
-<li>Effective C(pdf)</li>
-<li>More Effective C(pdf)</li>
-</ul>
-<p>Java</p>
-<ul>
-<li>Java编程思想</li>
-<li>Head First Java</li>
-</ul>
-<p>Android</p>
-<ul>
-<li>第一行代码——Android(pdf)</li>
-</ul>
-<p>JavaScipt</p>
-<ul>
-<li>JavaScript高级语言程序设计</li>
-<li>你不知道的JavasScript</li>
-</ul>
-<p>Nodejs</p>
-<ul>
-<li>深入浅出Node.js</li>
-</ul>
-<p>Haskell</p>
-<ul>
-<li>魔力Haskell</li>
-</ul>
-<p>R</p>
-<ul>
-<li>R语言实战</li>
-<li>ggplot2:数据分析与图形艺术</li>
-</ul>
-<p>算法</p>
-<ul>
-<li>算法(第4版)</li>
-<li>算法导论(pdf)</li>
-</ul>
-<p>网络</p>
-<ul>
-<li>TCP/IP详解卷1:协议</li>
-<li>HTTP_2基础教程(pdf)</li>
-<li>TCP-IP详解卷1：协议(pdf)</li>
-<li>TCP-IP详解卷2：实现(pdf)</li>
-<li>TCP-IP详解卷3：TCP事务协议，HTTP，NNTP和UNIX域协议(pdf)</li>
-<li>图解HTTP(pdf)</li>
-<li>网络是怎样连接的(pdf)</li>
-</ul>
-<p>计算机</p>
-<ul>
-<li>深入理解计算机系统</li>
-<li>计算机程序的构造与解释</li>
-<li>操作系统-精髓与设计原理</li>
-<li>编码 隐匿在计算机软硬件背后的语言</li>
-<li>程序是怎样跑起来的(pdf)</li>
-<li>计算机是怎样跑起来的(pdf)</li>
-</ul>
-<p>设计模式</p>
-<ul>
-<li>Head First 设计模式</li>
-</ul>
-<p>Bioinformatics</p>
-<ul>
-<li>生物信息学(李霞,刘建波)</li>
-<li>生物信息学(陈铭)</li>
-<li>Bioinformatics with Python Cookbook(English)(pdf)</li>
-<li>Bioinformatics Data Skills: Reproducible and Robust Research with Open Source Tools(English)(pdf)</li>
-</ul>
-<p>Linux</p>
-<ul>
-<li>鸟哥的Linux私房菜基础学习篇(第三版)(Kindle)</li>
-</ul>
-<p>数据库</p>
-<ul>
-<li>SQL进阶教程(pdf)</li>
-</ul>
-<p>杂</p>
-<ul>
-<li>人工智能简史</li>
-<li>得未曾有</li>
-<li>一个人的朝圣</li>
-<li>春宴</li>
-</ul>
+          机器学习
 
-          
+数学之美
+稀疏统计学习与应用
+应用随机过程概率模型导论
+数据挖掘导论
+深度学习 中文版(pdf)
+Python数据科学手册(pdf)
+Python机器学习基础教程(pdf)
+机器学习实战(pdf)
+deep learning(English)(pdf)
+python数据科学手册(在线版)
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/27/2018/books/#更多" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -781,9 +681,9 @@ uwsgi-2.0.17
     <link itemprop="mainEntityOfPage" href="https://situmaimes.github.io/2018/04/27/2018/apache/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Jingkang">
+      <meta itemprop="name" content="未雪君">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -872,6 +772,17 @@ uwsgi-2.0.17
 
           
           
+             <span id="/2018/04/27/2018/apache/" class="leancloud_visitors" data-flag-title="Apache Mod_wsgi Django Anaconda Python3 配置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -894,46 +805,21 @@ uwsgi-2.0.17
       
         
           
-            <p><em>本文假设读者具有一定的Linux命令行和python基础</em></p>
-<p>运行环境</p>
-<pre><code>Centos-7.4
+          本文假设读者具有一定的Linux命令行和python基础
+运行环境
+Centos-7.4
 Anaconda-Python3.6.4
 Django-2.0.4
 httpd-2.4.33
-</code></pre><p>服务器为腾讯云服务器，httpd是apache中的服务，安装httpd需要依赖apr，apr-util，pcre<br>python选用anaconda并且使用conda虚拟环境</p>
-<p>首先安装gcc编译器，gcc为编译必须，c++编译器和expat-devel依赖为pcre安装所必须<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc</span><br><span class="line">yum install gcc-c++</span><br><span class="line">yum install expat-devel</span><br></pre></td></tr></table></figure></p>
-<p>下载源码安装包，注意当使用apr-util，apr1.6版本编译安装httpd时出现xml错误，在/usr/local/httpd/目录下只有modules文件夹。因此1.6版本不适用于httpd的最新版，因此选用1.5版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://archive.apache.org/dist/apr/apr-1.5.2.tar.gz</span><br><span class="line">wget http://archive.apache.org/dist/apr/apr-util-1.5.4.tar.gz</span><br><span class="line">wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.40.tar.gz</span><br><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/apache/httpd/httpd-2.4.33.tar.gz</span><br><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-5.1.0-Linux-x86_64.sh</span><br></pre></td></tr></table></figure></p>
-<p>解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar -xzf pcre-8.40.tar.gz</span><br><span class="line">tar -xzf httpd-2.4.33.tar.gz</span><br><span class="line">tar -xzf apr-util-1.5.4.tar.gz</span><br><span class="line">tar -xzf apr-1.5.2.tar.gz</span><br></pre></td></tr></table></figure></p>
-<p>安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">cd apr-1.5.2</span><br><span class="line">./configure --prefix=/usr/local/apr</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line">cd ../apr-util-1.5.4</span><br><span class="line">./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line">cd ../pcre-8.40</span><br><span class="line">./configure --prefix=/usr/local/pcre --with-apr=/usr/local/apr</span><br><span class="line"></span><br><span class="line">cd ../httpd-2.4.33</span><br><span class="line">./configure --prefix=/usr/local/httpd --with-pcre=/usr/local/pcre --with-apr=/usr/local/apr --with-apr-util=/usr/local/apr-util</span><br><span class="line">make </span><br><span class="line">make install </span><br><span class="line"></span><br><span class="line">cd ..</span><br><span class="line">bash Anaconda3-5.1.0-Linux-x86_64.sh</span><br></pre></td></tr></table></figure></p>
-<p>将Anaconda命令和httpd启动命令添加到path<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure></p>
-<p>在最后添加两行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/usr/local/httpd/bin:$PATH</span><br><span class="line">export PATH=/root/anaconda3/bin:$PATH</span><br></pre></td></tr></table></figure></p>
-<p>使profile文件起作用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">. /etc/profile</span><br></pre></td></tr></table></figure></p>
-<p>试一下httpd行不行 输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpd -k start</span><br></pre></td></tr></table></figure></p>
-<p>访问服务器ip地址，可以看到页面显示it works</p>
-<p>相应的，重新启动和停止的命令为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">httpd -k restart</span><br><span class="line">httpd -k stop</span><br></pre></td></tr></table></figure></p>
-<p>下面开始配置python django</p>
-<p>conda添加清华源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure></p>
-<p>创建django安装的python3.6环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create -n django python=3.6</span><br><span class="line">source activate django</span><br><span class="line">pip install django</span><br></pre></td></tr></table></figure></p>
-<p>安装mod_wsgi<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install mod_wsgi</span><br></pre></td></tr></table></figure></p>
-<p>获取mod_wsgi配置信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mod_wsgi-express module-config</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LoadModule wsgi_module &quot;/root/anaconda3/envs/django/lib/python3.6/site-packages/mod_wsgi/server/mod_wsgi-py36.cpython-36m-x86_64-linux-gnu.so&quot;</span><br><span class="line">WSGIPythonHome &quot;/root/anaconda3/envs/django&quot;</span><br></pre></td></tr></table></figure>
-<p>修改httpd配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/httpd/conf</span><br><span class="line">vim httpd.conf</span><br></pre></td></tr></table></figure></p>
-<p>LoadModule中添加一行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LoadModule wsgi_module &quot;/root/anaconda3/envs/django/lib/python3.6/site-packages/mod_wsgi/server/mod_wsgi-py36.cpython-36m-x86_64-linux-gnu.so&quot;</span><br></pre></td></tr></table></figure></p>
-<p>将这一行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Include conf/extra/httpd-vhosts.conf</span><br></pre></td></tr></table></figure></p>
-<p>取消注释<br>相应的修改httpd-vhosts.conf文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd extra</span><br><span class="line">vim httpd-vhosts.conf</span><br></pre></td></tr></table></figure></p>
-<p>全部注释掉之后添加下面部分<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">WSGIPythonPath /root/anaconda3/envs/django/lib/python3.6/site-packages:/home/website</span><br><span class="line">WSGIPythonHome /root/anaconda3/envs/django</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">DocumentRoot /home/website/website</span><br><span class="line">ServerName localhost:80</span><br><span class="line">ServerAdmin jstsyhyjk@163.com</span><br><span class="line"></span><br><span class="line">WSGIScriptAlias / /home/website/website/wsgi.py</span><br><span class="line">Alias /static/ /home/website/static/</span><br><span class="line">&lt;Directory &quot;/home/website&quot;&gt;</span><br><span class="line">Require all granted</span><br><span class="line">&lt;/Directory&gt;</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure></p>
-<p>先来看下我的目录结构<br>这是/home/website内的文件树形图（已省略一部分无关内容更）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">|-- db.sqlite3</span><br><span class="line">|-- manage.py</span><br><span class="line">|-- static</span><br><span class="line">|-- templates</span><br><span class="line">|   `-- index.html</span><br><span class="line">|-- website</span><br><span class="line">|   |-- __init__.py</span><br><span class="line">|   |-- settings.py</span><br><span class="line">|   |-- urls.py</span><br><span class="line">|   |-- view.py</span><br><span class="line">|   `-- wsgi.py</span><br></pre></td></tr></table></figure></p>
-<p>配置wsgi.py<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">from django.core.wsgi import get_wsgi_application</span><br><span class="line">os.environ[&apos;PYTHON_EGG_CACHE&apos;] = &apos;/tmp/.python-eggs&apos;</span><br><span class="line">os.environ.setdefault(&quot;DJANGO_SETTINGS_MODULE&quot;, &quot;website.settings&quot;)</span><br><span class="line">application = get_wsgi_application()</span><br></pre></td></tr></table></figure></p>
-<p>同时在settings.py中修改这一部分，如果不修改，django会拒绝外部的访问<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALLOWED_HOSTS = [&quot;你的ip地址和域名&quot;]</span><br></pre></td></tr></table></figure></p>
-<p>WSGIPythonPath 取上面mod_wsgi输出的路径的site-packages部分，/home/website是我django网站存放的路径<br>WSGIPythonHome 与上面mod_wsgi输出的相同<br>DocumentRoot 就是django主要文件存放的地方<br>WSGIScriptAlias 将wsgi.py的地址映射为/<br>Alias 将存放静态文件的文件姐映射到/static/<br>Directory是为了提升所需要目录的权限</p>
-<p>一切就绪之后,重新启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpd -k restart</span><br></pre></td></tr></table></figure></p>
-<p>访问域名，发现没成功</p>
-<p>查看error_log，默认位置在logs内<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/local/httpd/logs/error_log</span><br></pre></td></tr></table></figure></p>
-<p>可以看到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Permission denied: mod_wsgi (pid=6696): Unable to stat Python home /root/anaconda3/envs/django. Python interpreter may not be able to be initialized correctly. Verify the supplied path and access permissions for whole of the path.</span><br><span class="line">Fatal Python error: Py_Initialize: Unable to get the locale encoding</span><br><span class="line">ModuleNotFoundError: No module named &apos;encodings&apos;</span><br></pre></td></tr></table></figure></p>
-<p>表示权限不够。因此提升权限，亲测仅提升anaconda文件夹权限不能解决，因此<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod 755 /root</span><br><span class="line">httpd -k start</span><br></pre></td></tr></table></figure></p>
-<p>访问成功<br>error_log在网站内部代码运行错误时还会存放错误信息,用于查到代码运行中可能出现的bug<br>（注意配置中的所有路径信息，如果其中包含括号，则需要在两侧加上引号）</p>
-
-          
+服务器为腾讯云服务器，httpd是apache中的服务，安装httpd需要依赖apr，apr-util，pcrepy
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/27/2018/apache/#更多" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -988,9 +874,9 @@ httpd-2.4.33
     <link itemprop="mainEntityOfPage" href="https://situmaimes.github.io/2018/04/27/2018/urls/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Jingkang">
+      <meta itemprop="name" content="未雪君">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1079,6 +965,17 @@ httpd-2.4.33
 
           
           
+             <span id="/2018/04/27/2018/urls/" class="leancloud_visitors" data-flag-title="网站">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -1101,48 +998,45 @@ httpd-2.4.33
       
         
           
-            <p>编程相关</p>
-<ul>
-<li><a href="https://visualgo.net/zh" target="_blank" rel="noopener">数据结构和算法可视化</a></li>
-<li><a href="http://www.pythontutor.com/" target="_blank" rel="noopener">代码运行可视化</a></li>
-<li><a href="https://leetcode-cn.com/" target="_blank" rel="noopener">程序员刷题</a></li>
-</ul>
-<p>在线书籍</p>
-<ul>
-<li><a href="https://jakevdp.github.io/PythonDataScienceHandbook/" target="_blank" rel="noopener">Python数据科学手册</a></li>
-</ul>
-<p>大数据比赛</p>
-<ul>
-<li><a href="https://tianchi.aliyun.com/" target="_blank" rel="noopener">天池</a></li>
-<li><a href="http://www.pkbigdata.com/" target="_blank" rel="noopener">DataCastle</a></li>
-<li><a href="http://www.datafountain.cn/#/" target="_blank" rel="noopener">DataFountain</a></li>
-<li><a href="https://www.kesci.com/" target="_blank" rel="noopener">科赛网</a></li>
-<li><a href="http://jddc.jd.com/" target="_blank" rel="noopener">京东jddc</a></li>
-<li><a href="http://dianshi.baidu.com/" target="_blank" rel="noopener">点石</a></li>
-</ul>
-<p>工具</p>
-<ul>
-<li><a href="http://bigjpg.com/" target="_blank" rel="noopener">人工智能图片放答</a></li>
-<li><a href="https://www.banwagong8.com/" target="_blank" rel="noopener">搬瓦工</a></li>
-<li><a href="https://www.wondercv.com/" target="_blank" rel="noopener">简历制作</a></li>
-</ul>
-<p>资源</p>
-<ul>
-<li><a href="https://pixabay.com/" target="_blank" rel="noopener">免费高清晰度照片</a></li>
-<li><a href="http://iconfont.cn/" target="_blank" rel="noopener">图标库</a></li>
-<li><a href="http://www.chongbuluo.com/" target="_blank" rel="noopener">虫部落</a></li>
-<li><a href="http://www.btwhat.info/" target="_blank" rel="noopener">Btbook</a></li>
-</ul>
-<p>博客模板</p>
-<ul>
-<li><a href="http://stockholmlanding.select-themes.com/" target="_blank" rel="noopener">stockholm</a></li>
-<li><a href="https://pixelarity.com/" target="_blank" rel="noopener">pixelarity</a></li>
-<li><a href="https://themeskingdom.com/wordpress-themes/" target="_blank" rel="noopener">WordPress Themes</a></li>
-<li><a href="https://html5up.net/" target="_blank" rel="noopener">html5up</a></li>
-<li><a href="http://www.nextdesignweb.com/" target="_blank" rel="noopener">nextdesin</a></li>
-</ul>
+          编程相关
 
-          
+数据结构和算法可视化
+代码运行可视化
+程序员刷题
+
+在线书籍
+
+Python数据科学手册
+
+大数据比赛
+
+天池
+DataCastle
+DataFountain
+科赛网
+京东jddc
+点石
+
+工具
+
+人工智能图片放答
+搬瓦工
+简历制作
+
+资源
+
+免费高清晰度照片
+图标库
+虫部落
+Btboo
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/27/2018/urls/#更多" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1197,9 +1091,9 @@ httpd-2.4.33
     <link itemprop="mainEntityOfPage" href="https://situmaimes.github.io/2018/04/27/2018/reading_plan/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Jingkang">
+      <meta itemprop="name" content="未雪君">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1283,6 +1177,17 @@ httpd-2.4.33
 
           
           
+             <span id="/2018/04/27/2018/reading_plan/" class="leancloud_visitors" data-flag-title="阅读计划">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -1305,22 +1210,29 @@ httpd-2.4.33
       
         
           
-            <h3 id="web"><a href="#web" class="headerlink" title="web"></a>web</h3><ul>
-<li>《Flask Web开发：基于Python的Web应用开发实战》</li>
-<li>《HTTP2基础教程》</li>
-</ul>
-<h3 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h3><ul>
-<li>《Python数据科学手册》</li>
-<li>《机器学习实战》</li>
-</ul>
-<h3 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h3><ul>
-<li>《程序员的数学》</li>
-<li>《程序员的数学 2 概率统计》</li>
-<li>《程序员的数学 3 线性代数》</li>
-<li>《统计学七支柱》</li>
-</ul>
+          web
+《Flask Web开发：基于Python的Web应用开发实战》
+《HTTP2基础教程》
+
+数据分析
+《Python数据科学手册》
+《机器学习实战》
+
+数学
+《程序员的数学》
+《程序员的数学 2 概率统计》
+《程序员的数学 3 线性代数》
+《统计学七支柱》
+
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/27/2018/reading_plan/#更多" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1375,9 +1287,9 @@ httpd-2.4.33
     <link itemprop="mainEntityOfPage" href="https://situmaimes.github.io/2018/04/26/2018/overview/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Jingkang">
+      <meta itemprop="name" content="未雪君">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1473,6 +1385,17 @@ httpd-2.4.33
 
           
           
+             <span id="/2018/04/26/2018/overview/" class="leancloud_visitors" data-flag-title="总览">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -1495,9 +1418,16 @@ httpd-2.4.33
       
         
           
-            <p>2018-03-26 <a href="https://www.zhihu.com/question/61486078" target="_blank" rel="noopener">武汉理工大学 陶崇园坠楼</a><br>2018-04-26 <a href="https://www.zhihu.com/question/274459587" target="_blank" rel="noopener">厦门大学 田佳良事件</a><br>2018-04-26 <a href="https://www.zhihu.com/question/274828827" target="_blank" rel="noopener">天津大学 学生体测猝死</a><br>2018-04-29 <a href="https://www.zhihu.com/question/275021771" target="_blank" rel="noopener">四川遂宁 男子公交车上殴打小孩</a><br>2018-04-28 <a href="https://www.zhihu.com/question/275020131" target="_blank" rel="noopener">淘宝网大面积刊登性别歧视广告</a></p>
+          2018-03-26 武汉理工大学 陶崇园坠楼2018-04-26 厦门大学 田佳良事件2018-04-26 天津大学 学生体测猝死2018-04-29 四川遂宁 男子公交车上殴打小孩2018-04-28 淘宝网大面积刊登性别歧视广告
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/26/2018/overview/#更多" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1552,9 +1482,9 @@ httpd-2.4.33
     <link itemprop="mainEntityOfPage" href="https://situmaimes.github.io/2018/04/26/2018/welcome/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Jingkang">
+      <meta itemprop="name" content="未雪君">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1625,6 +1555,17 @@ httpd-2.4.33
 
           
           
+             <span id="/2018/04/26/2018/welcome/" class="leancloud_visitors" data-flag-title="welcome">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           
 
@@ -1647,9 +1588,16 @@ httpd-2.4.33
       
         
           
-            <p>hello everyone!<br>This is my blog, welcome!</p>
+          hello everyone!This is my blog, welcome!
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/26/2018/welcome/#更多" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1718,7 +1666,11 @@ httpd-2.4.33
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">Yang Jingkang</p>
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="未雪君" />
+            
+              <p class="site-author-name" itemprop="name">未雪君</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
@@ -1814,7 +1766,7 @@ httpd-2.4.33
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Yang Jingkang</span>
+  <span class="author" itemprop="copyrightHolder">未雪君</span>
 
   
 
@@ -1824,15 +1776,9 @@ httpd-2.4.33
 
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
 
 
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a> v6.2.0</div>
 
 
 
@@ -1965,6 +1911,102 @@ httpd-2.4.33
 
 
   
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Fycibp3W2RFooM20AmwsEUFh-gzGzoHsz", "y5BtVQOm5unncgk39eHDDlPl");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
 
   
 
