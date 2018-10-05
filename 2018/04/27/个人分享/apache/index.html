@@ -109,7 +109,7 @@
 <meta property="og:site_name" content="Simon Yang">
 <meta property="og:description" content="本文假设读者具有一定的Linux命令行和python基础 运行环境 Centos-7.4 Anaconda-Python3.6.4 Django-2.0.4 httpd-2.4.33 服务器为腾讯云服务器，httpd是apache中的服务，安装httpd需要依赖apr，apr-util，pcrepython选用anaconda并且使用conda虚拟环境 首先安装gcc编译器，gcc为编译必须，c+">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-08T11:07:49.966Z">
+<meta property="og:updated_time" content="2018-10-05T15:29:59.030Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Apache Mod_wsgi Django Anaconda Python3 配置">
 <meta name="twitter:description" content="本文假设读者具有一定的Linux命令行和python基础 运行环境 Centos-7.4 Anaconda-Python3.6.4 Django-2.0.4 httpd-2.4.33 服务器为腾讯云服务器，httpd是apache中的服务，安装httpd需要依赖apr，apr-util，pcrepython选用anaconda并且使用conda虚拟环境 首先安装gcc编译器，gcc为编译必须，c+">
@@ -391,7 +391,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-08 19:07:49" itemprop="dateModified" datetime="2018-09-08T19:07:49+08:00">2018-09-08</time>
+                <time title="修改时间：2018-10-05 23:29:59" itemprop="dateModified" datetime="2018-10-05T23:29:59+08:00">2018-10-05</time>
               
             
           </span>
@@ -496,7 +496,7 @@ httpd-2.4.33
 <p>同时在settings.py中修改这一部分，如果不修改，django会拒绝外部的访问<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALLOWED_HOSTS = [&quot;你的ip地址和域名&quot;]</span><br></pre></td></tr></table></figure></p>
 <p>WSGIPythonPath 取上面mod_wsgi输出的路径的site-packages部分，/home/website是我django网站存放的路径<br>WSGIPythonHome 与上面mod_wsgi输出的相同<br>DocumentRoot 就是django主要文件存放的地方<br>WSGIScriptAlias 将wsgi.py的地址映射为/<br>Alias 将存放静态文件的文件姐映射到/static/<br>Directory是为了提升所需要目录的权限</p>
 <p>一切就绪之后,重新启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpd -k restart</span><br></pre></td></tr></table></figure></p>
-<p>访问域名，发现没成功</p>
+<p>访问域名，发现没</p>
 <p>查看error_log，默认位置在logs内<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/local/httpd/logs/error_log</span><br></pre></td></tr></table></figure></p>
 <p>可以看到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Permission denied: mod_wsgi (pid=6696): Unable to stat Python home /root/anaconda3/envs/django. Python interpreter may not be able to be initialized correctly. Verify the supplied path and access permissions for whole of the path.</span><br><span class="line">Fatal Python error: Py_Initialize: Unable to get the locale encoding</span><br><span class="line">ModuleNotFoundError: No module named &apos;encodings&apos;</span><br></pre></td></tr></table></figure></p>
 <p>表示权限不够。因此提升权限，亲测仅提升anaconda文件夹权限不能解决，因此<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod 755 /root</span><br><span class="line">httpd -k start</span><br></pre></td></tr></table></figure></p>
