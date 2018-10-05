@@ -488,6 +488,14 @@
     <content type="text"></content>
   </entry>
   <entry>
+    <title><![CDATA[交大服务总览]]></title>
+    <url>%2F2018%2F08%2F28%2F%E4%BA%A4%E5%A4%A7%E6%9C%8D%E5%8A%A1%2F</url>
+    <content type="text"><![CDATA[按下control f快捷键就可以在本页面直接搜索需要的信息哦更新ing 问题类（我想快速解决问题）日常生活类 如何充一卡通&amp;如何补一卡通 如何充热水卡&amp;如何补热水卡 如何充电费 饮用水如何订购 如何在线申请校园网 综合楼在哪 如何使用图书馆的座位预约功能 如何申请交大的edu邮箱 我该如何选电脑欢迎加入信息青协电脑交流群 284933381 网站密码类 电信网的默认密码是多少12345678 联通网的默认密码是多少身份证后6位 金工实习选课网址是多少 电工与电子技术基础选课网址是多少 电话号码 新生入学手册上的电话号码编程学习类 软件安装类 如何装matlab&amp;matlab软件获取、安装与破解 如何装python&amp;python软件获取 如何重装系统 Python自学 软件安装页面最下面选择Windows x86-64 executable installer点击下载，安装时注意勾选add python to path 廖雪峰的教程 菜鸟教程 服务类日常生活 一卡通的使用 水卡的使用 电费的使用 常用的网站服务 社团类]]></content>
+      <categories>
+        <category>交大服务</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[饮用水的使用]]></title>
     <url>%2F2018%2F08%2F28%2F%E4%BA%A4%E5%A4%A7%E6%9C%8D%E5%8A%A1%2F%E9%A5%AE%E7%94%A8%E6%B0%B4%E7%9A%84%E4%BD%BF%E7%94%A8%2F</url>
     <content type="text"><![CDATA[饮用水订购电话拨打电话66361111，告知寝室号即可 微信公众号购水微信关注交大水业商城，下单即可 两种购水方式都由师傅送水上门，支持支付宝微信现金支付，12元/桶]]></content>
@@ -533,14 +541,6 @@
     <content type="text"><![CDATA[首先利用u盘或者移动硬盘备份好你的电脑文件一般重装系统要求系统盘格式化 下面开始 （不用任何装系统软件，系统为微软纯版系统） 找到一个usb3.0 8g及以上的U盘 下载 链接：https://pan.baidu.com/s/1ZrW8sZJcNAQNAFVv1WFGIQ 密码：so8j 的windows中文版x64系统 U盘文件备份 将cn_windows_10_consumer_edition_version_1803_updated_jul_2018_x64_dvd_12711333.iso文件解压到U盘内 查询百度如何设置你的电脑从U盘启动 插上U盘，设置电脑从U盘启动，电脑自动重启进行安装 选择安装选项，一直点击到现在安装 选择我没有产品密钥，安装需要的版本，接受许可，选择自定义，仅安装windows 选择系统盘的分区，点击格式化，点击下一步，即可在该分区安装系统 一直等。最后成功 桌面上只有回收站，在Cortana处输入我的电脑，右键点击属性，看电脑有没有激活 （如果没有激活进行以下操作） 点击桌面右下角的盾标志的图案，打开windows defender，点击病毒和威胁扫描，点击病毒和威胁防护设置，关上三个开的选项 下载破解程序 链接：https://pan.baidu.com/s/1rbeFyip-TRcNb9WWgmY4eQ 密码：adnu 双击打开，点击激活windows 10 （注意要联网），等待成功 开启上面关闭的三个选项 在Cortana处输入自动更新，安装所有可用更新]]></content>
       <categories>
         <category>软件教程</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[交大服务总览]]></title>
-    <url>%2F2018%2F08%2F24%2F%E4%BA%A4%E5%A4%A7%E6%9C%8D%E5%8A%A1%2F</url>
-    <content type="text"><![CDATA[按下control f快捷键就可以在本页面直接搜索需要的信息哦更新ing 问题类（我想快速解决问题）日常生活类 如何充一卡通&amp;如何补一卡通 如何充热水卡&amp;如何补热水卡 如何充电费 饮用水如何订购 如何在线申请校园网 综合楼在哪 如何使用图书馆的座位预约功能 如何申请交大的edu邮箱 我该如何选电脑欢迎加入信息青协电脑交流群 284933381 网站密码类 电信网的默认密码是多少12345678 联通网的默认密码是多少身份证后6位 金工实习选课网址是多少 电工与电子技术基础选课网址是多少 电话号码 新生入学手册上的电话号码编程学习类 软件安装类 如何装matlab&amp;matlab软件获取、安装与破解 如何装python&amp;python软件获取 如何重装系统 Python自学 软件安装页面最下面选择Windows x86-64 executable installer点击下载，安装时注意勾选add python to path 廖雪峰的教程 菜鸟教程 服务类日常生活 一卡通的使用 水卡的使用 电费的使用 常用的网站服务 社团类]]></content>
-      <categories>
-        <category>交大服务</category>
       </categories>
   </entry>
   <entry>
