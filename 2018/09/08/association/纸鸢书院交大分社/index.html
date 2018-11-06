@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="纸鸢书院交大分社欢迎加入18年纸鸢书院交大分社，群聊号码：627233873    爱读书的我们，不是书呆子，也能聚在一起嘻嘻哈哈打打闹闹玩游戏；爱读书的我们，爱分享，也会将自己心爱的书籍献出借给对它感兴趣的人；爱读书的我们，在纸鸢书院这个小小的地方，也能乘着东风，放飞我们的梦想。爱读书的我们，欢迎每一个爱读书的你加入！我们是纸鸢书院！    QA：Q1：纸鸢书院是做什么的？（简介）     纸">
+<meta property="og:type" content="article">
+<meta property="og:title" content="纸鸢书院交大分社">
+<meta property="og:url" content="https://blog.situmaimes.cn/2018/09/08/association/纸鸢书院交大分社/index.html">
+<meta property="og:site_name" content="Simon Yang">
+<meta property="og:description" content="纸鸢书院交大分社欢迎加入18年纸鸢书院交大分社，群聊号码：627233873    爱读书的我们，不是书呆子，也能聚在一起嘻嘻哈哈打打闹闹玩游戏；爱读书的我们，爱分享，也会将自己心爱的书籍献出借给对它感兴趣的人；爱读书的我们，在纸鸢书院这个小小的地方，也能乘着东风，放飞我们的梦想。爱读书的我们，欢迎每一个爱读书的你加入！我们是纸鸢书院！    QA：Q1：纸鸢书院是做什么的？（简介）     纸">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2%E5%8D%8F%E4%BC%9ALOGO.jpg">
+<meta property="og:image" content="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E9%BB%98%E8%AE%A4%E6%A0%87%E9%A2%98_%E6%89%8B%E6%9C%BA%E6%B5%B7%E6%8A%A5_2018.07.29%20(1).jpg">
+<meta property="og:image" content="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E9%BB%98%E8%AE%A4%E6%A0%87%E9%A2%98_%E6%89%8B%E6%9C%BA%E6%B5%B7%E6%8A%A5_2018.07.29%20(2).jpg">
+<meta property="og:image" content="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E9%BB%98%E8%AE%A4%E6%A0%87%E9%A2%98_%E6%89%8B%E6%9C%BA%E6%B5%B7%E6%8A%A5_2018.07.29%20(3).jpg">
+<meta property="og:image" content="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E9%BB%98%E8%AE%A4%E6%A0%87%E9%A2%98_%E6%89%8B%E6%9C%BA%E6%B5%B7%E6%8A%A5_2018.07.29%20(4).jpg">
+<meta property="og:image" content="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E9%BB%98%E8%AE%A4%E6%A0%87%E9%A2%98_%E6%89%8B%E6%9C%BA%E6%B5%B7%E6%8A%A5_2018.07.29%20(6).jpg">
+<meta property="og:image" content="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E9%BB%98%E8%AE%A4%E6%A0%87%E9%A2%98_%E6%89%8B%E6%9C%BA%E6%B5%B7%E6%8A%A5_2018.07.29%20(7).jpg">
+<meta property="og:image" content="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E9%BB%98%E8%AE%A4%E6%A0%87%E9%A2%98_%E6%89%8B%E6%9C%BA%E6%B5%B7%E6%8A%A5_2018.07.29%20(8).jpg">
+<meta property="og:image" content="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E9%BB%98%E8%AE%A4%E6%A0%87%E9%A2%98_%E6%89%8B%E6%9C%BA%E6%B5%B7%E6%8A%A5_2018.07.29%20(9).jpg">
+<meta property="og:image" content="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E2%80%9C%E4%B8%80%E7%AB%99%E5%88%B0%E5%BA%95%E2%80%9D%E7%BB%8F%E5%85%B8%E9%98%85%E8%AF%BB%E6%8C%91%E6%88%98%E8%B5%9B.jpg">
+<meta property="og:image" content="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E2%80%9C%E6%88%90%E9%83%BD%E7%9A%84%E4%B8%80%E5%A4%A9%E2%80%9D%E6%B4%BB%E5%8A%A8.jpg">
+<meta property="og:image" content="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E2%80%9C%E6%88%90%E9%83%BD%E7%9A%84%E4%B8%80%E5%A4%A9%E2%80%9D%E6%B4%BB%E5%8A%A8%E5%88%86%E4%BA%AB%E4%BC%9A.jpg">
+<meta property="og:image" content="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E2%80%9C%E7%88%B1%E5%9C%A8%E5%BF%83%E5%A4%B4%E5%8F%A3%E9%9A%BE%E5%BC%80%E2%80%9D%E9%82%AE%E5%AF%84%E5%AE%B6%E4%B9%A6%E6%B4%BB%E5%8A%A8.jpg">
+<meta property="og:image" content="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E2%80%9D%E9%9C%8D%E9%87%91%E8%AF%B4%E2%80%9C%E8%AF%BB%E4%B9%A6%E5%88%86%E4%BA%AB%E4%BC%9A.jpg">
+<meta property="og:image" content="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E5%90%B4%E6%99%93%E6%B3%A2%E2%80%9C%E6%BF%80%E8%8D%A1%E5%8D%81%E5%B9%B4%E2%80%9D%E8%AF%BB%E4%B9%A6%E5%88%86%E4%BA%AB%E4%BC%9A.jpg">
+<meta property="og:image" content="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E7%B4%A0%E8%B4%A8%E6%8B%93%E5%B1%95%E6%B4%BB%E5%8A%A8.jpg">
+<meta property="og:updated_time" content="2018-09-12T12:39:29.404Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="纸鸢书院交大分社">
+<meta name="twitter:description" content="纸鸢书院交大分社欢迎加入18年纸鸢书院交大分社，群聊号码：627233873    爱读书的我们，不是书呆子，也能聚在一起嘻嘻哈哈打打闹闹玩游戏；爱读书的我们，爱分享，也会将自己心爱的书籍献出借给对它感兴趣的人；爱读书的我们，在纸鸢书院这个小小的地方，也能乘着东风，放飞我们的梦想。爱读书的我们，欢迎每一个爱读书的你加入！我们是纸鸢书院！    QA：Q1：纸鸢书院是做什么的？（简介）     纸">
+<meta name="twitter:image" content="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2%E5%8D%8F%E4%BC%9ALOGO.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://blog.situmaimes.cn/2018/09/08/association/纸鸢书院交大分社/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>纸鸢书院交大分社 | Simon Yang</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Simon Yang</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.situmaimes.cn/2018/09/08/association/纸鸢书院交大分社/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Simon Yang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Simon Yang">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">纸鸢书院交大分社
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-09-08 18:42:03" itemprop="dateCreated datePublished" datetime="2018-09-08T18:42:03+08:00">2018-09-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-09-12 20:39:29" itemprop="dateModified" datetime="2018-09-12T20:39:29+08:00">2018-09-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/社团/" itemprop="url" rel="index"><span itemprop="name">社团</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/08/association/纸鸢书院交大分社/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/09/08/association/纸鸢书院交大分社/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/09/08/association/纸鸢书院交大分社/" class="leancloud_visitors" data-flag-title="纸鸢书院交大分社">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h1 id="纸鸢书院交大分社"><a href="#纸鸢书院交大分社" class="headerlink" title="纸鸢书院交大分社"></a>纸鸢书院交大分社</h1><h2 id="欢迎加入18年纸鸢书院交大分社，群聊号码：627233873"><a href="#欢迎加入18年纸鸢书院交大分社，群聊号码：627233873" class="headerlink" title="欢迎加入18年纸鸢书院交大分社，群聊号码：627233873 "></a><strong>欢迎加入18年纸鸢书院交大分社，群聊号码：627233873</strong> </h2><p><img src="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2%E5%8D%8F%E4%BC%9ALOGO.jpg" alt="协会logo">  </p>
+<p>爱读书的我们，不是书呆子，也能聚在一起嘻嘻哈哈打打闹闹玩游戏；爱读书的我们，爱分享，也会将自己心爱的书籍献出借给对它感兴趣的人；爱读书的我们，在纸鸢书院这个小小的地方，也能乘着东风，放飞我们的梦想。爱读书的我们，欢迎每一个爱读书的你加入！我们是纸鸢书院！   </p>
+<h2 id="QA："><a href="#QA：" class="headerlink" title="QA："></a>QA：</h2><p><strong>Q1：纸鸢书院是做什么的？（简介）</strong>    </p>
+<p>纸鸢即风筝，寓意追求梦想，放飞希望。<br>书院是中国历史发展演变及文化内涵传承的载体。<br>2014年10月，纸鸢书院文化宣传交流平台在中共成都市委宣传部策划和指导下应运而生。纸鸢书院主要面向高<br>校大学生为主的时代青年，通过开展读书分享、思想交流、文化创意、社会实践、创新创业等系列精品主题活<br>动，引导当代青年积极思考，锐意进取，全力打造一个助力当代青年实现自我价值和梦想追求的知识传播与思<br>想交流平台。  </p>
+<p><strong>Q2：纸鸢书院学生分社是什么？（简介）</strong>   </p>
+<p>纸鸢书院学生分社，是纸鸢书院文化交流平台的基础，由各高校分社组成，主要承担各高校宣传纸鸢书院、传<br>播校园正能量、丰富校园文化活动等工作内容。目前以社团或组织的形式已经在12所高校建立起了纸鸢书院学<br>生分社，承载着纸鸢梦想一起飞，一起美。<br>纸鸢书院西南交通大学分社成立于2015年，指导单位是共青团西南交通大学委员会。纸鸢书院相信青年具有创<br>新和开拓的力量，只要插上翅膀就能展翅飞翔,纸鸢书院用行动支持年轻人.让开展活动成为逐梦的起点，让纸<br>鸢书院成为筑梦的平台，把理想化作现实。“博学 审问 慎思 明辨 笃行”是我们的理念，纸鸢书院西南交通大<br>学分社欢迎你的到来！   </p>
+<p><strong>Q3：纸鸢书院西南交通大学分社与总社的关联？</strong>   </p>
+<p>纸鸢书院西南交通大学分社在纸鸢书院总社的领导下，主要负责发掘、优选本校内利于学生健康成长的活动项目，经由纸鸢书院项目组审核后予以指导、组织、赞助、众筹、推广等落地扶持，真正帮助大学生创造自我价值，实现人生梦想。   </p>
+<p><strong>Q4：纸鸢书院西南交通大学分社主要办过什么活动？</strong>   </p>
+<p>我们举办过“万里思念，一封家书”（中国扶贫基金会携手善品公社、纸鸢书院和启梦社对雅安果农的扶贫活动）、“经典的力量——一站到底挑战赛”、“创·青春”高校创新创业交流会、“集书惠众”图书分享活动等。<br>可以关注我们的微信公众号“纸鸢书院交大分社”查看具体介绍哦。   </p>
+<p><strong>Q5：纸鸢书院有什么部门，各自是负责什么的？</strong>  </p>
+<p>我们总共有五个部门：<br>①人事管理部<br>安排通知协会各种会议和重要活动；负责社团财务、成员的管理。<br>②媒体宣传部<br>负责社团宣传工作，海报的制作；负责社团的微博、微信公众号等新媒体的运营与维护。<br>③公共关系部<br>负责与其他校级学生社团的合作以及各高校分社之间的交流。<br>④项目策划部<br>组织、策划、安排社团内各项活动；负责活动的会场设计及布置等工作。<br>⑤综合设计部<br>职责：全面设计协会的各种活动，统筹安排，全面协调各部门开展活动  。</p>
+<p><strong>Q6：加入纸鸢书院有什么好处？</strong>  </p>
+<p>①给你一个家。<br>学弟学妹离开昔日的高中校园，来到一个陌生的环境，自然会产生不安、寂寞的情绪。加入我们纸鸢书院的大<br>家庭，这里有学长学姐耐心细致地分享他们的一些关于大学生活的心得经验，这里有和你兴趣相似、<br>志同道合的朋友，这里有传说中的归属感，相信会很好地消除那些负面情绪，促进你更快地适应新环境。 </p>
+<p>②能够锻炼和提高你解决问题的能力。<br>在组织我们社团的活动中，会遇到许多实际的问题，通过解决这些问题，可以锻炼你的综合能力。  </p>
+<p>③能够丰富你的大学生活。<br>大学当然是以学习为重心，但是，大学生不能只是学习书本知识。在确保完成学习任务之余，加入我们纸鸢书<br>院，组织或参加一些有意义的活动，你的大学生活会更加丰富多彩<br>。<br>④能够为以后步入社会打下基石。<br>你的社团经历是简历中不可或缺的一部分，也是你找工作时可以好好利用的砝码。另外，在以后的工作中，从<br>我们纸鸢书院的社团活动中学到的为人处世之道一定可以派上用场。 </p>
+<p>⑤展示自己。<br>我们给你一个舞台，这里可以展示你的特长，展现你的风采，让更多的人看到，纸鸢书院就是你的人生巅峰舞<br>台。  </p>
+<p><strong>Q7：加入纸鸢书院的要求？</strong>  </p>
+<p>纸鸢书院是一个大家庭，是一个团结友爱积极向上的集体。对于刚来到大学的你，只要你有一腔热情，热爱纸鸢书院，我们便欢迎。</p>
+<p><strong>Q8：加入纸鸢书院的报名方式？</strong>  </p>
+<p>欢迎加入18年纸鸢书院交大分社，群聊号码：627233873</p>
+<p><strong>Q9：我们社团的特点优势？</strong>  </p>
+<p>我们纸鸢书院与其他社团最大的不同点便是我们是在中共成都市委宣传部的策划和指导下产生的，成都市各大高校都有纸鸢书院分社。这意味着我们可以搞更大的事情，举办的活动规模会更大，影响会更广，更加锻炼你的能力，展示你的风采。  </p>
+<p><strong>Q10：平时社团会不会很忙？</strong>  </p>
+<p>纸鸢书院只有在举办活动时才会忙一点，平时几乎没有事情，不会影响学弟学妹的学习和吃喝玩乐哦，而且我们社团还会不定期地聚餐游玩，还有好玩的素质拓展等待你的参与，超级有趣。欢迎你的加入！   </p>
+<h2 id="宣传图"><a href="#宣传图" class="headerlink" title="宣传图"></a>宣传图</h2><p><img src="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E9%BB%98%E8%AE%A4%E6%A0%87%E9%A2%98_%E6%89%8B%E6%9C%BA%E6%B5%B7%E6%8A%A5_2018.07.29%20(1).jpg" alt="九图"><br><img src="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E9%BB%98%E8%AE%A4%E6%A0%87%E9%A2%98_%E6%89%8B%E6%9C%BA%E6%B5%B7%E6%8A%A5_2018.07.29%20(2).jpg" alt="九图"><br><img src="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E9%BB%98%E8%AE%A4%E6%A0%87%E9%A2%98_%E6%89%8B%E6%9C%BA%E6%B5%B7%E6%8A%A5_2018.07.29%20(3).jpg" alt="九图"><br><img src="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E9%BB%98%E8%AE%A4%E6%A0%87%E9%A2%98_%E6%89%8B%E6%9C%BA%E6%B5%B7%E6%8A%A5_2018.07.29%20(4).jpg" alt="九图"><br><img src="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E9%BB%98%E8%AE%A4%E6%A0%87%E9%A2%98_%E6%89%8B%E6%9C%BA%E6%B5%B7%E6%8A%A5_2018.07.29%20(6).jpg" alt="九图"><br><img src="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E9%BB%98%E8%AE%A4%E6%A0%87%E9%A2%98_%E6%89%8B%E6%9C%BA%E6%B5%B7%E6%8A%A5_2018.07.29%20(7).jpg" alt="九图"><br><img src="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E9%BB%98%E8%AE%A4%E6%A0%87%E9%A2%98_%E6%89%8B%E6%9C%BA%E6%B5%B7%E6%8A%A5_2018.07.29%20(8).jpg" alt="九图"><br><img src="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E9%BB%98%E8%AE%A4%E6%A0%87%E9%A2%98_%E6%89%8B%E6%9C%BA%E6%B5%B7%E6%8A%A5_2018.07.29%20(9).jpg" alt="九图"></p>
+<h2 id="活动"><a href="#活动" class="headerlink" title="活动"></a>活动</h2><p><strong>一站到底经典阅读挑战赛</strong><br><img src="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E2%80%9C%E4%B8%80%E7%AB%99%E5%88%B0%E5%BA%95%E2%80%9D%E7%BB%8F%E5%85%B8%E9%98%85%E8%AF%BB%E6%8C%91%E6%88%98%E8%B5%9B.jpg" alt="活动"><br><strong>成都的一天 活动</strong><br><img src="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E2%80%9C%E6%88%90%E9%83%BD%E7%9A%84%E4%B8%80%E5%A4%A9%E2%80%9D%E6%B4%BB%E5%8A%A8.jpg" alt="活动"><br><strong>成都的一天活动分享会</strong><br><img src="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E2%80%9C%E6%88%90%E9%83%BD%E7%9A%84%E4%B8%80%E5%A4%A9%E2%80%9D%E6%B4%BB%E5%8A%A8%E5%88%86%E4%BA%AB%E4%BC%9A.jpg" alt="活动"><br><strong>爱在心头口难开邮寄家书活动</strong><br><img src="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E2%80%9C%E7%88%B1%E5%9C%A8%E5%BF%83%E5%A4%B4%E5%8F%A3%E9%9A%BE%E5%BC%80%E2%80%9D%E9%82%AE%E5%AF%84%E5%AE%B6%E4%B9%A6%E6%B4%BB%E5%8A%A8.jpg" alt="活动"><br><strong>霍金说读书分享会</strong><br><img src="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E2%80%9D%E9%9C%8D%E9%87%91%E8%AF%B4%E2%80%9C%E8%AF%BB%E4%B9%A6%E5%88%86%E4%BA%AB%E4%BC%9A.jpg" alt="活动"><br><strong>吴晓波“激荡十年”读书分享会</strong><br><img src="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E5%90%B4%E6%99%93%E6%B3%A2%E2%80%9C%E6%BF%80%E8%8D%A1%E5%8D%81%E5%B9%B4%E2%80%9D%E8%AF%BB%E4%B9%A6%E5%88%86%E4%BA%AB%E4%BC%9A.jpg" alt="活动"><br><strong>素质拓展活动</strong><br><img src="https://swjtu-1257570108.cos.ap-chengdu.myqcloud.com/%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2/%E7%B4%A0%E8%B4%A8%E6%8B%93%E5%B1%95%E6%B4%BB%E5%8A%A8.jpg" alt="活动"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/08/association/网球协会/" rel="next" title="网球协会">
+                <i class="fa fa-chevron-left"></i> 网球协会
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/08/association/镜湖文学社/" rel="prev" title="镜湖文学社">
+                镜湖文学社 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Simon Yang" />
+            
+              <p class="site-author-name" itemprop="name">Simon Yang</p>
+              <p class="site-description motion-element" itemprop="description">交大学子的公益服务平台</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">87</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/situmaimes" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:jstsyhyjk@outlook.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#纸鸢书院交大分社"><span class="nav-number">1.</span> <span class="nav-text">纸鸢书院交大分社</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#欢迎加入18年纸鸢书院交大分社，群聊号码：627233873"><span class="nav-number">1.1.</span> <span class="nav-text">欢迎加入18年纸鸢书院交大分社，群聊号码：627233873 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QA："><span class="nav-number">1.2.</span> <span class="nav-text">QA：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#宣传图"><span class="nav-number">1.3.</span> <span class="nav-text">宣传图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#活动"><span class="nav-number">1.4.</span> <span class="nav-text">活动</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Simon Yang</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="https://blog-1254458596.cos.ap-chengdu.myqcloud.com/av-min.js"></script>
+  
+  
+  <script src="https://blog-1254458596.cos.ap-chengdu.myqcloud.com/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'vi0YPoBao45UrtepGDCCd40B-gzGzoHsz',
+        appKey: 'iLM1yw4Ul3CpE5AijBWWynyh',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://blog-1254458596.cos.ap-chengdu.myqcloud.com/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("vi0YPoBao45UrtepGDCCd40B-gzGzoHsz", "iLM1yw4Ul3CpE5AijBWWynyh");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
