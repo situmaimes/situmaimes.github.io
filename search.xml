@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[linux shell 脚本攻略]]></title>
+    <url>%2F2018%2F11%2F26%2Flinux-shell%2F</url>
+    <content type="text"><![CDATA[因为linux和shell的学习对于生物信息来说很重要，而且平常使用机会较少所以还是决定重读一遍《linux shell脚本攻略》并写下笔记笔记真实代码输入输出自行理解 无特殊说明均在linux centos环境下运行得出这是这本书的第一章，共40页书是从交大图书馆借的，第二版，感觉不适合新手看 [TOC] 小试牛刀简介 shell中的注释开头为#~表示主目录每当一个新shell生成时，都会执行~/.bashrc 1234[root@VM_0_14_centos ~]# pwd #linux centos root下/rootvip7@VM-0-15-ubuntu:~$ pwd #linux ubuntu 非root下/home/vip7 root开头为# 非root开头为$ @前为用户名后为主机名非root用户使用sudo &lt;command&gt; &lt;arguments&gt;执行root命令shell脚本通常起始为 #!/bin/bash 123456789101112131415161718&gt; echo echo hello &gt; hello.sh&gt; cat hello.shecho hello&gt; bash hello.shhello&gt; ./hello.sh-bash: ./hello.sh: Permission denied&gt; ls -ltotal 12-rw-r--r-- 1 root root 11 Jul 24 09:36 hello.sh&gt; chmod a+x hello.sh&gt; ./hello.shhello&gt; /root/hello.shhello&gt; ls -ltotal 12-rwxr-xr-x 1 root root 11 Jul 24 09:36 hello.sh 打印12345678910111213141516&gt; echo hellohello&gt; echo hello worldhello world&gt; echo 'hello world'hello world&gt; echo "hello world"hello world&gt; echo "hello world !"-bash: !": event not found&gt; echo 'hello world !'hello world !&gt; echo "hello world \!"hello world \!&gt; echo "hello world\$"hello world$ ubuntu稍有区别123456vip7@VM-0-15-ubuntu:~$ echo &quot;hello world !&quot;hello world !vip7@VM-0-15-ubuntu:~$ echo &apos;hello world !&apos;hello world !vip7@VM-0-15-ubuntu:~$ echo &quot;hello world\$&quot;hello world$ 123456&gt; printf "%-5s %-10s %-4.2f\n" 1 simon 40.3524 1 simon 40.35&gt; echo -n hello;echo hello hellohello&gt; echo -e "1\t2\t3" 1 2 3 环境变量和变量1234567891011&gt; pgrep ls #获取程序的PID464&gt; cat /proc/464/environLANG=en_USUTF-8PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/binHOME=/rootLOGNAME=rootUSER=rootSHELL=/bin/sh #中间用&gt; cat /proc/464/environ | tr '\0' '\n'LANG=en_US.UTF-8PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/binHOME=/rootLOGNAME=rootUSER=rootSHELL=/bin/sh 书中还讲到了环境变量LD_LIBRARY_PATH，该环境变量主要用于指定查找共享库（动态链接库）时除了默认路径之外的其他路径。但是两个服务器这个值都还不存在。123456789101112131415161718&gt; var=value&gt; var = value-bash: var: command not found&gt; var="hello world"&gt; echo varvar&gt; echo $varhello world&gt; echo $&#123;var&#125;hello world&gt; echo $vars&gt; echo $&#123;var&#125;shello worlds&gt; echo '$var'$var&gt; echo "$var"hello world 1234&gt; var=value&gt; length=$&#123;#var&#125;&gt; echo $length5 一些内置值1234567891011121314&gt; echo $SHELL/bin/bash&gt; echo $0-bash&gt; echo $PATH/root/anaconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin&gt; echo $HOME/root&gt; echo $PWD/root&gt; echo $USERroot&gt; echo $UID0 1234vip7@VM-0-15-ubuntu:~$ echo $USERvip7vip7@VM-0-15-ubuntu:~$ echo $UID1011 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849export PATH="/root/anaconda3/bin:$PATH" #只在本次shell对话中有效&gt; echo $PATH/root/anaconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin``` ## 数学运算```shell&gt; a=1&gt; b=2&gt; let c=a+b&gt; echo $c3&gt; let a++&gt; echo $a2&gt; c=$[a+b]&gt; echo $c4&gt; let b+=4&gt; echo $b6&gt; c=$((a+b))&gt; echo $c8&gt; d=`expr a+b`&gt; echo $da+b&gt; d=`expr $a+$b`&gt; echo $d2+6&gt; d=`expr $a + $b`&gt; echo $d8&gt; d=`expr $a \* $b` #只有这里的*需要转义&gt; echo $d12&gt; echo "4*0.35" | bc1.40&gt; result=`echo "$a*1.24" | bc`&gt; echo $result2.48&gt; number=100&gt; echo "obase=2;$number" | bc1100100&gt; number=1100100&gt; echo "obase=10;ibase=2;$number" | bc100&gt; echo "sqrt(100);10^10" | bc1010000000000 文件描述符1234重定向0 --- stdin1 --- stdout2 --- stderr 1234567891011121314151617181920212223&gt; echo "some" &gt; some.txt&gt; cat some.txtsome&gt; echo "word" &gt;&gt; some.txt&gt; cat some.txtsomeword&gt; ls +ls: cannot access +: No such file or directory&gt; echo $? #命令执行状态2 #非0代表失败&gt; lsanaconda3 hello.sh some.txt&gt; echo $?0 #代表成功&gt; ls + 2&gt; err.txt #错误重定向&gt; cat err.txtls: cannot access +: No such file or directory &gt; cmd &gt; some.txt 2&gt;&amp;1 #标准错误重定向到标准输出&gt; cat some.txt-bash: cmd: command not found&gt; ls + &amp;&gt; out.txt #标准错误和标准输出均重定向&gt; ls + 2&gt; /dev/null #错误重定向到黑洞 123456789101112131415161718192021222324&gt; ls | tee out.txt | cat -n # tee将stdin写入文件的同时提供一份副本到管道 1 anaconda3 2 err.txt 3 hello.sh 4 out.txt 5 some.txt&gt; cat out.txtanaconda3err.txthello.shout.txtsome.txt&gt; echo hello | tee -a out.txthello&gt; cat out.txtanaconda3err.txthello.shout.txtsome.txthello&gt; echo who | tee - # -代表stdin 提供一份副本到标准输出whowho 1234567891011&gt; echo some &gt; out.txt &gt; cat &lt; out.txt #文件内容重定向到命令some&gt; cat&lt;&lt;EOF&gt;out.txt #EOF之间的内容重定向cat 然后重定向到out.txt EOF是一个tag可以替换成其他词&gt; hello&gt; boy&gt; EOF&gt; cat out.txthelloboy 123&lt; --- 从文件读取到stdin&gt; --- 截断模式写入文件&gt;&gt;--- 追加模式写入文件 1234&gt; echo this is a line &gt; input.txt&gt; exec 3&lt; input.txt #不能使用0,1,2 创建自己的文件描述符&gt; cat &lt;&amp;3 this is a line #再次读取需要重新分配文件描述符 数组1234567891011121314151617&gt; array=(1 2 3 4 5) #普通数组&gt; array[5]=6&gt; echo $&#123;array[5]&#125;6&gt; index=2&gt; echo $&#123;array[$index]&#125;3&gt; echo $&#123;array[*]&#125;1 2 3 4 5 6&gt; array[10]=1&gt; echo $&#123;#array[*]&#125;7&gt; echo $&#123;array[*]&#125;1 2 3 4 5 6 1&gt; echo $&#123;array[10]&#125;1&gt; echo $&#123;array[9]&#125; 123456789&gt; declare -A ass_array #定义关联数组&gt; ass_array=([index1]=val1 [index2]=val2&#125;)&gt; ass_array[index3]=val3&gt; echo $&#123;ass_array[index3]&#125;val3&gt; echo $&#123;ass_array[*]&#125;val1 val2&#125; val3&gt; echo $&#123;!ass_array[*]&#125;index1 index2 index3 别名123456&gt; alias ls='ls -ll'&gt; lstotal 4drwxr-xr-x 22 root root 4096 Oct 5 2018 anaconda3&gt; \lsanaconda3 获取终端信息12345stty -echo #禁止将输出发送到终端stty echo #允许将输出发送到终端tput sc #存储光标位置tput rc #恢复光标位置tput ed #清除从当前光标到行末尾的所有内容 时间和日期123456789101112131415&gt; dateSun Nov 18 18:22:25 CST 2018&gt; date +%s1542536551&gt; date --date "Nov 18 2018" +%ASunday&gt; date "+%d %B %Y"18 November 2018&gt; date -s "2018 11 18 18:23:22"date: invalid date ‘2018 11 18 18:23:22’&gt; date -s "2018 Nov 18 18:23:22"date: invalid date ‘2018 Nov 18 18:23:22’&gt; date -s "18 Nov 2018 18:23:22"Sun Nov 18 18:23:22 CST 2018&gt; sleep 10 12345678910星期 %a %A月 %b %B日 %d固定格式日期 %D年 %y %Y小时 %I %H分钟 %M秒 %S纳秒 %NUnix纪元时 %s 调试脚本1234567891011121314&gt; echo echo some &gt; out.sh&gt; bash -x out.sh+ echo somesome&gt; for i in &#123;1..3&#125;; do set -x; echo $i; set +x; done+ echo 11+ set +x+ echo 22+ set +x+ echo 33+ set +x 1234set -x 在执行时显示参数和命令set +x 禁止调试set -v 当命令进行读取时显示输入set +v 禁止打印输入 调试便捷方法将#!/bin/bash改为#!/bin/bash -xv 函数12345678function fname()&#123; statements;&#125;fname()&#123; statements;&#125; 1234567891011&gt; fname()&gt; &#123;&gt; echo $1,$2;&gt; echo "$@"; &gt; echo "$*"; &gt; return 0;&gt; &#125;&gt; fname my worldmy,worldmy worldmy world $* 和 $@ 都表示传递给函数或脚本的所有参数，不被双引号&quot; &quot;包含时，都以&quot;$1&quot; &quot;$2&quot; … &quot;$n&quot; 的形式输出所有参数。但是当它们被双引号&quot; &quot;包含时，&quot;$*&quot; 会将所有的参数作为一个整体，以&quot;$1 $2 … $n&quot;的形式输出所有参数；&quot;$@&quot; 会将各个参数分开，以&quot;$1&quot; &quot;$2&quot; … &quot;$n&quot; 的形式输出所有参数。1234567$0 当前脚本的文件名$n 传递给脚本或函数的参数。n 是一个数字，表示第几个参数。例如，第一个参数是$1，第二个参数是$2。$# 传递给脚本或函数的参数个数。$* 传递给脚本或函数的所有参数。$@ 传递给脚本或函数的所有参数。$? 上个命令的退出状态，或函数的返回值。一般情况下，大部分命令执行成功会返回 0，失败返回 非0。$$ 当前Shell进程ID。对于 Shell 脚本，就是这些脚本所在的进程ID。 1234567891011121314151617&gt; cat parent.sh#!/bin/bashplus1()&#123; echo $(($1+1));&#125;echo $(plus1 4)export -f plus1 #使函数子进程可用./child.sh 3 4&gt; vim child.sh&gt; cat child.sh#!/bin/bashecho $(plus1 $(($1 * $2)))&gt; chmod a+x *.sh&gt; ./parent.sh513&gt; cmd="echo some"&gt; $cmd #好神奇啊我也不知道为啥some 将输出写入变量 管道操作符 cmd1 | cmd2 | cmd312345678910&gt; ls | cat -n &gt;out.txt&gt; cat out.txt 1 anaconda3 2 out.txt&gt; output=$(ls | cat -n)&gt; echo $output1 anaconda3 2 out.txt&gt; output=`ls | cat -n`&gt; echo $output1 anaconda3 2 out.txt 子shell12345678910111213141516&gt; pwd/root&gt; (cd /data;ls)Anaconda3-5.1.0-Linux-x86_64.sh index.txt&gt; pwd/root&gt; cat text.txt123&gt; out=$(cat text.txt)&gt; echo $out1 2 3&gt; out="$(cat text.txt)"&gt; echo $out1 2 3 read12345678910111213&gt; read -n 2 var12&gt; echo $var12&gt; read -s password #输入时无回显&gt; echo $passwordsimonyang&gt; read -p "Please enter your Name:" varPlease enter your Name:simonyang&gt; echo $varsimonyang&gt; read -d . varsimon.&gt; echo $varsimon read -t 2 var要求两秒内输入 运行命令直至成功 true作为/bin中的一个二进制文件实现shell内建的:总是返回0的退出码1&gt; repeat() &#123;while :; do $@ &amp;&amp; return ; done&#125; 字段分隔符 IFS IFS的默认值为空白字符（换行符、制表符或者空格）123456789&gt; for item in "1 2 3";do echo $item;done1 2 3&gt; oldifs=$IFS&gt; IFS=,&gt; for item in "1,2,3";do echo $item;done1 2 3&gt; IFS=$oldifs&gt; for item in "1,2,3";do echo $item;done1,2,3 12345678910111213141516for var in list;do commands;donefor((i=0;i&lt;10;i++))&#123; commands;&#125;while condition;do commands;doneuntil condition; #直到条件为真do commands;done 12345678&gt; for i in &#123;a..g&#125;;do echo $i;doneabcdefg 比较12345678910111213if condition;then commands;fiif condition;then commands;else if condition;then commands;else commands;fi [ condition ] &amp;&amp; action #如果真，则action运行[ condition ] || action #如果假，则action运行 1234567算术比较-eq equal返回真 -ne not equal返回真-gt greater than返回真-lt less than返回真-ge greater or equal返回真-le less or equal返回真 1234&gt; if [ 5 -eq 5 -a 4 -gt 3]; then echo true;fi-bash: [: missing `]' #3与]应有空格，5与[也是&gt; if [ 5 -eq 5 -a 4 -gt 3 ]; then echo true;fitrue 12345678910文件系统测试，是为真[ -f $var ] 是否包含文件路径和文件名 [ -x $var ] 是否可执行[ -d $var ] 是否是目录[ -e $var ] 是否存在[ -c $var ] 是否是字符设备[ -b $var ] 是否是块设备[ -w $var ] 是否可写[ -r $var ] 是否可读[ -L $var ] 是否是符号链接 123456&gt; if [ -f out.txt ]; then echo true;fitrue&gt; lsanaconda3 out.txt text.txt&gt; if [ ! -L out.txt ]; then echo true;fi # !取反true 123456789字符串比较，是为真最好使用双中括号，str1和str2前后都有空格[[ $str1 = $str2 ]] 是否相等[[ $str1 == $str2 ]] 是否相等[[ $str1 != $str2 ]] 是否不相等[[ $str1 &gt; $str2 ]] 按字母序，str1是否大于str2[[ $str1 &gt; $str2 ]] 按字母序，str1是否小于str1[[ -z $str2 ]] 是否是空字符串[[ -n $str2 ]] 是否是非空字符串 1234&gt; str1="hello"&gt; str2=''&gt; if [[ -n $str1 ]] &amp;&amp; [[ -z $str2 ]];then echo true;fitrue 使用test1234&gt; if test $var -eq 1;then echo true;fitrue&gt; if ! test $var -eq 0;then echo true;fitrue 命令之乐cat12345678910&gt; echo this is a line &gt; out.txt &gt; cat out.txtthis is a line&gt; echo this is a new line &gt;out2.txt&gt; cat out.txt out2.txtthis is a linethis is a new line&gt; echo some new | cat - out.txtsome newthis is a line 1234567891011121314151617181920212223242526272829303132333435363738&gt; cat out.txt123&gt; cat -s out.txt123&gt; cat some.pydef hello(): print("hello world")&gt; cat -T some.pydef hello():^Iprint("hello world")&gt; cat -n some.py 1 def hello(): 2 print("hello world")&gt; cat -n out.txt 1 1 2 2 3 4 5 6 7 3&gt; cat -nb out.txt 1 1 2 2 3 3 script12345678910111213141516171819&gt; script -t 2&gt; timelog.log -a output.sessionScript started, file is output.session&gt; echo hello &gt; new.txt&gt; cat new.txthello&gt; exitexitScript done, file is output.session&gt; cat output.sessionScript started on Sat 24 Nov 2018 04:24:45 PM CST&gt; echo hello &gt; new.txt&gt; cat new.txthello&gt; exitexitScript done on Sat 24 Nov 2018 04:25:07 PM CST&gt; scriptreplay timelog.log output.session #重放 find12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970&gt; cd /home&gt; touch some.py out1.txt out2.txt&gt; lsout1.txt out2.txt some.py&gt; find . ../out2.txt./out1.txt./some.py&gt; find . -print0../out2.txt./out1.txt./some.py&gt; find . -name "*.txt"./out2.txt./out1.txt&gt; find . -name *.txtfind: paths must precede expression: out2.txtUsage: find [-H] [-L] [-P] [-Olevel] [-D help|tree|search|stat|rates|opt|exec] [path...] [expression]&gt; touch OUT.txt&gt; find . -iname "out*"./out2.txt./OUT.txt./out1.txt&gt; touch some.log&gt; lsout1.txt out2.txt OUT.txt some.log some.py&gt; find . \( -name "*.txt" -o -name "*.log" \) ./out2.txt./OUT.txt./out1.txt./some.log&gt; find /root/ -path "*/.ssh/*"/root/.ssh/authorized_keys&gt; find . -regex ".*\(\.py\|\.txt\)$"./out2.txt./OUT.txt./out1.txt./some.py&gt; touch some.PY&gt; find . -iregex ".*\.py$"./some.PY./some.py&gt; find . ! -iregex ".*\.py$"../out2.txt./OUT.txt./out1.txt./some.log&gt; mkdir some&gt; mv out* some/&gt; find . -maxdepth 1 ../some.PY./OUT.txt./some./some.py./some.log&gt; find .../some.PY./OUT.txt./some./some/out2.txt./some/out1.txt./some.py./some.log&gt; find . -mindepth 2./some/out2.txt./some/out1.txt&gt; find . -type d # d指目录，同样的还有f l ../some 访问时间 -atime 用户最近一次访问文件的时间 access修改时间 -mtime 文件内容最后一次被修改的时间 modify变化时间 -ctime 文件元数据最后一次改变的时间 change作为时间选项 单位是天 -表示小于 +表示大于以分钟为计量单位 -amin -mmin -cmin123456789101112131415161718&gt; vim OUT.txt&gt; find . -cmin -1../OUT.txt&gt; find . -newer some.PY../OUT.txt./some&gt; find . -size -1 #./some.PY./some/out2.txt./some/out1.txt./some.py./some.log&gt; find . -size +1c #大于1字节 ../OUT.txt./some b 块 512字节 c 字节 w 字 2字节 k 1024字节 M 1024K字节 G 1024M字节12345678910111213141516171819202122232425262728293031323334353637383940414243444546&gt; lsOUT.txt some some.log some.py some.PY&gt; find . -size +1c -deletefind: cannot delete ‘./some’: Directory not empty&gt; ls -ltotal 4drwxr-xr-x 2 root root 4096 Nov 24 16:52 some-rw-r--r-- 1 root root 0 Nov 24 16:41 some.log-rw-r--r-- 1 root root 0 Nov 24 16:37 some.py-rw-r--r-- 1 root root 0 Nov 24 16:48 some.PY&gt; find . -maxdepth 1 -perm 755 ../some&gt; find . -maxdepth 1 -user root../some.PY./some./some.py./some.log&gt; find . -maxdepth 1 -name "some.*" -exec chmod 755 &#123;&#125; \; # &#123;&#125; 每次代入文件名然后每次运行&gt; ls -ltotal 4drwxr-xr-x 2 755 root 4096 Nov 24 16:52 some-rwxr-xr-x 1 755 root 0 Nov 24 16:41 some.log-rwxr-xr-x 1 755 root 0 Nov 24 16:37 some.py-rwxr-xr-x 1 755 root 0 Nov 24 16:48 some.PY&gt; find . -maxdepth 1 -name "some.*" -exec chmod 644 &#123;&#125; +; # &#123;&#125; 传入所有文件名然后一次运行&gt; ls -ltotal 4drwxr-xr-x 2 755 root 4096 Nov 24 16:52 some-rw-r--r-- 1 755 root 0 Nov 24 16:41 some.log-rw-r--r-- 1 755 root 0 Nov 24 16:37 some.py-rw-r--r-- 1 755 root 0 Nov 24 16:48 some.PY&gt; cat some.pydef hi(): pass&gt; cat some.PYdef hello(): pass&gt; find . -iname "*.py" -exec cat &#123;&#125; \;&gt; final&gt; cat finaldef hello(): passdef hi(): pass&gt; find ~/ -name ".git" -prune #跳过.git目录 xargs xargs 命令将标准输入数据转换成命令行参数123456789101112&gt; cat out.txt1 2 3 4 56 7 89&gt; cat out.txt | xargs1 2 3 4 5 6 7 8 9&gt; cat out.txt | xargs -n 31 2 34 5 67 8 9&gt; echo "splitXsplitXsplit" | xargs -d X # d delimitersplit split split 1234567891011121314151617&gt; cat demo.shecho $* #&gt; cat args.txtarg1arg2arg3&gt; cat args.txt | xargs -n 2 ./demo.sharg1 arg2arg3&gt; cat args.txt | xargs -I &#123;&#125; ./demo.sh -p &#123;&#125; # -I指定替换名称 对于每个参数执行一次-p arg1-p arg2-p arg3&gt; cat args.txt | xargs -I p ./demo.sh -p -l-arg1 -l-arg2 -l-arg3 -l 将find与xargs结合使用时定界符应该是\0123456789101112131415161718&gt; lsargs.txt demo.sh out.txt&gt; find . -name "out.*" -print0 | xargs -0 rm -f #-print0 将`\0`作为定界符输出文件名 xargs -0 将`\0`作为定界符分开&gt; lsdemo.sh&gt; cat files.txtargs1.txtargs2.txt&gt; cat args1.txthello&gt; cat args2.txthi&gt; cat files.txt | xargs -I &#123;&#125; cat &#123;&#125;hellohi&gt; cat files.txt | (while read arg; do cat $arg; done ) #利用子shell实现相似功能hellohi tr tr只能通过stdin接受输入123456789101112&gt; echo "HELLO" | tr "A-Z" 'a-z' #'z-a'是行不通的hello&gt; echo "HELLO" | tr "A-Z" 'b'bbbbb&gt; echo "HELLO I AM" | tr -d 'A-H'LLO I M&gt; echo "HELLO I AM" | tr -d -c 'A-H\n' #-c选择补集HEA&gt; echo hello i am your friend | tr -s ' ' # 压缩hello i am your friend&gt; echo hello i am your friend | tr [:lower:] [:upper:] HELLO I AM YOUR FRIEND md5sum sha1sum 计算校验和md5sum 和 sha1sum 使用非常相似12345&gt; md5sum demo.she88d83ea97b4461177c708b8760045a8 demo.sh&gt; md5sum demo.sh &gt; demo.md5&gt; md5sum -c demo.md5demo.sh: OK gpg base64123456789&gt; cat demo.shecho $* #&gt; gpg -c demo.sh&gt; gpg demo.sh.gpg&gt; base64 demo.sh &gt; out&gt; cat outZWNobyAkKiAjCg==&gt; base64 -d out | cat -echo $* # sort uniq1234567891011121314151617181920212223242526&gt; cat files.txt339328&gt; sort files.txt233389&gt; sort -r files.txt983332&gt; sort -r files.txt | uniq9832 uniq的输入要求必须排序过，如果已经排序sort会返回0的退出码，否则返回非0123456789101112131415161718192021222324&gt; cat data.txt9 mac 80007 dell 700010 lenovo 6000&gt; sort -nk 1 data.txt #按数字大小7 dell 70009 mac 800010 lenovo 6000&gt; sort -k 1 data.txt #字母序10 lenovo 60007 dell 70009 mac 8000&gt; sort -rk 3 data.txt9 mac 80007 dell 700010 lenovo 6000&gt; sort -k 2.2 data.txt #按照第二列第二个字符排列，因为默认的分隔是把 "非空白到空白转换" 做为分段的依据，所以按照d,l,m排列7 dell 700010 lenovo 60009 mac 8000&gt; sort -t ' ' -k 2.2 data.txt #-t 制定空格作为分隔符，第二列第二个字符所以按照a,e,e排列9 mac 80007 dell 700010 lenovo 6000 -o 输出到指定文件，可以覆盖原文件–f 忽略大小写-c 检查文件是否已排好序，如果乱序，则输出第一个乱序的行的相关信息，最后返回1-C 检查文件是否已排好序，如果乱序，不输出内容，仅返回1-M 以月份来排序，比如JAN小于FEB等等-b 忽略每一行前面的所有空白部分-z 用\0结束行-m 合并-u 删除重复行1234567891011121314151617181920212223242526&gt; cat files.txt339328&gt; sort files.txt -o files.txt&gt; uniq -u files.txt #只显示唯一行289&gt; uniq -c files.txt #统计次数 1 2 3 3 1 8 1 9&gt; uniq -d files.txt #显示重复行3&gt; cat data.txt9mac80007dell70001lenovo6000&gt; cat data.txt | uniq -s 2 -w 1 # 忽略前两个字符比较一个字符9mac80007dell7000 mktemp /tmp目录中的内容系统重启后清空123456789&gt; filename=`mktemp` #反引号运行&gt; echo $filename/tmp/tmp.iBLhJgtGp3&gt; filename=`mktemp -d`&gt; echo $filename/tmp/tmp.0ojbVHR0ZG&gt; filename=`mktemp -u` #不创建实际文件&gt; mktemp test.XXX #根据模板创建test.7Ou split1234567891011121314151617181920212223242526272829303132333435363738&gt; dd if=/dev/urandom of=test.file bs=13MB count=1 #创建13m大小的文件1+0 records in1+0 records out13000000 bytes (13 MB) copied, 0.0903847 s, 144 MB/s&gt; split -b 1m test.file #以1M大小划分&gt; lstest.file xaa xab xac xad xae xaf xag xah xai xaj xak xal xam&gt; rm -f x* #删除x开头所有文件&gt; split -b 5m test.file -d -a 3 split #数字结尾 结尾三个数字 split开头&gt; lssplit000 split001 split002 test.file&gt; split -l 10 test.file #10行分&gt; cat server.logSERVER-1[connection][disconnect][connection][disconnect]SERVER-2[connection][disconnect]SERVER-3[disconnect][connection]&gt; csplit server.log /SERVER/ -n 1 &#123;*&#125; -f split -b "%d.log" #/SERVER/正则匹配 -n 1 文件后数字后缀一个 -f 前缀是split -b 后缀格式 &#123;*&#125; 分割执行次数0613536&gt; lsserver.log split0.log split1.log split2.log split3.log&gt; cat split0.log #split0.log是分隔前的，所以没有内容&gt; cat split1.logSERVER-1[connection][disconnect][connection][disconnect] { }1234567891011121314151617181920&gt; filename=some.tar.gz #必须使用变量&gt; name=$&#123;filename%.*&#125; #从尾向前匹配.*短数据删除&gt; echo $namenew.tar&gt; name=$&#123;filename%%.*&#125; #从尾向前匹配.*长数据删除&gt; echo $namesome&gt; name=$&#123;filename#*.&#125; #从前向尾匹配*.短数据删除&gt; echo $nametar.gz&gt; name=$&#123;filename##*.&#125; #从前向尾匹配*.长数据删除&gt; echo $namegz&gt; filename=new.new.some&gt; name=$&#123;filename/new/hi&#125; #new替换成hi，值替换一次&gt; echo $namehi.new.some&gt; name=$&#123;filename//new/hi&#125; &gt; echo $namehi.hi.some 抄一张图，懒得挨个试了 rename mv cp12345678#!/bin/bashcount=1;for img in `find . -maxdepth 1 -iname "*.jpg" -o -iname "*.png" -type f`;do new=image-$count.$&#123;img##*.&#125; #重命名 mv "$img" "$new" # 移动 let count++done 123&gt; rename JPG jpg *.JPG&gt; lsnew.jpg old.jpg 在我的服务器上rename正则使用失败，网上查不到原因1234567891011&gt; mkdir pic&gt; mv new.jpg ./pic&gt; lsold.jpg pic&gt; (cd pic;ls)new.jpg&gt; cp old.jpg ./pic&gt; (cd pic;ls)new.jpg old.jpg&gt; lsold.jpg pic look read12345678&gt; cat word.txtabcbcdcde&gt; look bc word.txt #寻找bc开头的行bcd&gt; grep "^a" word.txt #寻找a开头的行abc 123#!/bin/bashread -p "Enter your name:" nameecho "you name is $name" 12345&gt; echo -e "hello\n" | ./hello.shyou name is hello&gt; echo -e "simon\n" &gt; input&gt; ./hello.sh &lt;inputyou name is simon &amp;后台执行12345678#!/bin/bashpidarray=()for file in File1.iso File2.iso;do md5sum $file &amp; #后台运行 pidarray+=("$!") #获取进程piddonewait $&#123;pidarray[@]&#125; 以文件之名]]></content>
+      <categories>
+        <category>overview</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[软件安装管家]]></title>
     <url>%2F2018%2F11%2F16%2F2018%2Fsoftware_manager%2F</url>
     <content type="text"><![CDATA[唉，一共才50多粉丝，我还要安利别人的公众号，真是免费帮别人打广告不过抄过来一篇文章实在不好，广告打就打吧 明天大一新生就要开始建模大业了，总有人问我matlab怎么装。下面一个公众号解决你所有大学常用软件的安装问题 软件安装管家下面是他提供的软件安装教程目录，如果你还是懒得看教程装，就是想花钱要服务，公众号 回复 软件+联系方式 我学会了帮你装，感谢]]></content>
@@ -57,9 +65,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[Multisim]]></title>
-    <url>%2F2018%2F09%2F09%2F2018%2FMultisim%2F</url>
-    <content type="text"><![CDATA[感谢信息青协支持，信息青协电脑交流群284933381 Multisim 13.0.1汉化破解版 链接：https://pan.baidu.com/s/1eXxn55auHOB-7rGuCb8KoQ 密码：t7xq]]></content>
+    <title><![CDATA[VC++]]></title>
+    <url>%2F2018%2F09%2F09%2F2018%2FVC%2B%2B%2F</url>
+    <content type="text"><![CDATA[感谢信息青协支持，信息青协电脑交流群284933381 Visual_C++_6.0-win10 链接：https://pan.baidu.com/s/1WfY4Oz8u8nxKjMI-mJmpIw 密码：sje0]]></content>
       <categories>
         <category>share</category>
       </categories>
@@ -73,9 +81,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[VC++]]></title>
-    <url>%2F2018%2F09%2F09%2F2018%2FVC%2B%2B%2F</url>
-    <content type="text"><![CDATA[感谢信息青协支持，信息青协电脑交流群284933381 Visual_C++_6.0-win10 链接：https://pan.baidu.com/s/1WfY4Oz8u8nxKjMI-mJmpIw 密码：sje0]]></content>
+    <title><![CDATA[Multisim]]></title>
+    <url>%2F2018%2F09%2F09%2F2018%2FMultisim%2F</url>
+    <content type="text"><![CDATA[感谢信息青协支持，信息青协电脑交流群284933381 Multisim 13.0.1汉化破解版 链接：https://pan.baidu.com/s/1eXxn55auHOB-7rGuCb8KoQ 密码：t7xq]]></content>
       <categories>
         <category>share</category>
       </categories>
@@ -97,14 +105,6 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[资源分享总览]]></title>
-    <url>%2F2018%2F09%2F08%2Fshare%2F</url>
-    <content type="text"><![CDATA[更新ing MatlabMultisimOfficeVC++]]></content>
-      <categories>
-        <category>overview</category>
-      </categories>
-  </entry>
-  <entry>
     <title><![CDATA[西南交通大学社团总览]]></title>
     <url>%2F2018%2F09%2F08%2Fassociation%2F</url>
     <content type="text"><![CDATA[更新ing 社团联合会 公益实践类 校园服务类 学术科技类 理论研究类 文化艺术类 体育健身类 贫困地区教育观念救助会 大学生伙食管理委员会 基础数学协会 大学生心理学会 书画协会 篮球协会 大学生创新创业俱乐部 招生宣传志愿者协会 数学建模协会 国际关系研究会 西南交通大学校辩论队 街舞协会 公益协会 校友志愿者协会 交通运输科技协会 中医药文化与健康协会 外语协会 体育舞蹈协会 动植物协会 书志-图书馆学生管理委员会 测量协会 汽车爱好者协会 洛灵诗歌协会 武术协会 雷锋公司 尊老敬老协会 投资理财协会 青年马克思主义发展协会 镜湖文学社 双节棍协会 大学生创业孵化工作室 纸鸢书院交大分社 ACM协会 消防安全协会 MARS动漫同人社 足球运动管理联合会 环保志愿者协会 晨读社 大学生物理协会 雾都天文社 南国相声社 磐石社 大学生就业与创业协会 计财处助理团 大学生创造学会 国防教育协会 演讲与口才协会 健美操协会 思益社 交大教学信息站(仍在招新) 机器人协会 研究生心理学会 汉服社 排球协会 大学生交往与拓展协会 文物管理协会 大学生法律协会 证券交流协会 旅游文化协会 自行车协会 节能协会 砺行社 交大PPT协会 习近平新时代中国特色社会主义思想研究会 魔术协会 棋牌协会 留守儿童关爱协会 思源社 大学生生命科学学会 科幻协会 网球协会 自我成长与发展协会 交大Kelly说 计算机与网络科技协会 陶艺协会 游泳协会 启梦社 校团委学生助理团 环境协会 摄影协会 跆拳道协会 国际交流协会 安全教育协会 化学协会 粤语社 轮滑协会 中华创新与创业联盟CEN 力学与科技协会 齐契古风社 羽毛球协会 物流协会 Lt手作创意设计社团 台球协会 工程实践创新协会 美妆护肤与礼仪形象协会 乒乓球协会 菁蓉协会 彝文化协会 乐悠悠球协会 Office职场训练营 岗拉梅朵锅庄协会 瑜伽协会 创客协会 扬音吉他社 空手道协会 综合设施工程协会 刀笔油画协会 花式跳绳协会 电子科技协会 中外文化交流与传播协会 太极拳协会 航模协会 西南交通大学电影协会 柔道协会 数据科学协会 西南交大校园媒体俱乐部 射声弓箭社 STEAM实验与创新协会 西南交大茶文化协会 健身协会 翻译-ECYLF×SWJTU协会 犀源诵读爱好者协会 田径协会 魔方协会 听音FM协会 I&amp;F电子竞技协会 班级联合会 Moonlight钢琴社 滑板协会 毽球协会 极限飞盘协会]]></content>
@@ -113,27 +113,11 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[大学生创造学会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%A4%A7%E5%AD%A6%E7%94%9F%E5%88%9B%E9%80%A0%E5%AD%A6%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[大学生创造学会 大学生创造学会微信招新链接 活动]]></content>
+    <title><![CDATA[资源分享总览]]></title>
+    <url>%2F2018%2F09%2F08%2Fshare%2F</url>
+    <content type="text"><![CDATA[更新ing MatlabMultisimOfficeVC++]]></content>
       <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[计财处助理团]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%AE%A1%E8%B4%A2%E5%A4%84%E5%8A%A9%E7%90%86%E5%9B%A2%2F</url>
-    <content type="text"><![CDATA[计财处助理团【QQ】西南交大计财处助理团（2649553091）外出办公、来校访问、科研立项、收入管理，财务一路相随。如何有效理解财务报销、正确把握收税政策，计财处助理团让你不在财务的路口迷茫。在这里，有学长学姐学姐手把手教你如何保账，有老师一对一辅导财会知识。这里，我们一同成长为一支懂财务，服务学校各单位财务事务的骨干团队。这只团队，期待你的加入! 社团简介【社团简介】计财处助理团是一支在计划财务处和校团委的指导下，面向全校师生的学生服务团队。本社团秉承“服务育人、管理育人”的理念，旨在让更多的人了解学校计财处相关政策与服务，减少师生办理财务业务的冗余程序，加强同学与学校计财处的沟通。是一支具备相关财会知识和操作技能，能够服务和指导学校各单位、各类人员快捷办理财务事务的学生骨干团队。【社团宗旨】以学生团队为依托，将具体的财务管理知识传授给学院和师生。旨在弘扬社会主义新风尚，促进大学生的精神文明建设和文化建设，提高大学生的基本技能，丰富校园生活。【品牌活动】财务业务导引、社团财务报销讲座、会计专业认知实习 等【邮箱】jcczltSWJTU@163.com【微信公众号】西南交大计财处助理团【QQ】西南交大计财处助理团（2649553091） 招新计财处助理团微信招新推送计财处助理团微信招新推送]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[镜湖文学社]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E9%95%9C%E6%B9%96%E6%96%87%E5%AD%A6%E7%A4%BE%2F</url>
-    <content type="text"><![CDATA[镜湖文学社镜湖文学社QQ：2196421655【社团简介】西南交通大学镜湖文学社，创建于1996年，因交大九里校区的镜湖而得名。在一所以工科见长的学府里，镜湖文学社是最具有文学特色的社团，陪伴交大走过了20多年的风雨历程，见证了交大的发展。镜湖文学社的指导单位是西南交通大学人文学院，管理单位是共青团西南交通大学委员会，监督单位是西南交通大学社团联合会，有自己独立的社团内部组成机构和特有的运作模式。【社团宗旨】一直以来，镜湖文学社秉承着“心明如镜，心静如湖；文墨繁华，学思甚笃”的办社思想，结合“缤纷校园，绿化心灵”的宗旨和“培养交大学子人文情怀，提高交大校园文化底蕴，为文学爱好者提供交流平台”的基本目标，为交大学子提供丰富多彩的活动和展示自己的舞台【品牌活动】文学大爆炸，等你的情书征文活动，一站到底挑战赛【邮箱】 jhwxs@qq.com【QQ】 2196421655【微博】 西南交大镜湖文学社【微信公众号】 交大镜湖 招新镜湖文学社微信招新推送]]></content>
-      <categories>
-        <category>社团</category>
+        <category>overview</category>
       </categories>
   </entry>
   <entry>
@@ -145,9 +129,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[花式跳绳协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%8A%B1%E5%BC%8F%E8%B7%B3%E7%BB%B3%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[花式跳绳协会【微信公众号】SWJUT花式跳绳社团简介【社团简介】花式跳绳协会成立于2014年，主要以花式跳绳团体表演培训和个人速度跳培训为主，每周开展训练。跳绳是一项对身体协调能力以及耐力要求较高的运动，通过跳绳我们可以提升自己的肢体协调能力，也可以通过连续跳绳达到高效减肥的目的。花式跳绳团体表演则强调团队协作与节奏掌握，整齐划一的团队表演具有非常高的观赏性和视觉冲击感。我们致力于推广跳绳运动，带领交大学生跳出健康、跳出活力、跳出精彩人生！【社团宗旨】跳出新花样，挑出健康与活力。【品牌活动】西南交通大学跳绳运动会、速度跳培训活动【邮箱】2033507420@qq.com【微信公众号】SWJUT花式跳绳]]></content>
+    <title><![CDATA[国际关系研究会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%9B%BD%E9%99%85%E5%85%B3%E7%B3%BB%E7%A0%94%E7%A9%B6%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[国际关系研究会国际关系研究会招新群：774377875 国际关系研究会微信招新推送 国际关系研究会介绍]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -161,17 +145,17 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[DM魔术协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2FDM%E9%AD%94%E6%9C%AF%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[DM魔术协会 你想在朋友聚会中成为焦点吗？想看到别人惊喜诧异的眼神吗？想让人刮目相看吗？那就加入魔术协会吧！在这里，有你想看的大变活人！在这里，有你想看的读心术！在这里，有你想看的空手出牌！在这里有你想看想学的各种魔术，还有很多志同道合的小伙伴们！还在等什么呢，魔术协会欢迎你的加入！ 招新魔术协会招新视频魔术协会微信招新推送 活动]]></content>
+    <title><![CDATA[镜湖文学社]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E9%95%9C%E6%B9%96%E6%96%87%E5%AD%A6%E7%A4%BE%2F</url>
+    <content type="text"><![CDATA[镜湖文学社镜湖文学社QQ：2196421655【社团简介】西南交通大学镜湖文学社，创建于1996年，因交大九里校区的镜湖而得名。在一所以工科见长的学府里，镜湖文学社是最具有文学特色的社团，陪伴交大走过了20多年的风雨历程，见证了交大的发展。镜湖文学社的指导单位是西南交通大学人文学院，管理单位是共青团西南交通大学委员会，监督单位是西南交通大学社团联合会，有自己独立的社团内部组成机构和特有的运作模式。【社团宗旨】一直以来，镜湖文学社秉承着“心明如镜，心静如湖；文墨繁华，学思甚笃”的办社思想，结合“缤纷校园，绿化心灵”的宗旨和“培养交大学子人文情怀，提高交大校园文化底蕴，为文学爱好者提供交流平台”的基本目标，为交大学子提供丰富多彩的活动和展示自己的舞台【品牌活动】文学大爆炸，等你的情书征文活动，一站到底挑战赛【邮箱】 jhwxs@qq.com【QQ】 2196421655【微博】 西南交大镜湖文学社【微信公众号】 交大镜湖 招新镜湖文学社微信招新推送]]></content>
       <categories>
         <category>社团</category>
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[未收录，待补充]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2Ftemp%2F</url>
-    <content type="text"><![CDATA[未收录，待补充 返回社团总览 联系站主]]></content>
+    <title><![CDATA[计财处助理团]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%AE%A1%E8%B4%A2%E5%A4%84%E5%8A%A9%E7%90%86%E5%9B%A2%2F</url>
+    <content type="text"><![CDATA[计财处助理团【QQ】西南交大计财处助理团（2649553091）外出办公、来校访问、科研立项、收入管理，财务一路相随。如何有效理解财务报销、正确把握收税政策，计财处助理团让你不在财务的路口迷茫。在这里，有学长学姐学姐手把手教你如何保账，有老师一对一辅导财会知识。这里，我们一同成长为一支懂财务，服务学校各单位财务事务的骨干团队。这只团队，期待你的加入! 社团简介【社团简介】计财处助理团是一支在计划财务处和校团委的指导下，面向全校师生的学生服务团队。本社团秉承“服务育人、管理育人”的理念，旨在让更多的人了解学校计财处相关政策与服务，减少师生办理财务业务的冗余程序，加强同学与学校计财处的沟通。是一支具备相关财会知识和操作技能，能够服务和指导学校各单位、各类人员快捷办理财务事务的学生骨干团队。【社团宗旨】以学生团队为依托，将具体的财务管理知识传授给学院和师生。旨在弘扬社会主义新风尚，促进大学生的精神文明建设和文化建设，提高大学生的基本技能，丰富校园生活。【品牌活动】财务业务导引、社团财务报销讲座、会计专业认知实习 等【邮箱】jcczltSWJTU@163.com【微信公众号】西南交大计财处助理团【QQ】西南交大计财处助理团（2649553091） 招新计财处助理团微信招新推送计财处助理团微信招新推送]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -185,9 +169,41 @@
       </categories>
   </entry>
   <entry>
+    <title><![CDATA[MARS动漫同人社]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2FMARS%E5%8A%A8%E6%BC%AB%E5%90%8C%E4%BA%BA%E7%A4%BE%2F</url>
+    <content type="text"><![CDATA[MARS动漫同人社2018年MARS迎新总群：346744380这里是二次元的世界，聚集了一批喜欢ACGN的小伙伴们，我们有COS部，LIVE部、CV部、技术部、原创部以及漫讯部。无论是你想找到志同道合的朋友，想参加有趣的活动，还是想学到酷炫的各项技能，在这里都能实现。LIVE歌舞祭，COSPLAY嘉年华，MAD红白合战，笔稿大赛……在这里，你甚至可以学到如何化妆、道具与穿小裙子（划掉）。如果你对ACGN文化感兴趣的话，MARS动漫同人社是你不容错过的选择！快来加入我们, 一起享受快乐肥宅的生活吧！ 招新 MARS动漫同人社B站视频 MARS动漫同人社招新推送]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[西南交大雷锋公司]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%A5%BF%E5%8D%97%E4%BA%A4%E5%A4%A7%E9%9B%B7%E9%94%8B%E5%85%AC%E5%8F%B8%2F</url>
+    <content type="text"><![CDATA[西南交大雷锋公司 微信推送链接 雷锋公司协会具体资料请戳这里！！]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[DM魔术协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2FDM%E9%AD%94%E6%9C%AF%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[DM魔术协会 你想在朋友聚会中成为焦点吗？想看到别人惊喜诧异的眼神吗？想让人刮目相看吗？那就加入魔术协会吧！在这里，有你想看的大变活人！在这里，有你想看的读心术！在这里，有你想看的空手出牌！在这里有你想看想学的各种魔术，还有很多志同道合的小伙伴们！还在等什么呢，魔术协会欢迎你的加入！ 招新魔术协会招新视频魔术协会微信招新推送 活动]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[LT手作创意设计社团]]></title>
     <url>%2F2018%2F09%2F08%2Fassociation%2FLT%E6%89%8B%E4%BD%9C%E5%88%9B%E6%84%8F%E8%AE%BE%E8%AE%A1%E7%A4%BE%E5%9B%A2%2F</url>
     <content type="text"><![CDATA[LT手作创意设计社团 Hello~大家好，我们是LT手作创意设计社团，简称为LT手作社，我们是一个关于传统手工艺的社团，在社团里大家可以偶尔做做活动（我们社团承接活动的人群一般都是外国小哥哥小姐姐呢）也可以学习软件（因为社团内部很多都是设计专业的同学，所以又不会的问题也可以问哇） 还有太多太多… 下面正经的介绍一下：社团全名为：Little Things手作创意设计社团，简称“LT手作创意设计社团”。 本社团立足于对传统手工艺的传承与创新，以坚持弘扬民族文化，开拓在校大学生的设计文化视野为宗旨，围绕现代手工艺设计及社会相关设计文化现象开展活动，力求在物质文明发达的今天，用艺术设计这样具有浓厚人文气息的学科来丰富我们的精神生活。 本社团的目的是以艺术设计专业为基础，建立一个多学科、多专业的交流平台，通过设计交流会、讲座、展览和设计咨询的方式在全校范围进行手作设计宣传展示，吸引更多的热爱创意、热爱设计艺术、热爱手作设计的同学加入本社团，为他们提供一个相互交流、相互学习的平台。同时，我们将积极与社会相关团体进行广泛合作，为本社团会员搭建一个宣传、展示的实践平台。 在社团里大家可以偶尔做做活动（我们社团承接活动的人群一般都是外国留学生）也可以学习软件（因为社团内部很多都是设计专业的同学，所以有不会的问题也可以问） 总之我们是一个团结，和谐的社团，我们也相信加入我们后你会找到自己想做的事情，我们期待你的加入啊！ 招新 部门介绍 活动与日本交流生活动的小合影在美国交流生活动中小姐姐的照片手工作品手工扎染活动的展示 社团作品展示]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[未收录，待补充]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2Ftemp%2F</url>
+    <content type="text"><![CDATA[未收录，待补充 返回社团总览 联系站主]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -201,9 +217,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[MARS动漫同人社]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2FMARS%E5%8A%A8%E6%BC%AB%E5%90%8C%E4%BA%BA%E7%A4%BE%2F</url>
-    <content type="text"><![CDATA[MARS动漫同人社2018年MARS迎新总群：346744380这里是二次元的世界，聚集了一批喜欢ACGN的小伙伴们，我们有COS部，LIVE部、CV部、技术部、原创部以及漫讯部。无论是你想找到志同道合的朋友，想参加有趣的活动，还是想学到酷炫的各项技能，在这里都能实现。LIVE歌舞祭，COSPLAY嘉年华，MAD红白合战，笔稿大赛……在这里，你甚至可以学到如何化妆、道具与穿小裙子（划掉）。如果你对ACGN文化感兴趣的话，MARS动漫同人社是你不容错过的选择！快来加入我们, 一起享受快乐肥宅的生活吧！ 招新 MARS动漫同人社B站视频 MARS动漫同人社招新推送]]></content>
+    <title><![CDATA[书画协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E4%B9%A6%E7%94%BB%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[书画协会欢迎喜欢书画的你们加入QQ群：487784822朝书暮画，斯如骑战马。激情笔笔注点划，应知情义无价。挥笔泼墨间尽展灵动、飘逸与风雅。在这里——他，能引一代之风流；她，能创一派之古典。他，是书法；她，是国画。西南交通大学大学生书画协会，创立于2002年，文化积淀16载春秋！工科学校，艺术殿堂！每周练笔+书画培训，教你秒变大神，作品展览+福利附送，带你领略书画风采！这个九月，书协等你！PS:欢迎喜欢书画的你们加入QQ群：487784822，更多精彩等你来哦！ 关注我们微信公众号 微博qq空间]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -225,9 +241,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[书画协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E4%B9%A6%E7%94%BB%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[书画协会欢迎喜欢书画的你们加入QQ群：487784822朝书暮画，斯如骑战马。激情笔笔注点划，应知情义无价。挥笔泼墨间尽展灵动、飘逸与风雅。在这里——他，能引一代之风流；她，能创一派之古典。他，是书法；她，是国画。西南交通大学大学生书画协会，创立于2002年，文化积淀16载春秋！工科学校，艺术殿堂！每周练笔+书画培训，教你秒变大神，作品展览+福利附送，带你领略书画风采！这个九月，书协等你！PS:欢迎喜欢书画的你们加入QQ群：487784822，更多精彩等你来哦！ 关注我们微信公众号 微博qq空间]]></content>
+    <title><![CDATA[体育舞蹈协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E4%BD%93%E8%82%B2%E8%88%9E%E8%B9%88%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[体育舞蹈协会欢迎加入体舞18大群 群号794300746西南交通大学体育舞蹈协会又名银杏之下舞蹈工作室，成立于1999年，至今已多次获得全校优秀社团、明星社团等称号。协会指导老师王彦老师为体育舞蹈国家级裁判，国标舞十项全能选手。 体育舞蹈，又称“国际标准舞”，即“国标舞”，可分为两大类，10个舞种。第一大类为摩登舞，包括华尔兹、探戈、狐步舞、快步舞、维也纳华尔兹；第二大类为拉丁舞，包括伦巴、恰恰、桑巴、斗牛舞、牛仔舞。 协会每周三和周日晚为常规舞蹈训练，由专业老师指导、资深学长学姐带领教学，训练从零基础开始，保证左右会员都能接受哦！协会每年举办国标舞大赛、迎新晚会等活动，在学校有相当大的影响力，在提高学校体育舞蹈水平，丰富在校同学的文化生活等方面有着举足轻重的作用。 简单说来，体舞协会是热爱跳舞、喜欢舞台的小伙伴们的基地。 交大之中，银杏之下，体舞就在那里，晴也盼你，雨也盼你。体舞协会欢迎每一个人！欢迎加入协会QQ大群，群号：794300476欢迎关注体舞微信公众号：JDTWXH 招新体育舞蹈协会微信招新链接 视频活动会员大会倾城之恋迎新晚会日常训练舞自由我国标舞大赛迎新晚会指导老师王彦]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -249,22 +265,6 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[体育舞蹈协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E4%BD%93%E8%82%B2%E8%88%9E%E8%B9%88%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[体育舞蹈协会欢迎加入体舞18大群 群号794300746西南交通大学体育舞蹈协会又名银杏之下舞蹈工作室，成立于1999年，至今已多次获得全校优秀社团、明星社团等称号。协会指导老师王彦老师为体育舞蹈国家级裁判，国标舞十项全能选手。 体育舞蹈，又称“国际标准舞”，即“国标舞”，可分为两大类，10个舞种。第一大类为摩登舞，包括华尔兹、探戈、狐步舞、快步舞、维也纳华尔兹；第二大类为拉丁舞，包括伦巴、恰恰、桑巴、斗牛舞、牛仔舞。 协会每周三和周日晚为常规舞蹈训练，由专业老师指导、资深学长学姐带领教学，训练从零基础开始，保证左右会员都能接受哦！协会每年举办国标舞大赛、迎新晚会等活动，在学校有相当大的影响力，在提高学校体育舞蹈水平，丰富在校同学的文化生活等方面有着举足轻重的作用。 简单说来，体舞协会是热爱跳舞、喜欢舞台的小伙伴们的基地。 交大之中，银杏之下，体舞就在那里，晴也盼你，雨也盼你。体舞协会欢迎每一个人！欢迎加入协会QQ大群，群号：794300476欢迎关注体舞微信公众号：JDTWXH 招新体育舞蹈协会微信招新链接 视频活动会员大会倾城之恋迎新晚会日常训练舞自由我国标舞大赛迎新晚会指导老师王彦]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[动植物协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%8A%A8%E6%A4%8D%E7%89%A9%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[动植物协会 动植物协会成立于2013年，提倡对环境，野生动物和人类社会进行关心和爱护。通过各种活动的开展，培植我们对自然关爱、对动植物保护的环境友好意识。以关爱野生动植物为出发点，放眼全世界，透过自然教育、野生动物救助行动，推动野生动植物保护工作，期许让每个人将自然美好的感动转化为环境守护的行动，保护我们的地球母亲。关注所有野生动植物的生存需求，包括我们人类自己。通过每年举办各种各样的活动，走进自然，体验大自然的奇妙。 协会内部管理设主席团，分管办公室、活动部、公关部、宣传部和学术部，五个部门各司其职，团结奋进，统筹安排协会内的相关事务。从建会到现在，本协会先后举办的各项与动植物相关的活动均得到校领导及校内师生的认可。协会将教大家制作叶雕书签、琥珀标本，还会举办苔藓造景大赛等活动，丰富大家的课余生活。作为新兴协会之一，本协会秉承不断学习的原则，不仅积极学习动植物的相关知识，同时也向各大社团吸取经验，不断进取，为协会的发展努力。愿和我们一样热爱自然的你加入我们！ 一花一世界，一蝶一千秋。我们热爱自然，用心感受每个生命和每份成长，一起去湖边见证木芙蓉的盛放，学会制作有爱的叶雕书签和琥珀标本，在微景观大赛中发现自己创造美的能力。这样的我们在这里等待这样的你的加入！]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
     <title><![CDATA[化学协会]]></title>
     <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%8C%96%E5%AD%A6%E5%8D%8F%E4%BC%9A%2F</url>
     <content type="text"><![CDATA[化学协会18酷炫化协小萌新，群聊号码：863053012化学合成我们的激情，分解我们的快乐，置换我们的友谊,化学协会等待着你！打造化学舞台，创造灿烂人生是我们的宗旨,多元化的活动让我们的协会生机勃勃, 这是一个开放广阔的舞台,我们期待的你的意气风发!给心灵找个家,给化学找个伴,化学协会期待你的加入! 【社团简介】西南交通大学化学协会是依托于西南交通大学生命科学与工程学院、注重对全校学生的化学素质培养以及化学知识普及的学术类社团，成立于2014年，是一个注重实验与知识竞赛的校级社团组织。旨在为交大学子提供一个良好的平台，使其在大学能够继续热爱化学并且得到提升，丰富大家的校园文化生活；更多的是提高部员的实验动手能力，也为生命学院助力。一切服务于会员的基础之上，增强创新能力，提高活动质量，定期开展丰富多彩的活动，不断探索学生社团的发展，为活跃校园文化，加强校园文化建设贡献力量。 【社团宗旨】以实验为依托，开展化学知识竞赛与实验比赛。旨在提升大家的化学素养以及动手操作能力、实践能力，促进学生的发展。 【品牌活动】化学知识竞赛、实验比赛、化学猜字谜、内部实验、元素大乱斗等 【邮箱】SWJTUChemistryClub@163.com【微信公众号】酷炫化协【QQ】1546504844]]></content>
@@ -281,9 +281,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[大学生伙食管理委员会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BC%99%E9%A3%9F%E7%AE%A1%E7%90%86%E5%A7%94%E5%91%98%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[大学生伙食管理委员会【微信公众号】西南交大伙食管理委员会又是一年开学季，西南交大伙食管理委员会前来报道！这里不仅是交大“吃货”们的聚集地，还是与交大食堂息息相关的服务类社团。你想深入探索交大食堂么？想在交大展露你的精湛厨艺么？想与志同道合的朋友一起举办各类美食活动么？我们在交大伙管会，期待每一个有想法有创意爱美食的你加入! 社团简介【社团简介】想全方位探索交大食堂么？想获得更多饮食服务中心相关活动和精品课堂的新鲜资讯么？这里是大学生伙食管理委员会，架起学生与食堂之间的沟通桥梁，收集你的任何建议与吐槽，满足你对大学食堂的期望，近距离接触厨艺绝佳又可爱的食堂师傅，创造属于你的带不走的“交大味道”！食神大赛，让你发现潜藏在身边的厨神；食堂师傅技能大赛，带你大饱口福！在这里，我们给你交流厨艺的机会与平台，交大这么大，我们的相遇一定是对于美食的心有灵犀。西南交通大学大学生伙食管理委员会等待你们的加入！【社团宗旨】面向全校师生，构建学生与食堂之间的沟通平台，协助交大饮食服务中心一起提高食堂知名度，营造良好的交大饮食文化。【品牌活动】食神烹饪大赛，光盘行动，失物招领，蛋糕DIY 等【邮箱】1060628972@qq.com【微信公众号】西南交大伙食管理委员会 活动食话食说课堂记录蛋糕DIY会员大会食神大赛初赛食神大赛决赛]]></content>
+    <title><![CDATA[动植物协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%8A%A8%E6%A4%8D%E7%89%A9%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[动植物协会 动植物协会成立于2013年，提倡对环境，野生动物和人类社会进行关心和爱护。通过各种活动的开展，培植我们对自然关爱、对动植物保护的环境友好意识。以关爱野生动植物为出发点，放眼全世界，透过自然教育、野生动物救助行动，推动野生动植物保护工作，期许让每个人将自然美好的感动转化为环境守护的行动，保护我们的地球母亲。关注所有野生动植物的生存需求，包括我们人类自己。通过每年举办各种各样的活动，走进自然，体验大自然的奇妙。 协会内部管理设主席团，分管办公室、活动部、公关部、宣传部和学术部，五个部门各司其职，团结奋进，统筹安排协会内的相关事务。从建会到现在，本协会先后举办的各项与动植物相关的活动均得到校领导及校内师生的认可。协会将教大家制作叶雕书签、琥珀标本，还会举办苔藓造景大赛等活动，丰富大家的课余生活。作为新兴协会之一，本协会秉承不断学习的原则，不仅积极学习动植物的相关知识，同时也向各大社团吸取经验，不断进取，为协会的发展努力。愿和我们一样热爱自然的你加入我们！ 一花一世界，一蝶一千秋。我们热爱自然，用心感受每个生命和每份成长，一起去湖边见证木芙蓉的盛放，学会制作有爱的叶雕书签和琥珀标本，在微景观大赛中发现自己创造美的能力。这样的我们在这里等待这样的你的加入！]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -297,25 +297,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[国际关系研究会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%9B%BD%E9%99%85%E5%85%B3%E7%B3%BB%E7%A0%94%E7%A9%B6%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[国际关系研究会国际关系研究会招新群：774377875 国际关系研究会微信招新推送 国际关系研究会介绍]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
     <title><![CDATA[外语协会]]></title>
     <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%A4%96%E8%AF%AD%E5%8D%8F%E4%BC%9A%2F</url>
     <content type="text"><![CDATA[外语协会2018外语协会交流群QQ：823958146社团简介【社团简介】西南交大外语协会（Foreign Language Association of SWJTU）,简称FLA，成立于1991年，是西南交通大学成立最早的元老级别社团之一，迄今已走过了28个春秋，多次荣获西南交通大学“十佳学生社团”、“明星社团”等称号。外语协会主打英语，辅之世界各国语言和文化，旨在为广大喜爱英语和外国文化的交大学子提供一个交流的平台和展示的舞台。 外语协会作为文化艺术类五星级社团，不仅为全校学生开展英语学习的沙龙活动，历届还会举办英语演讲比赛、写作比赛、四六级模拟考试等学术竞赛类活动，我们以多种多样的对外活动，致力于为全校学生提供最好的英语学习机会与资源。 自1991年成立以来，外语协会一直不忘初心，秉承理念，给交大学子提供接触外语、学习外语和展示外语的平台，向热爱外国文化的同学搭建对外学习的桥梁与载体，让更多对外语感兴趣的同学加入到我们之中。愿外语协会在交大学子的参与及鼓励之下继往开来、生生不息。 【社团宗旨】为广大喜爱英语和外国文化的交大学子提供一个交流的平台和展示的舞台。 【品牌活动】“交大之星”英语演讲比赛：以提高语言能力、增进在校同学之间学习、交流为目的的高校英语演讲大赛。以新颖、富有挑战的环节设置，为英语爱好者提供展示的平台。促进选手提高自己的英语水平，培养英语表达的能力。 外语协会迎新晚会：承载了外语协会内部的活力和外部的声望，体现了外语协会内部部门构成的多样化，考验了各个部门之间协调运作的能力，更是让外语协会一直富有凝聚力的核心。晚会的每一个演出节目都是外语协会各部门之间奇思妙想的结果。 四六级经验交流会及模考：邀请四六级考试中成绩优秀者来分享学习考试经验，让即将考试的同学们更了解四六级的考试技巧；模拟真实四六级考试，让同学们提前适应考试环境，发挥最佳考试水平。 【邮箱】swjtufla@qq.com【微信公众号】微信搜索 SWJTU-FLA 或 西南交大外协【官方QQ】西南交大外语协会QQ：1820551745【QQ交流群】2018外语协会交流群QQ：823958146【官方微博】Sina@西南交大外语协会 部门介绍部门介绍一览图（犀浦）部门介绍一览图（九里） 活动会员大会交大之星四六级经验交流会四六级模拟考试外教讲座写作大赛兴趣小组迎新晚会周年庆]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[跆拳道协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%B7%86%E6%8B%B3%E9%81%93%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[跆拳道协会 招兵买马，求萌妹，求御姐，求正太，求大叔云集各类精英，跆拳道协会，期待你的到来。有人的地方就有生活，有生活的地方就有咱们。如果你热爱青春，期望展示自我，快来加入咱们吧！年轻活力是我们的资本，张扬个性凸显胆识是我们的超越。加入我们，我们会帮你发现自己的闪光点，让你变得更加自信和充实。追不到女神？跆协祝你成功。当不了女神？跆协教你成长。 活动第二届“临战不退”跆拳道争霸赛图]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -329,25 +313,25 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[大学生就业与创业协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%A4%A7%E5%AD%A6%E7%94%9F%E5%B0%B1%E4%B8%9A%E4%B8%8E%E5%88%9B%E4%B8%9A%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[大学生就业与创业协会 招新大学生就业与创业协会微信招新链接]]></content>
+    <title><![CDATA[大学生伙食管理委员会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BC%99%E9%A3%9F%E7%AE%A1%E7%90%86%E5%A7%94%E5%91%98%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[大学生伙食管理委员会【微信公众号】西南交大伙食管理委员会又是一年开学季，西南交大伙食管理委员会前来报道！这里不仅是交大“吃货”们的聚集地，还是与交大食堂息息相关的服务类社团。你想深入探索交大食堂么？想在交大展露你的精湛厨艺么？想与志同道合的朋友一起举办各类美食活动么？我们在交大伙管会，期待每一个有想法有创意爱美食的你加入! 社团简介【社团简介】想全方位探索交大食堂么？想获得更多饮食服务中心相关活动和精品课堂的新鲜资讯么？这里是大学生伙食管理委员会，架起学生与食堂之间的沟通桥梁，收集你的任何建议与吐槽，满足你对大学食堂的期望，近距离接触厨艺绝佳又可爱的食堂师傅，创造属于你的带不走的“交大味道”！食神大赛，让你发现潜藏在身边的厨神；食堂师傅技能大赛，带你大饱口福！在这里，我们给你交流厨艺的机会与平台，交大这么大，我们的相遇一定是对于美食的心有灵犀。西南交通大学大学生伙食管理委员会等待你们的加入！【社团宗旨】面向全校师生，构建学生与食堂之间的沟通平台，协助交大饮食服务中心一起提高食堂知名度，营造良好的交大饮食文化。【品牌活动】食神烹饪大赛，光盘行动，失物招领，蛋糕DIY 等【邮箱】1060628972@qq.com【微信公众号】西南交大伙食管理委员会 活动食话食说课堂记录蛋糕DIY会员大会食神大赛初赛食神大赛决赛]]></content>
       <categories>
         <category>社团</category>
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[大学生心理学会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%A4%A7%E5%AD%A6%E7%94%9F%E5%BF%83%E7%90%86%E5%AD%A6%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[大学生心理学会 大学生心理学会是一个以我校心理研究与咨询中心为指导核心,面向全校师生的学生社团组织。自1996年成立以来,本学会已经由最初的13人发展成五百多人的大社团。从1996年至今，大学生心理学会就连续被评为校“明星社团”, 更是曾经荣获“校十佳社团”、“全国大学生优秀社团” 、“四川省十佳社团”( 名列第一) 以及“全国高校十佳品牌社团”等荣誉称号。大学生心理学会现在已成为交大成立最早、人数最多、影响最大的优秀社团。外在的辉煌是因为内在的团结友爱和睦统一。 本学会内部设六个部门，分别是情景剧团.学术部、办公室、活动部、咨询部、宣传部。正是在这六个部门的协调一致、 共同努力下，心学逐渐形成了富有自身特色的心理剧公演、心理咨询、校园调查等活动。活动的同时,心理学会通过心理咨询、资料库、会刊、新媒体宣传及网站提供给同学们了解心理健康意义的平台和方式,给同学们学习心理知识的捷径。 社团宗旨：大学生心理学会以“为健康者更健康，心理困惑者能得到及时的帮助”为宗旨。 品牌活动：迎新晚会, 3-25善爱我宣传画征大赛，5-25善爱我情景割大赛、校外咨询活田动、学术电影展、心理学知识讲座 招新微信招新链接]]></content>
+    <title><![CDATA[跆拳道协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%B7%86%E6%8B%B3%E9%81%93%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[跆拳道协会 招兵买马，求萌妹，求御姐，求正太，求大叔云集各类精英，跆拳道协会，期待你的到来。有人的地方就有生活，有生活的地方就有咱们。如果你热爱青春，期望展示自我，快来加入咱们吧！年轻活力是我们的资本，张扬个性凸显胆识是我们的超越。加入我们，我们会帮你发现自己的闪光点，让你变得更加自信和充实。追不到女神？跆协祝你成功。当不了女神？跆协教你成长。 活动第二届“临战不退”跆拳道争霸赛图]]></content>
       <categories>
         <category>社团</category>
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[工程实践创新协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5%E5%88%9B%E6%96%B0%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[工程实践创新协会【微信公众号】交大工创当理论的烟花碰上实践的星火，当想象的白马插上创新的翅膀。才华不在无处施展，创造任尔天旋地转。我们就在工创遇见了你。这里倡导创新为动力，实践出真知，这里能让你所有天马行空的想象成为现实！加入我们，成就你！ 社团简介【社团简介】西南交通大学工程实践创新协会是依托于工程训练中心、服务于全校学生的学生社团。成立于2016年。本协会主要承办校级无碳小车比赛，能够锻炼同学的动手能力与三维设计能力，为有志于参加全国大学生工程训练综合能力大赛的同学提供更好的服务。因此本协会是一个有着良好的学术氛围的协会。【社团宗旨】旨在提高同学的三维设计于动手能力，为以后的工作奠定坚实的基础【品牌活动】无碳小车【邮箱】1262217915@qq.com【微信公众号】交大工创 活动工程实践创新协会竞赛讲解工程实践创新协会竞素质拓展活动工程实践创新协会招新宣讲全国大学生工程训练综合能力大赛1全国大学生工程训练综合能力大赛2全国大学生工程训练综合能力大赛3]]></content>
+    <title><![CDATA[大学生创造学会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%A4%A7%E5%AD%A6%E7%94%9F%E5%88%9B%E9%80%A0%E5%AD%A6%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[大学生创造学会 大学生创造学会微信招新链接 活动]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -361,17 +345,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[尊老敬老协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%B0%8A%E8%80%81%E6%95%AC%E8%80%81%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[尊老敬老协会 西南交通大学尊老敬老协会是依托于校离退处和校团委、主要西南交大退休老教授、老校友的学生组织，是学校中一个校园服务类的社团组织。我们协会旨在帮助老教授、老校友学习智能手机和电脑，通过与老教授的流与互相帮助丰富大学生的业余生活，获取志愿时间，鼓励同学们积极参加志愿活动，来提升自己，实现心理和知识双重发展。]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[极限飞盘协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E6%9E%81%E9%99%90%E9%A3%9E%E7%9B%98%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[极限飞盘协会 协会介绍 微信招新 极限飞盘运动介绍]]></content>
+    <title><![CDATA[大学生心理学会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%A4%A7%E5%AD%A6%E7%94%9F%E5%BF%83%E7%90%86%E5%AD%A6%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[大学生心理学会 大学生心理学会是一个以我校心理研究与咨询中心为指导核心,面向全校师生的学生社团组织。自1996年成立以来,本学会已经由最初的13人发展成五百多人的大社团。从1996年至今，大学生心理学会就连续被评为校“明星社团”, 更是曾经荣获“校十佳社团”、“全国大学生优秀社团” 、“四川省十佳社团”( 名列第一) 以及“全国高校十佳品牌社团”等荣誉称号。大学生心理学会现在已成为交大成立最早、人数最多、影响最大的优秀社团。外在的辉煌是因为内在的团结友爱和睦统一。 本学会内部设六个部门，分别是情景剧团.学术部、办公室、活动部、咨询部、宣传部。正是在这六个部门的协调一致、 共同努力下，心学逐渐形成了富有自身特色的心理剧公演、心理咨询、校园调查等活动。活动的同时,心理学会通过心理咨询、资料库、会刊、新媒体宣传及网站提供给同学们了解心理健康意义的平台和方式,给同学们学习心理知识的捷径。 社团宗旨：大学生心理学会以“为健康者更健康，心理困惑者能得到及时的帮助”为宗旨。 品牌活动：迎新晚会, 3-25善爱我宣传画征大赛，5-25善爱我情景割大赛、校外咨询活田动、学术电影展、心理学知识讲座 招新微信招新链接]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -385,6 +361,22 @@
       </categories>
   </entry>
   <entry>
+    <title><![CDATA[大学生就业与创业协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%A4%A7%E5%AD%A6%E7%94%9F%E5%B0%B1%E4%B8%9A%E4%B8%8E%E5%88%9B%E4%B8%9A%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[大学生就业与创业协会 招新大学生就业与创业协会微信招新链接]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[工程实践创新协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5%E5%88%9B%E6%96%B0%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[工程实践创新协会【微信公众号】交大工创当理论的烟花碰上实践的星火，当想象的白马插上创新的翅膀。才华不在无处施展，创造任尔天旋地转。我们就在工创遇见了你。这里倡导创新为动力，实践出真知，这里能让你所有天马行空的想象成为现实！加入我们，成就你！ 社团简介【社团简介】西南交通大学工程实践创新协会是依托于工程训练中心、服务于全校学生的学生社团。成立于2016年。本协会主要承办校级无碳小车比赛，能够锻炼同学的动手能力与三维设计能力，为有志于参加全国大学生工程训练综合能力大赛的同学提供更好的服务。因此本协会是一个有着良好的学术氛围的协会。【社团宗旨】旨在提高同学的三维设计于动手能力，为以后的工作奠定坚实的基础【品牌活动】无碳小车【邮箱】1262217915@qq.com【微信公众号】交大工创 活动工程实践创新协会竞赛讲解工程实践创新协会竞素质拓展活动工程实践创新协会招新宣讲全国大学生工程训练综合能力大赛1全国大学生工程训练综合能力大赛2全国大学生工程训练综合能力大赛3]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[扬音吉他社]]></title>
     <url>%2F2018%2F09%2F08%2Fassociation%2F%E6%89%AC%E9%9F%B3%E5%90%89%E4%BB%96%E7%A4%BE%2F</url>
     <content type="text"><![CDATA[扬音吉他社欢迎加入扬音吉他社，QQ群：836742069扬音吉他社不仅限于吉他只要你喜欢音乐就加入我们 一起玩耍吧吉他小白也不要怕我们会安排教学活动哦所以 你还犹豫什么接下来介绍的部门任君挑选 部门介绍表演部这里汇聚了各路大佬吹拉弹唱可谓是样样精通有一定基础的胖友们可以选择进入这个部门和志同道合的小伙伴促膝长谈一起组乐队啊 朋友 部门介绍外联部外联部主要负责拉平时活动的赞助人民币制造机擅长social的朋友们快来加入我们吧附一张外联部部长图片明明可以靠才华 她却要靠脸 部门介绍宣传部顾名思义宣传就是负责宣传整个社团或者每次活动对微信编辑或者PS有兴趣的这个部门将会是你最好的选择 部门介绍组织部策划 组织每次活动是大家的指南针也是专门负责搞事情的部门其实 不管你选择哪个部门都是奉行 大家一起玩 的宗旨所以别犹豫了只要你skr有趣的人就来加入这个skr的社团吧]]></content>
@@ -393,9 +385,25 @@
       </categories>
   </entry>
   <entry>
+    <title><![CDATA[极限飞盘协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E6%9E%81%E9%99%90%E9%A3%9E%E7%9B%98%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[极限飞盘协会 协会介绍 微信招新 极限飞盘运动介绍]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[文物管理协会]]></title>
     <url>%2F2018%2F09%2F08%2Fassociation%2F%E6%96%87%E7%89%A9%E7%AE%A1%E7%90%86%E5%8D%8F%E4%BC%9A%2F</url>
     <content type="text"><![CDATA[文物管理协会文物管理协会会员群：305940558盗笔？天眼？鬼吹灯？骨董？明器？陪葬品？ ——你对“文物”有着怎样的想象和憧憬？是青铜熔烁迸溅的火花，还是青瓷水墨丹青的妙笔？是书画纵横捭阖的气势，还是织锦繁缛又瑰丽的想象？是玉器通透玲珑的设色，还是古籍里幽深潜藏的岁月？是万千物象背后的故事，还是无数故事里时代的折痕？你，可曾想过走近它们，去寻那份血脉里的熟悉？不必担心自己不懂行，只要你有着对文物兴趣或热爱，文物协会都会敞开怀抱欢迎你！ 社团简介【协会简介】西南交通大学文物协会是2015年成立的学生社团和公益服务组织，立足于西南交通大学建筑小品保护，保护范围从交大历史杰出校友的石像、各式具有象征意义的小建筑及各届校友赠送母校的石像到“竢实扬华，自强不息”的交大精神。社团宗旨是发掘并宣传西南交通大学作为教育遗产的价值，保护交大文物，传递交大记忆。同时以传播考古知识，唤起文物保护意识为宗旨，以倡导共同学习和分享知识与审美体验为自我定位，为交大学子提供走进文物世界与聆听考古学智慧的桥梁。【协会宗旨】为交大师生及校友宣传学校的历史文化积淀，传播爱校意识。【品牌活动】文物知识竞赛、文物摄影比赛等【社团联系方式】：微信公众号：西南交大文物管理（xnjdwwglxh）；邮箱地址：2647808494@qq.com；会员群：305940558 活动三星堆出行活动照片文物摄影大赛决赛现场照片文物摄影决赛作品文物摄影比赛作品文物知识竞赛现场照片文物知识竞赛活动照片]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[尊老敬老协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%B0%8A%E8%80%81%E6%95%AC%E8%80%81%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[尊老敬老协会 西南交通大学尊老敬老协会是依托于校离退处和校团委、主要西南交大退休老教授、老校友的学生组织，是学校中一个校园服务类的社团组织。我们协会旨在帮助老教授、老校友学习智能手机和电脑，通过与老教授的流与互相帮助丰富大学生的业余生活，获取志愿时间，鼓励同学们积极参加志愿活动，来提升自己，实现心理和知识双重发展。]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -417,14 +425,6 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[演讲与口才协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E6%BC%94%E8%AE%B2%E4%B8%8E%E5%8F%A3%E6%89%8D%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[演讲与口才协会 演讲与口才协会微信招新链接 演讲与口才协会微信招新链接 王牌比赛“扬华杯”主持人大赛]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
     <title><![CDATA[电影协会]]></title>
     <url>%2F2018%2F09%2F08%2Fassociation%2F%E7%94%B5%E5%BD%B1%E5%8D%8F%E4%BC%9A%2F</url>
     <content type="text"><![CDATA[电影协会欢迎加入白日梦影社招新群:663701825 @下一个“电影人”，「白日梦影社」剧组进组了。你好，你喜欢电影吗？我们是白日梦影社，我们爱看电影，观影会，交大人专属包场电影；我们爱聊电影，电影沙龙，百影讲堂；我们想学电影，理论知识，影评写作；我们还想拍电影，剪辑后期，剧本构思，编剧导演。(?￣▽￣)? 部门介绍【影评部】你钟爱的电影都有我们独树一帜的讲解看了之后你会更加痴迷于它！【外联部】来到外联部，发挥你的社交才能吧！你们天马行空的想法，由我们来提供保障【宣策部】新鲜热点，笔转峰回，推送就此铺就。无限脑洞，精湛技艺，海报定格成相。【放映部】三位数阅片达人，亦或狂热偏好迷，对各类电影如数家珍。今天看什么？我说了算。 我们交流，互相安利，感受电影魅力。关于电影，你所想的都将成为可能，柏拉图洞穴寓言，电影是一个白日梦，你愿意和我们做一场电影梦吗？欢迎加入白日梦影社招新群:663701825?(?ω??) 招新线上报名链接 电影协会招新微信推送 欢迎关注电影协会公众号]]></content>
@@ -441,25 +441,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[科幻协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E7%A7%91%E5%B9%BB%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[科幻协会 西南交通大学科幻协会建立于2004年，是交大热爱科幻，乃至奇幻的同学们的聚集地。我们坚信“科幻不死，铁甲依然”，社团活动涉及小说，电影，桌游，漫画等各个领域，旨在为热爱幻想的同学提供多种多样丰富多彩的课余活动和心得交流，这里有你志同道合的伙伴，这里有你放飞想象的平台，来幻协，我们一起玩出个未来。 活动INGRESS电影幻协签售游戏约饭蹭书征文桌游]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[篮球协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E7%AF%AE%E7%90%83%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[篮球协会欢迎加入2018级交大篮协迎新群，群聊号码：560986342一球在手，天下交友。”要知道，篮球从不是一个人的运动。”无论萌妹子、钢铁直男还是邻家小哥哥，我们都需要你们来挑战地心引力，引爆篮球魅力！想认识交大最帅的小姐姐？成为犀浦流川枫，交大小皇帝？专业的国家级篮球裁判？脱贫脱单奔小康？Do you want to study crossover 、in and out and Euro step?保护好你的脚踝，只要你想来，只要你敢来，我们奉陪到底！人生如球，要投就投交大篮协！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;————西南交通大学篮球协会 小伙伴 活动Adidas校园火拼训练营AUBA大学生篮球联赛AUBA篮球联赛AUBA联赛总决赛扣篮王理查德贾森亲临总决赛篮协裁判吹罚比赛校庆社团嘉年华 部门介绍招新]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[纸鸢书院交大分社]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2%E4%BA%A4%E5%A4%A7%E5%88%86%E7%A4%BE%2F</url>
-    <content type="text"><![CDATA[纸鸢书院交大分社欢迎加入18年纸鸢书院交大分社，群聊号码：627233873 爱读书的我们，不是书呆子，也能聚在一起嘻嘻哈哈打打闹闹玩游戏；爱读书的我们，爱分享，也会将自己心爱的书籍献出借给对它感兴趣的人；爱读书的我们，在纸鸢书院这个小小的地方，也能乘着东风，放飞我们的梦想。爱读书的我们，欢迎每一个爱读书的你加入！我们是纸鸢书院！ QA：Q1：纸鸢书院是做什么的？（简介） 纸鸢即风筝，寓意追求梦想，放飞希望。书院是中国历史发展演变及文化内涵传承的载体。2014年10月，纸鸢书院文化宣传交流平台在中共成都市委宣传部策划和指导下应运而生。纸鸢书院主要面向高校大学生为主的时代青年，通过开展读书分享、思想交流、文化创意、社会实践、创新创业等系列精品主题活动，引导当代青年积极思考，锐意进取，全力打造一个助力当代青年实现自我价值和梦想追求的知识传播与思想交流平台。 Q2：纸鸢书院学生分社是什么？（简介） 纸鸢书院学生分社，是纸鸢书院文化交流平台的基础，由各高校分社组成，主要承担各高校宣传纸鸢书院、传播校园正能量、丰富校园文化活动等工作内容。目前以社团或组织的形式已经在12所高校建立起了纸鸢书院学生分社，承载着纸鸢梦想一起飞，一起美。纸鸢书院西南交通大学分社成立于2015年，指导单位是共青团西南交通大学委员会。纸鸢书院相信青年具有创新和开拓的力量，只要插上翅膀就能展翅飞翔,纸鸢书院用行动支持年轻人.让开展活动成为逐梦的起点，让纸鸢书院成为筑梦的平台，把理想化作现实。“博学 审问 慎思 明辨 笃行”是我们的理念，纸鸢书院西南交通大学分社欢迎你的到来！ Q3：纸鸢书院西南交通大学分社与总社的关联？ 纸鸢书院西南交通大学分社在纸鸢书院总社的领导下，主要负责发掘、优选本校内利于学生健康成长的活动项目，经由纸鸢书院项目组审核后予以指导、组织、赞助、众筹、推广等落地扶持，真正帮助大学生创造自我价值，实现人生梦想。 Q4：纸鸢书院西南交通大学分社主要办过什么活动？ 我们举办过“万里思念，一封家书”（中国扶贫基金会携手善品公社、纸鸢书院和启梦社对雅安果农的扶贫活动）、“经典的力量——一站到底挑战赛”、“创·青春”高校创新创业交流会、“集书惠众”图书分享活动等。可以关注我们的微信公众号“纸鸢书院交大分社”查看具体介绍哦。 Q5：纸鸢书院有什么部门，各自是负责什么的？ 我们总共有五个部门：①人事管理部安排通知协会各种会议和重要活动；负责社团财务、成员的管理。②媒体宣传部负责社团宣传工作，海报的制作；负责社团的微博、微信公众号等新媒体的运营与维护。③公共关系部负责与其他校级学生社团的合作以及各高校分社之间的交流。④项目策划部组织、策划、安排社团内各项活动；负责活动的会场设计及布置等工作。⑤综合设计部职责：全面设计协会的各种活动，统筹安排，全面协调各部门开展活动 。 Q6：加入纸鸢书院有什么好处？ ①给你一个家。学弟学妹离开昔日的高中校园，来到一个陌生的环境，自然会产生不安、寂寞的情绪。加入我们纸鸢书院的大家庭，这里有学长学姐耐心细致地分享他们的一些关于大学生活的心得经验，这里有和你兴趣相似、志同道合的朋友，这里有传说中的归属感，相信会很好地消除那些负面情绪，促进你更快地适应新环境。 ②能够锻炼和提高你解决问题的能力。在组织我们社团的活动中，会遇到许多实际的问题，通过解决这些问题，可以锻炼你的综合能力。 ③能够丰富你的大学生活。大学当然是以学习为重心，但是，大学生不能只是学习书本知识。在确保完成学习任务之余，加入我们纸鸢书院，组织或参加一些有意义的活动，你的大学生活会更加丰富多彩。④能够为以后步入社会打下基石。你的社团经历是简历中不可或缺的一部分，也是你找工作时可以好好利用的砝码。另外，在以后的工作中，从我们纸鸢书院的社团活动中学到的为人处世之道一定可以派上用场。 ⑤展示自己。我们给你一个舞台，这里可以展示你的特长，展现你的风采，让更多的人看到，纸鸢书院就是你的人生巅峰舞台。 Q7：加入纸鸢书院的要求？ 纸鸢书院是一个大家庭，是一个团结友爱积极向上的集体。对于刚来到大学的你，只要你有一腔热情，热爱纸鸢书院，我们便欢迎。 Q8：加入纸鸢书院的报名方式？ 欢迎加入18年纸鸢书院交大分社，群聊号码：627233873 Q9：我们社团的特点优势？ 我们纸鸢书院与其他社团最大的不同点便是我们是在中共成都市委宣传部的策划和指导下产生的，成都市各大高校都有纸鸢书院分社。这意味着我们可以搞更大的事情，举办的活动规模会更大，影响会更广，更加锻炼你的能力，展示你的风采。 Q10：平时社团会不会很忙？ 纸鸢书院只有在举办活动时才会忙一点，平时几乎没有事情，不会影响学弟学妹的学习和吃喝玩乐哦，而且我们社团还会不定期地聚餐游玩，还有好玩的素质拓展等待你的参与，超级有趣。欢迎你的加入！ 宣传图 活动一站到底经典阅读挑战赛成都的一天 活动成都的一天活动分享会爱在心头口难开邮寄家书活动霍金说读书分享会吴晓波“激荡十年”读书分享会素质拓展活动]]></content>
+    <title><![CDATA[演讲与口才协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E6%BC%94%E8%AE%B2%E4%B8%8E%E5%8F%A3%E6%89%8D%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[演讲与口才协会 演讲与口才协会微信招新链接 演讲与口才协会微信招新链接 王牌比赛“扬华杯”主持人大赛]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -473,9 +457,41 @@
       </categories>
   </entry>
   <entry>
+    <title><![CDATA[篮球协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E7%AF%AE%E7%90%83%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[篮球协会欢迎加入2018级交大篮协迎新群，群聊号码：560986342一球在手，天下交友。”要知道，篮球从不是一个人的运动。”无论萌妹子、钢铁直男还是邻家小哥哥，我们都需要你们来挑战地心引力，引爆篮球魅力！想认识交大最帅的小姐姐？成为犀浦流川枫，交大小皇帝？专业的国家级篮球裁判？脱贫脱单奔小康？Do you want to study crossover 、in and out and Euro step?保护好你的脚踝，只要你想来，只要你敢来，我们奉陪到底！人生如球，要投就投交大篮协！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;————西南交通大学篮球协会 小伙伴 活动Adidas校园火拼训练营AUBA大学生篮球联赛AUBA篮球联赛AUBA联赛总决赛扣篮王理查德贾森亲临总决赛篮协裁判吹罚比赛校庆社团嘉年华 部门介绍招新]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[科幻协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E7%A7%91%E5%B9%BB%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[科幻协会 西南交通大学科幻协会建立于2004年，是交大热爱科幻，乃至奇幻的同学们的聚集地。我们坚信“科幻不死，铁甲依然”，社团活动涉及小说，电影，桌游，漫画等各个领域，旨在为热爱幻想的同学提供多种多样丰富多彩的课余活动和心得交流，这里有你志同道合的伙伴，这里有你放飞想象的平台，来幻协，我们一起玩出个未来。 活动INGRESS电影幻协签售游戏约饭蹭书征文桌游]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[网球协会]]></title>
     <url>%2F2018%2F09%2F08%2Fassociation%2F%E7%BD%91%E7%90%83%E5%8D%8F%E4%BC%9A%2F</url>
     <content type="text"><![CDATA[网球协会欢迎加入qq群：776754183坚持不存在于血脉，而源于心中，这是网球独有的气场。截击、扣杀，热血竞技是你的快乐之源。You still have lots more to work on，只要努力，每个人都能成为越前龙马。真正的我就在这里，在这个和你对阵的球场上。想成为一颗被你打飞的球，然后听你在全场喊：“这是我的，我的，我的。”我知道你会来，所以我等，交大网协许你一网情深，我们一直在这里。 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-—交大网协，一路相伴 注：百团大战于9.23在北区体育场进行，网协在这等你 扫码关注网协（有很多好看的小哥哥小姐姐！！） 活动]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[纸鸢书院交大分社]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E7%BA%B8%E9%B8%A2%E4%B9%A6%E9%99%A2%E4%BA%A4%E5%A4%A7%E5%88%86%E7%A4%BE%2F</url>
+    <content type="text"><![CDATA[纸鸢书院交大分社欢迎加入18年纸鸢书院交大分社，群聊号码：627233873 爱读书的我们，不是书呆子，也能聚在一起嘻嘻哈哈打打闹闹玩游戏；爱读书的我们，爱分享，也会将自己心爱的书籍献出借给对它感兴趣的人；爱读书的我们，在纸鸢书院这个小小的地方，也能乘着东风，放飞我们的梦想。爱读书的我们，欢迎每一个爱读书的你加入！我们是纸鸢书院！ QA：Q1：纸鸢书院是做什么的？（简介） 纸鸢即风筝，寓意追求梦想，放飞希望。书院是中国历史发展演变及文化内涵传承的载体。2014年10月，纸鸢书院文化宣传交流平台在中共成都市委宣传部策划和指导下应运而生。纸鸢书院主要面向高校大学生为主的时代青年，通过开展读书分享、思想交流、文化创意、社会实践、创新创业等系列精品主题活动，引导当代青年积极思考，锐意进取，全力打造一个助力当代青年实现自我价值和梦想追求的知识传播与思想交流平台。 Q2：纸鸢书院学生分社是什么？（简介） 纸鸢书院学生分社，是纸鸢书院文化交流平台的基础，由各高校分社组成，主要承担各高校宣传纸鸢书院、传播校园正能量、丰富校园文化活动等工作内容。目前以社团或组织的形式已经在12所高校建立起了纸鸢书院学生分社，承载着纸鸢梦想一起飞，一起美。纸鸢书院西南交通大学分社成立于2015年，指导单位是共青团西南交通大学委员会。纸鸢书院相信青年具有创新和开拓的力量，只要插上翅膀就能展翅飞翔,纸鸢书院用行动支持年轻人.让开展活动成为逐梦的起点，让纸鸢书院成为筑梦的平台，把理想化作现实。“博学 审问 慎思 明辨 笃行”是我们的理念，纸鸢书院西南交通大学分社欢迎你的到来！ Q3：纸鸢书院西南交通大学分社与总社的关联？ 纸鸢书院西南交通大学分社在纸鸢书院总社的领导下，主要负责发掘、优选本校内利于学生健康成长的活动项目，经由纸鸢书院项目组审核后予以指导、组织、赞助、众筹、推广等落地扶持，真正帮助大学生创造自我价值，实现人生梦想。 Q4：纸鸢书院西南交通大学分社主要办过什么活动？ 我们举办过“万里思念，一封家书”（中国扶贫基金会携手善品公社、纸鸢书院和启梦社对雅安果农的扶贫活动）、“经典的力量——一站到底挑战赛”、“创·青春”高校创新创业交流会、“集书惠众”图书分享活动等。可以关注我们的微信公众号“纸鸢书院交大分社”查看具体介绍哦。 Q5：纸鸢书院有什么部门，各自是负责什么的？ 我们总共有五个部门：①人事管理部安排通知协会各种会议和重要活动；负责社团财务、成员的管理。②媒体宣传部负责社团宣传工作，海报的制作；负责社团的微博、微信公众号等新媒体的运营与维护。③公共关系部负责与其他校级学生社团的合作以及各高校分社之间的交流。④项目策划部组织、策划、安排社团内各项活动；负责活动的会场设计及布置等工作。⑤综合设计部职责：全面设计协会的各种活动，统筹安排，全面协调各部门开展活动 。 Q6：加入纸鸢书院有什么好处？ ①给你一个家。学弟学妹离开昔日的高中校园，来到一个陌生的环境，自然会产生不安、寂寞的情绪。加入我们纸鸢书院的大家庭，这里有学长学姐耐心细致地分享他们的一些关于大学生活的心得经验，这里有和你兴趣相似、志同道合的朋友，这里有传说中的归属感，相信会很好地消除那些负面情绪，促进你更快地适应新环境。 ②能够锻炼和提高你解决问题的能力。在组织我们社团的活动中，会遇到许多实际的问题，通过解决这些问题，可以锻炼你的综合能力。 ③能够丰富你的大学生活。大学当然是以学习为重心，但是，大学生不能只是学习书本知识。在确保完成学习任务之余，加入我们纸鸢书院，组织或参加一些有意义的活动，你的大学生活会更加丰富多彩。④能够为以后步入社会打下基石。你的社团经历是简历中不可或缺的一部分，也是你找工作时可以好好利用的砝码。另外，在以后的工作中，从我们纸鸢书院的社团活动中学到的为人处世之道一定可以派上用场。 ⑤展示自己。我们给你一个舞台，这里可以展示你的特长，展现你的风采，让更多的人看到，纸鸢书院就是你的人生巅峰舞台。 Q7：加入纸鸢书院的要求？ 纸鸢书院是一个大家庭，是一个团结友爱积极向上的集体。对于刚来到大学的你，只要你有一腔热情，热爱纸鸢书院，我们便欢迎。 Q8：加入纸鸢书院的报名方式？ 欢迎加入18年纸鸢书院交大分社，群聊号码：627233873 Q9：我们社团的特点优势？ 我们纸鸢书院与其他社团最大的不同点便是我们是在中共成都市委宣传部的策划和指导下产生的，成都市各大高校都有纸鸢书院分社。这意味着我们可以搞更大的事情，举办的活动规模会更大，影响会更广，更加锻炼你的能力，展示你的风采。 Q10：平时社团会不会很忙？ 纸鸢书院只有在举办活动时才会忙一点，平时几乎没有事情，不会影响学弟学妹的学习和吃喝玩乐哦，而且我们社团还会不定期地聚餐游玩，还有好玩的素质拓展等待你的参与，超级有趣。欢迎你的加入！ 宣传图 活动一站到底经典阅读挑战赛成都的一天 活动成都的一天活动分享会爱在心头口难开邮寄家书活动霍金说读书分享会吴晓波“激荡十年”读书分享会素质拓展活动]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[花式跳绳协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%8A%B1%E5%BC%8F%E8%B7%B3%E7%BB%B3%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[花式跳绳协会【微信公众号】SWJUT花式跳绳社团简介【社团简介】花式跳绳协会成立于2014年，主要以花式跳绳团体表演培训和个人速度跳培训为主，每周开展训练。跳绳是一项对身体协调能力以及耐力要求较高的运动，通过跳绳我们可以提升自己的肢体协调能力，也可以通过连续跳绳达到高效减肥的目的。花式跳绳团体表演则强调团队协作与节奏掌握，整齐划一的团队表演具有非常高的观赏性和视觉冲击感。我们致力于推广跳绳运动，带领交大学生跳出健康、跳出活力、跳出精彩人生！【社团宗旨】跳出新花样，挑出健康与活力。【品牌活动】西南交通大学跳绳运动会、速度跳培训活动【邮箱】2033507420@qq.com【微信公众号】SWJUT花式跳绳]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -492,14 +508,6 @@
     <title><![CDATA[贫困地区教育观念救助会]]></title>
     <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%B4%AB%E5%9B%B0%E5%9C%B0%E5%8C%BA%E6%95%99%E8%82%B2%E8%A7%82%E5%BF%B5%E6%95%91%E5%8A%A9%E4%BC%9A%2F</url>
     <content type="text"><![CDATA[贫困地区教育观念救助会 新生QQ交流群 西南交通大学贫困地区教育观念救助会，简称为“救助会”，成立于2002年5月17日，由一位来自于凉山的学长发起组建。正如协会的名字，作为公益类社团，协会以“自救者人恒救之”为理念，致力于改变贫困地区的落后教育观念。目前协会由会长团和五个部门组成。协会在凉山有三所基地小学，在校内有教职工子女40人左右的授课学生群，各类校级活动以快乐助学为主题，围绕小学生与大学生和社会的联系展开。协会的主要工作分为三块：校级活动（基地小学）、义教、支教。校级活动：目前协会已经举办了九届快乐助学活动，E课讲堂，Ta说，给你的画，和他一起写本书，毕业季微公益······义教:每周末按时早期，为校内教职工子女辅导功课，开设专题课程。支教：短暂的寒暑假，去需要我们的地方，认识一群可爱的学生。协会自成立至今，都以做公益为工作目标，如果你对公益感兴趣，如果你热心于帮助他人，那么欢迎你了解救助会，加入救助会，和我们一起为公益事业发光发热！ 宣传视频 部门介绍义教部综合事务部网络部宣传部外联部 招新贫困地区教育观念救助会微信招新链接 新生QQ交流群微信公众号 活动2016年给你的画2017年ta说2.02018会员大会2018暑假夏令营基地小学周末义教]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[西南交大雷锋公司]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%A5%BF%E5%8D%97%E4%BA%A4%E5%A4%A7%E9%9B%B7%E9%94%8B%E5%85%AC%E5%8F%B8%2F</url>
-    <content type="text"><![CDATA[西南交大雷锋公司 微信推送链接 雷锋公司协会具体资料请戳这里！！]]></content>
       <categories>
         <category>社团</category>
       </categories>
