@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Hexo博客搭建]]></title>
+    <url>%2F2018%2F11%2F27%2F2018%2Fhexo_blog%2F</url>
+    <content type="text"><![CDATA[Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。 本文默认操作系统为windows x64Mac用户安装node和git时选择对应版本即可Si tu m’aimes是我的用户名 安装Node.js和Git Node.js https://nodejs.org/en/ 选择LTS版本，然后安装，一路默认即可 Git https://git-scm.com/downloads 点击windows下载，然后安装，一路默认即可 验证一下安装成功没有打开命令行（windows用户 win+r 然后输入 cmd 回车）在cmd里1234C:\Users\Si tu m&apos;aimes&gt;node -vv8.9.3C:\Users\Si tu m&apos;aimes&gt;git --versiongit version 2.15.0.windows.1 你们的版本肯定比我的新，无错误即可 然后继续，&lt;&gt;内容需替换123C:\Users\Si tu m&apos;aimes&gt;git config --global user.name &lt;your username&gt;C:\Users\Si tu m&apos;aimes&gt;git config --global user.email &lt;your email&gt;C:\Users\Si tu m&apos;aimes&gt;npm install -g hexo 切换文件夹 cd &lt;folder&gt; 切换到你想放置博客的文件夹，cmd中切换盘符的命令 D: 然后回车比如我想放在E:\MyFiles下面 123C:\Users\Si tu m&apos;aimes&gt;E:E:\&gt;cd MyFilesE:\MyFiles&gt; 也可以在文件资源管理器的对应文件夹页面按住shift同时点击右键打开powershell，powershell是cmd的增强版，对这篇文章而言两者相同 cmd1234E:\MyFiles&gt;hexo init blog #这里会新建一个文件夹，blog名字可以随意更换E:\MyFiles&gt;cd blogE:\MyFiles\blog&gt;npm installE:\MyFiles\blog&gt;hexo server 打开 http://localhost:4000/ 有页面即成功 注册Githubhttps://github.com/ 注册然后对应邮箱激活，一定要激活 取个好的用户名 然后点击Start a project新建一个RepositoryRepository Name处填写&lt;your username&gt;.github.io 我的用户名是situmaimes，所以Repository Name就是situmaimes.github.io，博客地址也是这个 Description选填,Pubic,Readme不要勾选点击Create新建https://github.com/&lt;your username&gt;/&lt;your username&gt;.github.io.git 就是你的Repository地址点击右侧Settings，拉到下面GitHub Pages，Source处选择master branch,然后save，保存后页面会变成表明你的网站就是https://&lt;your username&gt;.github.io 向Repository传入内容打开E:\MyFiles\blog\_config.yml将deploy处更改如下1234deploy: type: git repository: https://github.com/&lt;your username&gt;/&lt;your username&gt;.github.io.git branch: master 注意配置项的冒号后面要用空格隔开 cmd12E:\MyFiles\blog&gt;npm install hexo-deployer-git --saveE:\MyFiles\blog&gt;hexo d -g 中途会出现登陆git的页面 最后出现INFO Deploy done: git即成功打开 https://&lt;your username&gt;.github.io 即是博客页面，如果没有页面的话稍等片刻，如果还没有的话请留言 写博客，维护博客hexo 文档 https://hexo.io/zh-cn/docs/新建博客1E:\MyFiles\blog&gt;hexo new &lt;blog name&gt; E:\MyFiles\blog\source\_posts\&lt;blog name&gt;.md 即为博客文章注意文章的编码应为utf-8博客采用markdown语法Markdown 文档 https://markdown-zh.readthedocs.io/en/latest/ 进一步不想隔一段时间hexo d -g就要重新登陆cmd1C:\Users\Si tu m&apos;aimes&gt;ssh-keygen -t rsa -C &quot;&lt;your email&gt;&quot; 一直回车 在C:\Users\Si tu m&#39;aimes\.ssh目录下有一个id_rsa.pub文件，用记事本打开，复制内容登陆github，点击右上角头像进入settings选择SSH and GPG keys，选择new SSH keyTitle随便填，key内粘贴你的id_rsa.pub文件内容，点击Add保存cmd1C:\Users\Si tu m&apos;aimes&gt;ssh -T git@github.com #输入yes 将deploy处更改为1234deploy: type: git repository: git@github.com:&lt;your username&gt;/&lt;your username&gt;.github.io.git branch: master 然后在cmd中1C:\Users\Si tu m&apos;aimes&gt;hexo d -g 这样便不再需要密码 这些操作的目的是为了使用ssh协议将博客推送到github 换一个模板百度寻找模板，按照要求git clone然后更改_config.ymltheme: &lt;your theme name&gt; 我有一台服务器，想把博客放到服务器上安装git1yum -y install git 在home下创建一个git仓库1234cd /homemkdir gitcd gitgit init --bare hexo.git 在hooks下面创建一个post-receive1vim /home/git/hexo.git/hooks/post-receive post-receive内容更改为12#!/bin/shgit --work-tree=/data/hexo --git-dir=/home/git/hexo.git checkout -f 接着创建博客目录，更改权限12chmod 755 post-receivemkdir /data/hexo 找到你的ssh key，在我的电脑上在这1C:\Users\Si tu m&apos;aimes\.ssh\id_rsa.pub 复制文本内容，然后在服务器上1vim /root/.ssh/authorized_keys 粘贴 保存然后在我的电脑上，cmd中1C:\Users\Si tu m&apos;aimes&gt;ssh root@&lt;your server ip&gt; #输入yes 最后更改_config.yml内容1234deploy: type: git repository: root@&lt;your server ip&gt;:/home/git/hexo.git branch: master hexo d -g结束，Bingo！]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[linux shell 脚本攻略]]></title>
-    <url>%2F2018%2F11%2F26%2Flinux-shell%2F</url>
-    <content type="text"><![CDATA[因为linux和shell的学习对于生物信息来说很重要，而且平常使用机会较少所以还是决定重读一遍《linux shell脚本攻略》并写下笔记笔记真实代码输入输出自行理解 无特殊说明均在linux centos环境下运行得出这是这本书的第一章，共40页书是从交大图书馆借的，第二版，感觉不适合新手看 [TOC] 小试牛刀简介 shell中的注释开头为#~表示主目录每当一个新shell生成时，都会执行~/.bashrc 1234[root@VM_0_14_centos ~]# pwd #linux centos root下/rootvip7@VM-0-15-ubuntu:~$ pwd #linux ubuntu 非root下/home/vip7 root开头为# 非root开头为$ @前为用户名后为主机名非root用户使用sudo &lt;command&gt; &lt;arguments&gt;执行root命令shell脚本通常起始为 #!/bin/bash 123456789101112131415161718&gt; echo echo hello &gt; hello.sh&gt; cat hello.shecho hello&gt; bash hello.shhello&gt; ./hello.sh-bash: ./hello.sh: Permission denied&gt; ls -ltotal 12-rw-r--r-- 1 root root 11 Jul 24 09:36 hello.sh&gt; chmod a+x hello.sh&gt; ./hello.shhello&gt; /root/hello.shhello&gt; ls -ltotal 12-rwxr-xr-x 1 root root 11 Jul 24 09:36 hello.sh 打印12345678910111213141516&gt; echo hellohello&gt; echo hello worldhello world&gt; echo 'hello world'hello world&gt; echo "hello world"hello world&gt; echo "hello world !"-bash: !": event not found&gt; echo 'hello world !'hello world !&gt; echo "hello world \!"hello world \!&gt; echo "hello world\$"hello world$ ubuntu稍有区别123456vip7@VM-0-15-ubuntu:~$ echo &quot;hello world !&quot;hello world !vip7@VM-0-15-ubuntu:~$ echo &apos;hello world !&apos;hello world !vip7@VM-0-15-ubuntu:~$ echo &quot;hello world\$&quot;hello world$ 123456&gt; printf "%-5s %-10s %-4.2f\n" 1 simon 40.3524 1 simon 40.35&gt; echo -n hello;echo hello hellohello&gt; echo -e "1\t2\t3" 1 2 3 环境变量和变量1234567891011&gt; pgrep ls #获取程序的PID464&gt; cat /proc/464/environLANG=en_USUTF-8PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/binHOME=/rootLOGNAME=rootUSER=rootSHELL=/bin/sh #中间用&gt; cat /proc/464/environ | tr '\0' '\n'LANG=en_US.UTF-8PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/binHOME=/rootLOGNAME=rootUSER=rootSHELL=/bin/sh 书中还讲到了环境变量LD_LIBRARY_PATH，该环境变量主要用于指定查找共享库（动态链接库）时除了默认路径之外的其他路径。但是两个服务器这个值都还不存在。123456789101112131415161718&gt; var=value&gt; var = value-bash: var: command not found&gt; var="hello world"&gt; echo varvar&gt; echo $varhello world&gt; echo $&#123;var&#125;hello world&gt; echo $vars&gt; echo $&#123;var&#125;shello worlds&gt; echo '$var'$var&gt; echo "$var"hello world 1234&gt; var=value&gt; length=$&#123;#var&#125;&gt; echo $length5 一些内置值1234567891011121314&gt; echo $SHELL/bin/bash&gt; echo $0-bash&gt; echo $PATH/root/anaconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin&gt; echo $HOME/root&gt; echo $PWD/root&gt; echo $USERroot&gt; echo $UID0 1234vip7@VM-0-15-ubuntu:~$ echo $USERvip7vip7@VM-0-15-ubuntu:~$ echo $UID1011 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849export PATH="/root/anaconda3/bin:$PATH" #只在本次shell对话中有效&gt; echo $PATH/root/anaconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin``` ## 数学运算```shell&gt; a=1&gt; b=2&gt; let c=a+b&gt; echo $c3&gt; let a++&gt; echo $a2&gt; c=$[a+b]&gt; echo $c4&gt; let b+=4&gt; echo $b6&gt; c=$((a+b))&gt; echo $c8&gt; d=`expr a+b`&gt; echo $da+b&gt; d=`expr $a+$b`&gt; echo $d2+6&gt; d=`expr $a + $b`&gt; echo $d8&gt; d=`expr $a \* $b` #只有这里的*需要转义&gt; echo $d12&gt; echo "4*0.35" | bc1.40&gt; result=`echo "$a*1.24" | bc`&gt; echo $result2.48&gt; number=100&gt; echo "obase=2;$number" | bc1100100&gt; number=1100100&gt; echo "obase=10;ibase=2;$number" | bc100&gt; echo "sqrt(100);10^10" | bc1010000000000 文件描述符1234重定向0 --- stdin1 --- stdout2 --- stderr 1234567891011121314151617181920212223&gt; echo "some" &gt; some.txt&gt; cat some.txtsome&gt; echo "word" &gt;&gt; some.txt&gt; cat some.txtsomeword&gt; ls +ls: cannot access +: No such file or directory&gt; echo $? #命令执行状态2 #非0代表失败&gt; lsanaconda3 hello.sh some.txt&gt; echo $?0 #代表成功&gt; ls + 2&gt; err.txt #错误重定向&gt; cat err.txtls: cannot access +: No such file or directory &gt; cmd &gt; some.txt 2&gt;&amp;1 #标准错误重定向到标准输出&gt; cat some.txt-bash: cmd: command not found&gt; ls + &amp;&gt; out.txt #标准错误和标准输出均重定向&gt; ls + 2&gt; /dev/null #错误重定向到黑洞 123456789101112131415161718192021222324&gt; ls | tee out.txt | cat -n # tee将stdin写入文件的同时提供一份副本到管道 1 anaconda3 2 err.txt 3 hello.sh 4 out.txt 5 some.txt&gt; cat out.txtanaconda3err.txthello.shout.txtsome.txt&gt; echo hello | tee -a out.txthello&gt; cat out.txtanaconda3err.txthello.shout.txtsome.txthello&gt; echo who | tee - # -代表stdin 提供一份副本到标准输出whowho 1234567891011&gt; echo some &gt; out.txt &gt; cat &lt; out.txt #文件内容重定向到命令some&gt; cat&lt;&lt;EOF&gt;out.txt #EOF之间的内容重定向cat 然后重定向到out.txt EOF是一个tag可以替换成其他词&gt; hello&gt; boy&gt; EOF&gt; cat out.txthelloboy 123&lt; --- 从文件读取到stdin&gt; --- 截断模式写入文件&gt;&gt;--- 追加模式写入文件 1234&gt; echo this is a line &gt; input.txt&gt; exec 3&lt; input.txt #不能使用0,1,2 创建自己的文件描述符&gt; cat &lt;&amp;3 this is a line #再次读取需要重新分配文件描述符 数组1234567891011121314151617&gt; array=(1 2 3 4 5) #普通数组&gt; array[5]=6&gt; echo $&#123;array[5]&#125;6&gt; index=2&gt; echo $&#123;array[$index]&#125;3&gt; echo $&#123;array[*]&#125;1 2 3 4 5 6&gt; array[10]=1&gt; echo $&#123;#array[*]&#125;7&gt; echo $&#123;array[*]&#125;1 2 3 4 5 6 1&gt; echo $&#123;array[10]&#125;1&gt; echo $&#123;array[9]&#125; 123456789&gt; declare -A ass_array #定义关联数组&gt; ass_array=([index1]=val1 [index2]=val2&#125;)&gt; ass_array[index3]=val3&gt; echo $&#123;ass_array[index3]&#125;val3&gt; echo $&#123;ass_array[*]&#125;val1 val2&#125; val3&gt; echo $&#123;!ass_array[*]&#125;index1 index2 index3 别名123456&gt; alias ls='ls -ll'&gt; lstotal 4drwxr-xr-x 22 root root 4096 Oct 5 2018 anaconda3&gt; \lsanaconda3 获取终端信息12345stty -echo #禁止将输出发送到终端stty echo #允许将输出发送到终端tput sc #存储光标位置tput rc #恢复光标位置tput ed #清除从当前光标到行末尾的所有内容 时间和日期123456789101112131415&gt; dateSun Nov 18 18:22:25 CST 2018&gt; date +%s1542536551&gt; date --date "Nov 18 2018" +%ASunday&gt; date "+%d %B %Y"18 November 2018&gt; date -s "2018 11 18 18:23:22"date: invalid date ‘2018 11 18 18:23:22’&gt; date -s "2018 Nov 18 18:23:22"date: invalid date ‘2018 Nov 18 18:23:22’&gt; date -s "18 Nov 2018 18:23:22"Sun Nov 18 18:23:22 CST 2018&gt; sleep 10 12345678910星期 %a %A月 %b %B日 %d固定格式日期 %D年 %y %Y小时 %I %H分钟 %M秒 %S纳秒 %NUnix纪元时 %s 调试脚本1234567891011121314&gt; echo echo some &gt; out.sh&gt; bash -x out.sh+ echo somesome&gt; for i in &#123;1..3&#125;; do set -x; echo $i; set +x; done+ echo 11+ set +x+ echo 22+ set +x+ echo 33+ set +x 1234set -x 在执行时显示参数和命令set +x 禁止调试set -v 当命令进行读取时显示输入set +v 禁止打印输入 调试便捷方法将#!/bin/bash改为#!/bin/bash -xv 函数12345678function fname()&#123; statements;&#125;fname()&#123; statements;&#125; 1234567891011&gt; fname()&gt; &#123;&gt; echo $1,$2;&gt; echo "$@"; &gt; echo "$*"; &gt; return 0;&gt; &#125;&gt; fname my worldmy,worldmy worldmy world $* 和 $@ 都表示传递给函数或脚本的所有参数，不被双引号&quot; &quot;包含时，都以&quot;$1&quot; &quot;$2&quot; … &quot;$n&quot; 的形式输出所有参数。但是当它们被双引号&quot; &quot;包含时，&quot;$*&quot; 会将所有的参数作为一个整体，以&quot;$1 $2 … $n&quot;的形式输出所有参数；&quot;$@&quot; 会将各个参数分开，以&quot;$1&quot; &quot;$2&quot; … &quot;$n&quot; 的形式输出所有参数。1234567$0 当前脚本的文件名$n 传递给脚本或函数的参数。n 是一个数字，表示第几个参数。例如，第一个参数是$1，第二个参数是$2。$# 传递给脚本或函数的参数个数。$* 传递给脚本或函数的所有参数。$@ 传递给脚本或函数的所有参数。$? 上个命令的退出状态，或函数的返回值。一般情况下，大部分命令执行成功会返回 0，失败返回 非0。$$ 当前Shell进程ID。对于 Shell 脚本，就是这些脚本所在的进程ID。 1234567891011121314151617&gt; cat parent.sh#!/bin/bashplus1()&#123; echo $(($1+1));&#125;echo $(plus1 4)export -f plus1 #使函数子进程可用./child.sh 3 4&gt; vim child.sh&gt; cat child.sh#!/bin/bashecho $(plus1 $(($1 * $2)))&gt; chmod a+x *.sh&gt; ./parent.sh513&gt; cmd="echo some"&gt; $cmd #好神奇啊我也不知道为啥some 将输出写入变量 管道操作符 cmd1 | cmd2 | cmd312345678910&gt; ls | cat -n &gt;out.txt&gt; cat out.txt 1 anaconda3 2 out.txt&gt; output=$(ls | cat -n)&gt; echo $output1 anaconda3 2 out.txt&gt; output=`ls | cat -n`&gt; echo $output1 anaconda3 2 out.txt 子shell12345678910111213141516&gt; pwd/root&gt; (cd /data;ls)Anaconda3-5.1.0-Linux-x86_64.sh index.txt&gt; pwd/root&gt; cat text.txt123&gt; out=$(cat text.txt)&gt; echo $out1 2 3&gt; out="$(cat text.txt)"&gt; echo $out1 2 3 read12345678910111213&gt; read -n 2 var12&gt; echo $var12&gt; read -s password #输入时无回显&gt; echo $passwordsimonyang&gt; read -p "Please enter your Name:" varPlease enter your Name:simonyang&gt; echo $varsimonyang&gt; read -d . varsimon.&gt; echo $varsimon read -t 2 var要求两秒内输入 运行命令直至成功 true作为/bin中的一个二进制文件实现shell内建的:总是返回0的退出码1&gt; repeat() &#123;while :; do $@ &amp;&amp; return ; done&#125; 字段分隔符 IFS IFS的默认值为空白字符（换行符、制表符或者空格）123456789&gt; for item in "1 2 3";do echo $item;done1 2 3&gt; oldifs=$IFS&gt; IFS=,&gt; for item in "1,2,3";do echo $item;done1 2 3&gt; IFS=$oldifs&gt; for item in "1,2,3";do echo $item;done1,2,3 12345678910111213141516for var in list;do commands;donefor((i=0;i&lt;10;i++))&#123; commands;&#125;while condition;do commands;doneuntil condition; #直到条件为真do commands;done 12345678&gt; for i in &#123;a..g&#125;;do echo $i;doneabcdefg 比较12345678910111213if condition;then commands;fiif condition;then commands;else if condition;then commands;else commands;fi [ condition ] &amp;&amp; action #如果真，则action运行[ condition ] || action #如果假，则action运行 1234567算术比较-eq equal返回真 -ne not equal返回真-gt greater than返回真-lt less than返回真-ge greater or equal返回真-le less or equal返回真 1234&gt; if [ 5 -eq 5 -a 4 -gt 3]; then echo true;fi-bash: [: missing `]' #3与]应有空格，5与[也是&gt; if [ 5 -eq 5 -a 4 -gt 3 ]; then echo true;fitrue 12345678910文件系统测试，是为真[ -f $var ] 是否包含文件路径和文件名 [ -x $var ] 是否可执行[ -d $var ] 是否是目录[ -e $var ] 是否存在[ -c $var ] 是否是字符设备[ -b $var ] 是否是块设备[ -w $var ] 是否可写[ -r $var ] 是否可读[ -L $var ] 是否是符号链接 123456&gt; if [ -f out.txt ]; then echo true;fitrue&gt; lsanaconda3 out.txt text.txt&gt; if [ ! -L out.txt ]; then echo true;fi # !取反true 123456789字符串比较，是为真最好使用双中括号，str1和str2前后都有空格[[ $str1 = $str2 ]] 是否相等[[ $str1 == $str2 ]] 是否相等[[ $str1 != $str2 ]] 是否不相等[[ $str1 &gt; $str2 ]] 按字母序，str1是否大于str2[[ $str1 &gt; $str2 ]] 按字母序，str1是否小于str1[[ -z $str2 ]] 是否是空字符串[[ -n $str2 ]] 是否是非空字符串 1234&gt; str1="hello"&gt; str2=''&gt; if [[ -n $str1 ]] &amp;&amp; [[ -z $str2 ]];then echo true;fitrue 使用test1234&gt; if test $var -eq 1;then echo true;fitrue&gt; if ! test $var -eq 0;then echo true;fitrue 命令之乐cat12345678910&gt; echo this is a line &gt; out.txt &gt; cat out.txtthis is a line&gt; echo this is a new line &gt;out2.txt&gt; cat out.txt out2.txtthis is a linethis is a new line&gt; echo some new | cat - out.txtsome newthis is a line 1234567891011121314151617181920212223242526272829303132333435363738&gt; cat out.txt123&gt; cat -s out.txt123&gt; cat some.pydef hello(): print("hello world")&gt; cat -T some.pydef hello():^Iprint("hello world")&gt; cat -n some.py 1 def hello(): 2 print("hello world")&gt; cat -n out.txt 1 1 2 2 3 4 5 6 7 3&gt; cat -nb out.txt 1 1 2 2 3 3 script12345678910111213141516171819&gt; script -t 2&gt; timelog.log -a output.sessionScript started, file is output.session&gt; echo hello &gt; new.txt&gt; cat new.txthello&gt; exitexitScript done, file is output.session&gt; cat output.sessionScript started on Sat 24 Nov 2018 04:24:45 PM CST&gt; echo hello &gt; new.txt&gt; cat new.txthello&gt; exitexitScript done on Sat 24 Nov 2018 04:25:07 PM CST&gt; scriptreplay timelog.log output.session #重放 find12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970&gt; cd /home&gt; touch some.py out1.txt out2.txt&gt; lsout1.txt out2.txt some.py&gt; find . ../out2.txt./out1.txt./some.py&gt; find . -print0../out2.txt./out1.txt./some.py&gt; find . -name "*.txt"./out2.txt./out1.txt&gt; find . -name *.txtfind: paths must precede expression: out2.txtUsage: find [-H] [-L] [-P] [-Olevel] [-D help|tree|search|stat|rates|opt|exec] [path...] [expression]&gt; touch OUT.txt&gt; find . -iname "out*"./out2.txt./OUT.txt./out1.txt&gt; touch some.log&gt; lsout1.txt out2.txt OUT.txt some.log some.py&gt; find . \( -name "*.txt" -o -name "*.log" \) ./out2.txt./OUT.txt./out1.txt./some.log&gt; find /root/ -path "*/.ssh/*"/root/.ssh/authorized_keys&gt; find . -regex ".*\(\.py\|\.txt\)$"./out2.txt./OUT.txt./out1.txt./some.py&gt; touch some.PY&gt; find . -iregex ".*\.py$"./some.PY./some.py&gt; find . ! -iregex ".*\.py$"../out2.txt./OUT.txt./out1.txt./some.log&gt; mkdir some&gt; mv out* some/&gt; find . -maxdepth 1 ../some.PY./OUT.txt./some./some.py./some.log&gt; find .../some.PY./OUT.txt./some./some/out2.txt./some/out1.txt./some.py./some.log&gt; find . -mindepth 2./some/out2.txt./some/out1.txt&gt; find . -type d # d指目录，同样的还有f l ../some 访问时间 -atime 用户最近一次访问文件的时间 access修改时间 -mtime 文件内容最后一次被修改的时间 modify变化时间 -ctime 文件元数据最后一次改变的时间 change作为时间选项 单位是天 -表示小于 +表示大于以分钟为计量单位 -amin -mmin -cmin123456789101112131415161718&gt; vim OUT.txt&gt; find . -cmin -1../OUT.txt&gt; find . -newer some.PY../OUT.txt./some&gt; find . -size -1 #./some.PY./some/out2.txt./some/out1.txt./some.py./some.log&gt; find . -size +1c #大于1字节 ../OUT.txt./some b 块 512字节 c 字节 w 字 2字节 k 1024字节 M 1024K字节 G 1024M字节12345678910111213141516171819202122232425262728293031323334353637383940414243444546&gt; lsOUT.txt some some.log some.py some.PY&gt; find . -size +1c -deletefind: cannot delete ‘./some’: Directory not empty&gt; ls -ltotal 4drwxr-xr-x 2 root root 4096 Nov 24 16:52 some-rw-r--r-- 1 root root 0 Nov 24 16:41 some.log-rw-r--r-- 1 root root 0 Nov 24 16:37 some.py-rw-r--r-- 1 root root 0 Nov 24 16:48 some.PY&gt; find . -maxdepth 1 -perm 755 ../some&gt; find . -maxdepth 1 -user root../some.PY./some./some.py./some.log&gt; find . -maxdepth 1 -name "some.*" -exec chmod 755 &#123;&#125; \; # &#123;&#125; 每次代入文件名然后每次运行&gt; ls -ltotal 4drwxr-xr-x 2 755 root 4096 Nov 24 16:52 some-rwxr-xr-x 1 755 root 0 Nov 24 16:41 some.log-rwxr-xr-x 1 755 root 0 Nov 24 16:37 some.py-rwxr-xr-x 1 755 root 0 Nov 24 16:48 some.PY&gt; find . -maxdepth 1 -name "some.*" -exec chmod 644 &#123;&#125; +; # &#123;&#125; 传入所有文件名然后一次运行&gt; ls -ltotal 4drwxr-xr-x 2 755 root 4096 Nov 24 16:52 some-rw-r--r-- 1 755 root 0 Nov 24 16:41 some.log-rw-r--r-- 1 755 root 0 Nov 24 16:37 some.py-rw-r--r-- 1 755 root 0 Nov 24 16:48 some.PY&gt; cat some.pydef hi(): pass&gt; cat some.PYdef hello(): pass&gt; find . -iname "*.py" -exec cat &#123;&#125; \;&gt; final&gt; cat finaldef hello(): passdef hi(): pass&gt; find ~/ -name ".git" -prune #跳过.git目录 xargs xargs 命令将标准输入数据转换成命令行参数123456789101112&gt; cat out.txt1 2 3 4 56 7 89&gt; cat out.txt | xargs1 2 3 4 5 6 7 8 9&gt; cat out.txt | xargs -n 31 2 34 5 67 8 9&gt; echo "splitXsplitXsplit" | xargs -d X # d delimitersplit split split 1234567891011121314151617&gt; cat demo.shecho $* #&gt; cat args.txtarg1arg2arg3&gt; cat args.txt | xargs -n 2 ./demo.sharg1 arg2arg3&gt; cat args.txt | xargs -I &#123;&#125; ./demo.sh -p &#123;&#125; # -I指定替换名称 对于每个参数执行一次-p arg1-p arg2-p arg3&gt; cat args.txt | xargs -I p ./demo.sh -p -l-arg1 -l-arg2 -l-arg3 -l 将find与xargs结合使用时定界符应该是\0123456789101112131415161718&gt; lsargs.txt demo.sh out.txt&gt; find . -name "out.*" -print0 | xargs -0 rm -f #-print0 将`\0`作为定界符输出文件名 xargs -0 将`\0`作为定界符分开&gt; lsdemo.sh&gt; cat files.txtargs1.txtargs2.txt&gt; cat args1.txthello&gt; cat args2.txthi&gt; cat files.txt | xargs -I &#123;&#125; cat &#123;&#125;hellohi&gt; cat files.txt | (while read arg; do cat $arg; done ) #利用子shell实现相似功能hellohi tr tr只能通过stdin接受输入123456789101112&gt; echo "HELLO" | tr "A-Z" 'a-z' #'z-a'是行不通的hello&gt; echo "HELLO" | tr "A-Z" 'b'bbbbb&gt; echo "HELLO I AM" | tr -d 'A-H'LLO I M&gt; echo "HELLO I AM" | tr -d -c 'A-H\n' #-c选择补集HEA&gt; echo hello i am your friend | tr -s ' ' # 压缩hello i am your friend&gt; echo hello i am your friend | tr [:lower:] [:upper:] HELLO I AM YOUR FRIEND md5sum sha1sum 计算校验和md5sum 和 sha1sum 使用非常相似12345&gt; md5sum demo.she88d83ea97b4461177c708b8760045a8 demo.sh&gt; md5sum demo.sh &gt; demo.md5&gt; md5sum -c demo.md5demo.sh: OK gpg base64123456789&gt; cat demo.shecho $* #&gt; gpg -c demo.sh&gt; gpg demo.sh.gpg&gt; base64 demo.sh &gt; out&gt; cat outZWNobyAkKiAjCg==&gt; base64 -d out | cat -echo $* # sort uniq1234567891011121314151617181920212223242526&gt; cat files.txt339328&gt; sort files.txt233389&gt; sort -r files.txt983332&gt; sort -r files.txt | uniq9832 uniq的输入要求必须排序过，如果已经排序sort会返回0的退出码，否则返回非0123456789101112131415161718192021222324&gt; cat data.txt9 mac 80007 dell 700010 lenovo 6000&gt; sort -nk 1 data.txt #按数字大小7 dell 70009 mac 800010 lenovo 6000&gt; sort -k 1 data.txt #字母序10 lenovo 60007 dell 70009 mac 8000&gt; sort -rk 3 data.txt9 mac 80007 dell 700010 lenovo 6000&gt; sort -k 2.2 data.txt #按照第二列第二个字符排列，因为默认的分隔是把 "非空白到空白转换" 做为分段的依据，所以按照d,l,m排列7 dell 700010 lenovo 60009 mac 8000&gt; sort -t ' ' -k 2.2 data.txt #-t 制定空格作为分隔符，第二列第二个字符所以按照a,e,e排列9 mac 80007 dell 700010 lenovo 6000 -o 输出到指定文件，可以覆盖原文件–f 忽略大小写-c 检查文件是否已排好序，如果乱序，则输出第一个乱序的行的相关信息，最后返回1-C 检查文件是否已排好序，如果乱序，不输出内容，仅返回1-M 以月份来排序，比如JAN小于FEB等等-b 忽略每一行前面的所有空白部分-z 用\0结束行-m 合并-u 删除重复行1234567891011121314151617181920212223242526&gt; cat files.txt339328&gt; sort files.txt -o files.txt&gt; uniq -u files.txt #只显示唯一行289&gt; uniq -c files.txt #统计次数 1 2 3 3 1 8 1 9&gt; uniq -d files.txt #显示重复行3&gt; cat data.txt9mac80007dell70001lenovo6000&gt; cat data.txt | uniq -s 2 -w 1 # 忽略前两个字符比较一个字符9mac80007dell7000 mktemp /tmp目录中的内容系统重启后清空123456789&gt; filename=`mktemp` #反引号运行&gt; echo $filename/tmp/tmp.iBLhJgtGp3&gt; filename=`mktemp -d`&gt; echo $filename/tmp/tmp.0ojbVHR0ZG&gt; filename=`mktemp -u` #不创建实际文件&gt; mktemp test.XXX #根据模板创建test.7Ou split1234567891011121314151617181920212223242526272829303132333435363738&gt; dd if=/dev/urandom of=test.file bs=13MB count=1 #创建13m大小的文件1+0 records in1+0 records out13000000 bytes (13 MB) copied, 0.0903847 s, 144 MB/s&gt; split -b 1m test.file #以1M大小划分&gt; lstest.file xaa xab xac xad xae xaf xag xah xai xaj xak xal xam&gt; rm -f x* #删除x开头所有文件&gt; split -b 5m test.file -d -a 3 split #数字结尾 结尾三个数字 split开头&gt; lssplit000 split001 split002 test.file&gt; split -l 10 test.file #10行分&gt; cat server.logSERVER-1[connection][disconnect][connection][disconnect]SERVER-2[connection][disconnect]SERVER-3[disconnect][connection]&gt; csplit server.log /SERVER/ -n 1 &#123;*&#125; -f split -b "%d.log" #/SERVER/正则匹配 -n 1 文件后数字后缀一个 -f 前缀是split -b 后缀格式 &#123;*&#125; 分割执行次数0613536&gt; lsserver.log split0.log split1.log split2.log split3.log&gt; cat split0.log #split0.log是分隔前的，所以没有内容&gt; cat split1.logSERVER-1[connection][disconnect][connection][disconnect] { }1234567891011121314151617181920&gt; filename=some.tar.gz #必须使用变量&gt; name=$&#123;filename%.*&#125; #从尾向前匹配.*短数据删除&gt; echo $namenew.tar&gt; name=$&#123;filename%%.*&#125; #从尾向前匹配.*长数据删除&gt; echo $namesome&gt; name=$&#123;filename#*.&#125; #从前向尾匹配*.短数据删除&gt; echo $nametar.gz&gt; name=$&#123;filename##*.&#125; #从前向尾匹配*.长数据删除&gt; echo $namegz&gt; filename=new.new.some&gt; name=$&#123;filename/new/hi&#125; #new替换成hi，值替换一次&gt; echo $namehi.new.some&gt; name=$&#123;filename//new/hi&#125; &gt; echo $namehi.hi.some 抄一张图，懒得挨个试了 rename mv cp12345678#!/bin/bashcount=1;for img in `find . -maxdepth 1 -iname "*.jpg" -o -iname "*.png" -type f`;do new=image-$count.$&#123;img##*.&#125; #重命名 mv "$img" "$new" # 移动 let count++done 123&gt; rename JPG jpg *.JPG&gt; lsnew.jpg old.jpg 在我的服务器上rename正则使用失败，网上查不到原因1234567891011&gt; mkdir pic&gt; mv new.jpg ./pic&gt; lsold.jpg pic&gt; (cd pic;ls)new.jpg&gt; cp old.jpg ./pic&gt; (cd pic;ls)new.jpg old.jpg&gt; lsold.jpg pic look read12345678&gt; cat word.txtabcbcdcde&gt; look bc word.txt #寻找bc开头的行bcd&gt; grep "^a" word.txt #寻找a开头的行abc 123#!/bin/bashread -p "Enter your name:" nameecho "you name is $name" 12345&gt; echo -e "hello\n" | ./hello.shyou name is hello&gt; echo -e "simon\n" &gt; input&gt; ./hello.sh &lt;inputyou name is simon &amp;后台执行12345678#!/bin/bashpidarray=()for file in File1.iso File2.iso;do md5sum $file &amp; #后台运行 pidarray+=("$!") #获取进程piddonewait $&#123;pidarray[@]&#125; 以文件之名]]></content>
+    <url>%2F2018%2F11%2F26%2F2018%2Flinux-shell%2F</url>
+    <content type="text"><![CDATA[因为linux和shell的学习对于生物信息来说很重要，而且平常使用机会较少所以还是决定重读一遍《linux shell脚本攻略》并写下笔记笔记真实代码输入输出自行理解 无特殊说明均在linux centos环境下运行得出书是从交大图书馆借的，第二版，感觉不适合新手看 小试牛刀简介 shell中的注释开头为#~表示主目录每当一个新shell生成时，都会执行~/.bashrc 1234[root@VM_0_14_centos ~]# pwd #linux centos root下/rootvip7@VM-0-15-ubuntu:~$ pwd #linux ubuntu 非root下/home/vip7 root开头为# 非root开头为$ @前为用户名后为主机名非root用户使用sudo &lt;command&gt; &lt;arguments&gt;执行root命令shell脚本通常起始为 #!/bin/bash 123456789101112131415161718 echo echo hello &gt; hello.sh&gt; cat hello.shecho hello&gt; bash hello.shhello&gt; ./hello.sh-bash: ./hello.sh: Permission denied&gt; ls -ltotal 12-rw-r--r-- 1 root root 11 Jul 24 09:36 hello.sh&gt; chmod a+x hello.sh&gt; ./hello.shhello&gt; /root/hello.shhello&gt; ls -ltotal 12-rwxr-xr-x 1 root root 11 Jul 24 09:36 hello.sh 打印12345678910111213141516&gt; echo hellohello&gt; echo hello worldhello world&gt; echo 'hello world'hello world&gt; echo "hello world"hello world&gt; echo "hello world !"-bash: !": event not found&gt; echo 'hello world !'hello world !&gt; echo "hello world \!"hello world \!&gt; echo "hello world\$"hello world$ ubuntu稍有区别123456vip7@VM-0-15-ubuntu:~$ echo &quot;hello world !&quot;hello world !vip7@VM-0-15-ubuntu:~$ echo &apos;hello world !&apos;hello world !vip7@VM-0-15-ubuntu:~$ echo &quot;hello world\$&quot;hello world$ 123456&gt; printf "%-5s %-10s %-4.2f\n" 1 simon 40.3524 1 simon 40.35&gt; echo -n hello;echo hello hellohello&gt; echo -e "1\t2\t3" 1 2 3 环境变量和变量1234567891011&gt; pgrep ls #获取程序的PID464&gt; cat /proc/464/environLANG=en_USUTF-8PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/binHOME=/rootLOGNAME=rootUSER=rootSHELL=/bin/sh #中间用&gt; cat /proc/464/environ | tr '\0' '\n'LANG=en_US.UTF-8PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/binHOME=/rootLOGNAME=rootUSER=rootSHELL=/bin/sh 书中还讲到了环境变量LD_LIBRARY_PATH，该环境变量主要用于指定查找共享库（动态链接库）时除了默认路径之外的其他路径。但是两个服务器这个值都还不存在。123456789101112131415161718&gt; var=value&gt; var = value-bash: var: command not found&gt; var="hello world"&gt; echo varvar&gt; echo $varhello world&gt; echo $&#123;var&#125;hello world&gt; echo $vars&gt; echo $&#123;var&#125;shello worlds&gt; echo '$var'$var&gt; echo "$var"hello world 1234&gt; var=value&gt; length=$&#123;#var&#125;&gt; echo $length5 一些内置值1234567891011121314&gt; echo $SHELL/bin/bash&gt; echo $0-bash&gt; echo $PATH/root/anaconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin&gt; echo $HOME/root&gt; echo $PWD/root&gt; echo $USERroot&gt; echo $UID0 1234vip7@VM-0-15-ubuntu:~$ echo $USERvip7vip7@VM-0-15-ubuntu:~$ echo $UID1011 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849export PATH="/root/anaconda3/bin:$PATH" #只在本次shell对话中有效&gt; echo $PATH/root/anaconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin``` ## 数学运算```shell&gt; a=1&gt; b=2&gt; let c=a+b&gt; echo $c3&gt; let a++&gt; echo $a2&gt; c=$[a+b]&gt; echo $c4&gt; let b+=4&gt; echo $b6&gt; c=$((a+b))&gt; echo $c8&gt; d=`expr a+b`&gt; echo $da+b&gt; d=`expr $a+$b`&gt; echo $d2+6&gt; d=`expr $a + $b`&gt; echo $d8&gt; d=`expr $a \* $b` #只有这里的*需要转义&gt; echo $d12&gt; echo "4*0.35" | bc1.40&gt; result=`echo "$a*1.24" | bc`&gt; echo $result2.48&gt; number=100&gt; echo "obase=2;$number" | bc1100100&gt; number=1100100&gt; echo "obase=10;ibase=2;$number" | bc100&gt; echo "sqrt(100);10^10" | bc1010000000000 文件描述符1234重定向0 --- stdin1 --- stdout2 --- stderr 1234567891011121314151617181920212223&gt; echo "some" &gt; some.txt&gt; cat some.txtsome&gt; echo "word" &gt;&gt; some.txt&gt; cat some.txtsomeword&gt; ls +ls: cannot access +: No such file or directory&gt; echo $? #命令执行状态2 #非0代表失败&gt; lsanaconda3 hello.sh some.txt&gt; echo $?0 #代表成功&gt; ls + 2&gt; err.txt #错误重定向&gt; cat err.txtls: cannot access +: No such file or directory &gt; cmd &gt; some.txt 2&gt;&amp;1 #标准错误重定向到标准输出&gt; cat some.txt-bash: cmd: command not found&gt; ls + &amp;&gt; out.txt #标准错误和标准输出均重定向&gt; ls + 2&gt; /dev/null #错误重定向到黑洞 123456789101112131415161718192021222324&gt; ls | tee out.txt | cat -n # tee将stdin写入文件的同时提供一份副本到管道 1 anaconda3 2 err.txt 3 hello.sh 4 out.txt 5 some.txt&gt; cat out.txtanaconda3err.txthello.shout.txtsome.txt&gt; echo hello | tee -a out.txthello&gt; cat out.txtanaconda3err.txthello.shout.txtsome.txthello&gt; echo who | tee - # -代表stdin 提供一份副本到标准输出whowho 1234567891011&gt; echo some &gt; out.txt &gt; cat &lt; out.txt #文件内容重定向到命令some&gt; cat&lt;&lt;EOF&gt;out.txt #EOF之间的内容重定向cat 然后重定向到out.txt EOF是一个tag可以替换成其他词&gt; hello&gt; boy&gt; EOF&gt; cat out.txthelloboy 123&lt; --- 从文件读取到stdin&gt; --- 截断模式写入文件&gt;&gt;--- 追加模式写入文件 1234&gt; echo this is a line &gt; input.txt&gt; exec 3&lt; input.txt #不能使用0,1,2 创建自己的文件描述符&gt; cat &lt;&amp;3 this is a line #再次读取需要重新分配文件描述符 数组1234567891011121314151617&gt; array=(1 2 3 4 5) #普通数组&gt; array[5]=6&gt; echo $&#123;array[5]&#125;6&gt; index=2&gt; echo $&#123;array[$index]&#125;3&gt; echo $&#123;array[*]&#125;1 2 3 4 5 6&gt; array[10]=1&gt; echo $&#123;#array[*]&#125;7&gt; echo $&#123;array[*]&#125;1 2 3 4 5 6 1&gt; echo $&#123;array[10]&#125;1&gt; echo $&#123;array[9]&#125; 123456789&gt; declare -A ass_array #定义关联数组&gt; ass_array=([index1]=val1 [index2]=val2&#125;)&gt; ass_array[index3]=val3&gt; echo $&#123;ass_array[index3]&#125;val3&gt; echo $&#123;ass_array[*]&#125;val1 val2&#125; val3&gt; echo $&#123;!ass_array[*]&#125;index1 index2 index3 别名123456&gt; alias ls='ls -ll'&gt; lstotal 4drwxr-xr-x 22 root root 4096 Oct 5 2018 anaconda3&gt; \lsanaconda3 获取终端信息12345stty -echo #禁止将输出发送到终端stty echo #允许将输出发送到终端tput sc #存储光标位置tput rc #恢复光标位置tput ed #清除从当前光标到行末尾的所有内容 时间和日期123456789101112131415&gt; dateSun Nov 18 18:22:25 CST 2018&gt; date +%s1542536551&gt; date --date "Nov 18 2018" +%ASunday&gt; date "+%d %B %Y"18 November 2018&gt; date -s "2018 11 18 18:23:22"date: invalid date ‘2018 11 18 18:23:22’&gt; date -s "2018 Nov 18 18:23:22"date: invalid date ‘2018 Nov 18 18:23:22’&gt; date -s "18 Nov 2018 18:23:22"Sun Nov 18 18:23:22 CST 2018&gt; sleep 10 12345678910星期 %a %A月 %b %B日 %d固定格式日期 %D年 %y %Y小时 %I %H分钟 %M秒 %S纳秒 %NUnix纪元时 %s 调试脚本1234567891011121314&gt; echo echo some &gt; out.sh&gt; bash -x out.sh+ echo somesome&gt; for i in &#123;1..3&#125;; do set -x; echo $i; set +x; done+ echo 11+ set +x+ echo 22+ set +x+ echo 33+ set +x 1234set -x 在执行时显示参数和命令set +x 禁止调试set -v 当命令进行读取时显示输入set +v 禁止打印输入 调试便捷方法将#!/bin/bash改为#!/bin/bash -xv 函数12345678function fname()&#123; statements;&#125;fname()&#123; statements;&#125; 1234567891011&gt; fname()&gt; &#123;&gt; echo $1,$2;&gt; echo "$@"; &gt; echo "$*"; &gt; return 0;&gt; &#125;&gt; fname my worldmy,worldmy worldmy world $* 和 $@ 都表示传递给函数或脚本的所有参数，不被双引号&quot; &quot;包含时，都以&quot;$1&quot; &quot;$2&quot; … &quot;$n&quot; 的形式输出所有参数。但是当它们被双引号&quot; &quot;包含时，&quot;$*&quot; 会将所有的参数作为一个整体，以&quot;$1 $2 … $n&quot;的形式输出所有参数；&quot;$@&quot; 会将各个参数分开，以&quot;$1&quot; &quot;$2&quot; … &quot;$n&quot; 的形式输出所有参数。1234567$0 当前脚本的文件名$n 传递给脚本或函数的参数。n 是一个数字，表示第几个参数。例如，第一个参数是$1，第二个参数是$2。$# 传递给脚本或函数的参数个数。$* 传递给脚本或函数的所有参数。$@ 传递给脚本或函数的所有参数。$? 上个命令的退出状态，或函数的返回值。一般情况下，大部分命令执行成功会返回 0，失败返回 非0。$$ 当前Shell进程ID。对于 Shell 脚本，就是这些脚本所在的进程ID。 1234567891011121314151617&gt; cat parent.sh#!/bin/bashplus1()&#123; echo $(($1+1));&#125;echo $(plus1 4)export -f plus1 #使函数子进程可用./child.sh 3 4&gt; vim child.sh&gt; cat child.sh#!/bin/bashecho $(plus1 $(($1 * $2)))&gt; chmod a+x *.sh&gt; ./parent.sh513&gt; cmd="echo some"&gt; $cmd #好神奇啊我也不知道为啥some 将输出写入变量 管道操作符 cmd1 | cmd2 | cmd312345678910&gt; ls | cat -n &gt;out.txt&gt; cat out.txt 1 anaconda3 2 out.txt&gt; output=$(ls | cat -n)&gt; echo $output1 anaconda3 2 out.txt&gt; output=`ls | cat -n`&gt; echo $output1 anaconda3 2 out.txt 子shell12345678910111213141516&gt; pwd/root&gt; (cd /data;ls)Anaconda3-5.1.0-Linux-x86_64.sh index.txt&gt; pwd/root&gt; cat text.txt123&gt; out=$(cat text.txt)&gt; echo $out1 2 3&gt; out="$(cat text.txt)"&gt; echo $out1 2 3 read12345678910111213&gt; read -n 2 var12&gt; echo $var12&gt; read -s password #输入时无回显&gt; echo $passwordsimonyang&gt; read -p "Please enter your Name:" varPlease enter your Name:simonyang&gt; echo $varsimonyang&gt; read -d . varsimon.&gt; echo $varsimon read -t 2 var要求两秒内输入 运行命令直至成功 true作为/bin中的一个二进制文件实现shell内建的:总是返回0的退出码1&gt; repeat() &#123;while :; do $@ &amp;&amp; return ; done&#125; 字段分隔符 IFS IFS的默认值为空白字符（换行符、制表符或者空格）123456789&gt; for item in "1 2 3";do echo $item;done1 2 3&gt; oldifs=$IFS&gt; IFS=,&gt; for item in "1,2,3";do echo $item;done1 2 3&gt; IFS=$oldifs&gt; for item in "1,2,3";do echo $item;done1,2,3 12345678910111213141516for var in list;do commands;donefor((i=0;i&lt;10;i++))&#123; commands;&#125;while condition;do commands;doneuntil condition; #直到条件为真do commands;done 12345678&gt; for i in &#123;a..g&#125;;do echo $i;doneabcdefg 比较12345678910111213if condition;then commands;fiif condition;then commands;else if condition;then commands;else commands;fi [ condition ] &amp;&amp; action #如果真，则action运行[ condition ] || action #如果假，则action运行 1234567算术比较-eq equal返回真 -ne not equal返回真-gt greater than返回真-lt less than返回真-ge greater or equal返回真-le less or equal返回真 1234&gt; if [ 5 -eq 5 -a 4 -gt 3]; then echo true;fi-bash: [: missing `]' #3与]应有空格，5与[也是&gt; if [ 5 -eq 5 -a 4 -gt 3 ]; then echo true;fitrue 12345678910文件系统测试，是为真[ -f $var ] 是否包含文件路径和文件名 [ -x $var ] 是否可执行[ -d $var ] 是否是目录[ -e $var ] 是否存在[ -c $var ] 是否是字符设备[ -b $var ] 是否是块设备[ -w $var ] 是否可写[ -r $var ] 是否可读[ -L $var ] 是否是符号链接 123456&gt; if [ -f out.txt ]; then echo true;fitrue&gt; lsanaconda3 out.txt text.txt&gt; if [ ! -L out.txt ]; then echo true;fi # !取反true 123456789字符串比较，是为真最好使用双中括号，str1和str2前后都有空格[[ $str1 = $str2 ]] 是否相等[[ $str1 == $str2 ]] 是否相等[[ $str1 != $str2 ]] 是否不相等[[ $str1 &gt; $str2 ]] 按字母序，str1是否大于str2[[ $str1 &gt; $str2 ]] 按字母序，str1是否小于str1[[ -z $str2 ]] 是否是空字符串[[ -n $str2 ]] 是否是非空字符串 1234&gt; str1="hello"&gt; str2=''&gt; if [[ -n $str1 ]] &amp;&amp; [[ -z $str2 ]];then echo true;fitrue 使用test1234&gt; if test $var -eq 1;then echo true;fitrue&gt; if ! test $var -eq 0;then echo true;fitrue 命令之乐cat12345678910&gt; echo this is a line &gt; out.txt &gt; cat out.txtthis is a line&gt; echo this is a new line &gt;out2.txt&gt; cat out.txt out2.txtthis is a linethis is a new line&gt; echo some new | cat - out.txtsome newthis is a line 1234567891011121314151617181920212223242526272829303132333435363738&gt; cat out.txt123&gt; cat -s out.txt123&gt; cat some.pydef hello(): print("hello world")&gt; cat -T some.pydef hello():^Iprint("hello world")&gt; cat -n some.py 1 def hello(): 2 print("hello world")&gt; cat -n out.txt 1 1 2 2 3 4 5 6 7 3&gt; cat -nb out.txt 1 1 2 2 3 3 script12345678910111213141516171819&gt; script -t 2&gt; timelog.log -a output.sessionScript started, file is output.session&gt; echo hello &gt; new.txt&gt; cat new.txthello&gt; exitexitScript done, file is output.session&gt; cat output.sessionScript started on Sat 24 Nov 2018 04:24:45 PM CST&gt; echo hello &gt; new.txt&gt; cat new.txthello&gt; exitexitScript done on Sat 24 Nov 2018 04:25:07 PM CST&gt; scriptreplay timelog.log output.session #重放 find12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970&gt; cd /home&gt; touch some.py out1.txt out2.txt&gt; lsout1.txt out2.txt some.py&gt; find . ../out2.txt./out1.txt./some.py&gt; find . -print0../out2.txt./out1.txt./some.py&gt; find . -name "*.txt"./out2.txt./out1.txt&gt; find . -name *.txtfind: paths must precede expression: out2.txtUsage: find [-H] [-L] [-P] [-Olevel] [-D help|tree|search|stat|rates|opt|exec] [path...] [expression]&gt; touch OUT.txt&gt; find . -iname "out*"./out2.txt./OUT.txt./out1.txt&gt; touch some.log&gt; lsout1.txt out2.txt OUT.txt some.log some.py&gt; find . \( -name "*.txt" -o -name "*.log" \) ./out2.txt./OUT.txt./out1.txt./some.log&gt; find /root/ -path "*/.ssh/*"/root/.ssh/authorized_keys&gt; find . -regex ".*\(\.py\|\.txt\)$"./out2.txt./OUT.txt./out1.txt./some.py&gt; touch some.PY&gt; find . -iregex ".*\.py$"./some.PY./some.py&gt; find . ! -iregex ".*\.py$"../out2.txt./OUT.txt./out1.txt./some.log&gt; mkdir some&gt; mv out* some/&gt; find . -maxdepth 1 ../some.PY./OUT.txt./some./some.py./some.log&gt; find .../some.PY./OUT.txt./some./some/out2.txt./some/out1.txt./some.py./some.log&gt; find . -mindepth 2./some/out2.txt./some/out1.txt&gt; find . -type d # d指目录，同样的还有f l ../some 访问时间 -atime 用户最近一次访问文件的时间 access修改时间 -mtime 文件内容最后一次被修改的时间 modify变化时间 -ctime 文件元数据最后一次改变的时间 change作为时间选项 单位是天 -表示小于 +表示大于以分钟为计量单位 -amin -mmin -cmin123456789101112131415161718&gt; vim OUT.txt&gt; find . -cmin -1../OUT.txt&gt; find . -newer some.PY../OUT.txt./some&gt; find . -size -1 #./some.PY./some/out2.txt./some/out1.txt./some.py./some.log&gt; find . -size +1c #大于1字节 ../OUT.txt./some b 块 512字节 c 字节 w 字 2字节 k 1024字节 M 1024K字节 G 1024M字节12345678910111213141516171819202122232425262728293031323334353637383940414243444546&gt; lsOUT.txt some some.log some.py some.PY&gt; find . -size +1c -deletefind: cannot delete ‘./some’: Directory not empty&gt; ls -ltotal 4drwxr-xr-x 2 root root 4096 Nov 24 16:52 some-rw-r--r-- 1 root root 0 Nov 24 16:41 some.log-rw-r--r-- 1 root root 0 Nov 24 16:37 some.py-rw-r--r-- 1 root root 0 Nov 24 16:48 some.PY&gt; find . -maxdepth 1 -perm 755 ../some&gt; find . -maxdepth 1 -user root../some.PY./some./some.py./some.log&gt; find . -maxdepth 1 -name "some.*" -exec chmod 755 &#123;&#125; \; # &#123;&#125; 每次代入文件名然后每次运行&gt; ls -ltotal 4drwxr-xr-x 2 755 root 4096 Nov 24 16:52 some-rwxr-xr-x 1 755 root 0 Nov 24 16:41 some.log-rwxr-xr-x 1 755 root 0 Nov 24 16:37 some.py-rwxr-xr-x 1 755 root 0 Nov 24 16:48 some.PY&gt; find . -maxdepth 1 -name "some.*" -exec chmod 644 &#123;&#125; +; # &#123;&#125; 传入所有文件名然后一次运行&gt; ls -ltotal 4drwxr-xr-x 2 755 root 4096 Nov 24 16:52 some-rw-r--r-- 1 755 root 0 Nov 24 16:41 some.log-rw-r--r-- 1 755 root 0 Nov 24 16:37 some.py-rw-r--r-- 1 755 root 0 Nov 24 16:48 some.PY&gt; cat some.pydef hi(): pass&gt; cat some.PYdef hello(): pass&gt; find . -iname "*.py" -exec cat &#123;&#125; \;&gt; final&gt; cat finaldef hello(): passdef hi(): pass&gt; find ~/ -name ".git" -prune #跳过.git目录 xargs xargs 命令将标准输入数据转换成命令行参数123456789101112&gt; cat out.txt1 2 3 4 56 7 89&gt; cat out.txt | xargs1 2 3 4 5 6 7 8 9&gt; cat out.txt | xargs -n 31 2 34 5 67 8 9&gt; echo "splitXsplitXsplit" | xargs -d X # d delimitersplit split split 1234567891011121314151617&gt; cat demo.shecho $* #&gt; cat args.txtarg1arg2arg3&gt; cat args.txt | xargs -n 2 ./demo.sharg1 arg2arg3&gt; cat args.txt | xargs -I &#123;&#125; ./demo.sh -p &#123;&#125; # -I指定替换名称 对于每个参数执行一次-p arg1-p arg2-p arg3&gt; cat args.txt | xargs -I p ./demo.sh -p -l-arg1 -l-arg2 -l-arg3 -l 将find与xargs结合使用时定界符应该是\0123456789101112131415161718&gt; lsargs.txt demo.sh out.txt&gt; find . -name "out.*" -print0 | xargs -0 rm -f #-print0 将`\0`作为定界符输出文件名 xargs -0 将`\0`作为定界符分开&gt; lsdemo.sh&gt; cat files.txtargs1.txtargs2.txt&gt; cat args1.txthello&gt; cat args2.txthi&gt; cat files.txt | xargs -I &#123;&#125; cat &#123;&#125;hellohi&gt; cat files.txt | (while read arg; do cat $arg; done ) #利用子shell实现相似功能hellohi tr tr只能通过stdin接受输入123456789101112&gt; echo "HELLO" | tr "A-Z" 'a-z' #'z-a'是行不通的hello&gt; echo "HELLO" | tr "A-Z" 'b'bbbbb&gt; echo "HELLO I AM" | tr -d 'A-H'LLO I M&gt; echo "HELLO I AM" | tr -d -c 'A-H\n' #-c选择补集HEA&gt; echo hello i am your friend | tr -s ' ' # 压缩hello i am your friend&gt; echo hello i am your friend | tr [:lower:] [:upper:] HELLO I AM YOUR FRIEND md5sum sha1sum 计算校验和md5sum 和 sha1sum 使用非常相似12345&gt; md5sum demo.she88d83ea97b4461177c708b8760045a8 demo.sh&gt; md5sum demo.sh &gt; demo.md5&gt; md5sum -c demo.md5demo.sh: OK gpg base64123456789&gt; cat demo.shecho $* #&gt; gpg -c demo.sh&gt; gpg demo.sh.gpg&gt; base64 demo.sh &gt; out&gt; cat outZWNobyAkKiAjCg==&gt; base64 -d out | cat -echo $* # sort uniq1234567891011121314151617181920212223242526&gt; cat files.txt339328&gt; sort files.txt233389&gt; sort -r files.txt983332&gt; sort -r files.txt | uniq9832 uniq的输入要求必须排序过，如果已经排序sort会返回0的退出码，否则返回非0123456789101112131415161718192021222324&gt; cat data.txt9 mac 80007 dell 700010 lenovo 6000&gt; sort -nk 1 data.txt #按数字大小7 dell 70009 mac 800010 lenovo 6000&gt; sort -k 1 data.txt #字母序10 lenovo 60007 dell 70009 mac 8000&gt; sort -rk 3 data.txt9 mac 80007 dell 700010 lenovo 6000&gt; sort -k 2.2 data.txt #按照第二列第二个字符排列，因为默认的分隔是把 "非空白到空白转换" 做为分段的依据，所以按照d,l,m排列7 dell 700010 lenovo 60009 mac 8000&gt; sort -t ' ' -k 2.2 data.txt #-t 制定空格作为分隔符，第二列第二个字符所以按照a,e,e排列9 mac 80007 dell 700010 lenovo 6000 -o 输出到指定文件，可以覆盖原文件–f 忽略大小写-c 检查文件是否已排好序，如果乱序，则输出第一个乱序的行的相关信息，最后返回1-C 检查文件是否已排好序，如果乱序，不输出内容，仅返回1-M 以月份来排序，比如JAN小于FEB等等-b 忽略每一行前面的所有空白部分-z 用\0结束行-m 合并-u 删除重复行1234567891011121314151617181920212223242526&gt; cat files.txt339328&gt; sort files.txt -o files.txt&gt; uniq -u files.txt #只显示唯一行289&gt; uniq -c files.txt #统计次数 1 2 3 3 1 8 1 9&gt; uniq -d files.txt #显示重复行3&gt; cat data.txt9mac80007dell70001lenovo6000&gt; cat data.txt | uniq -s 2 -w 1 # 忽略前两个字符比较一个字符9mac80007dell7000 mktemp /tmp目录中的内容系统重启后清空123456789&gt; filename=`mktemp` #反引号运行&gt; echo $filename/tmp/tmp.iBLhJgtGp3&gt; filename=`mktemp -d`&gt; echo $filename/tmp/tmp.0ojbVHR0ZG&gt; filename=`mktemp -u` #不创建实际文件&gt; mktemp test.XXX #根据模板创建test.7Ou split1234567891011121314151617181920212223242526272829303132333435363738&gt; dd if=/dev/urandom of=test.file bs=13MB count=1 #创建13m大小的文件1+0 records in1+0 records out13000000 bytes (13 MB) copied, 0.0903847 s, 144 MB/s&gt; split -b 1m test.file #以1M大小划分&gt; lstest.file xaa xab xac xad xae xaf xag xah xai xaj xak xal xam&gt; rm -f x* #删除x开头所有文件&gt; split -b 5m test.file -d -a 3 split #数字结尾 结尾三个数字 split开头&gt; lssplit000 split001 split002 test.file&gt; split -l 10 test.file #10行分&gt; cat server.logSERVER-1[connection][disconnect][connection][disconnect]SERVER-2[connection][disconnect]SERVER-3[disconnect][connection]&gt; csplit server.log /SERVER/ -n 1 &#123;*&#125; -f split -b "%d.log" #/SERVER/正则匹配 -n 1 文件后数字后缀一个 -f 前缀是split -b 后缀格式 &#123;*&#125; 分割执行次数0613536&gt; lsserver.log split0.log split1.log split2.log split3.log&gt; cat split0.log #split0.log是分隔前的，所以没有内容&gt; cat split1.logSERVER-1[connection][disconnect][connection][disconnect] { }1234567891011121314151617181920&gt; filename=some.tar.gz #必须使用变量&gt; name=$&#123;filename%.*&#125; #从尾向前匹配.*短数据删除&gt; echo $namenew.tar&gt; name=$&#123;filename%%.*&#125; #从尾向前匹配.*长数据删除&gt; echo $namesome&gt; name=$&#123;filename#*.&#125; #从前向尾匹配*.短数据删除&gt; echo $nametar.gz&gt; name=$&#123;filename##*.&#125; #从前向尾匹配*.长数据删除&gt; echo $namegz&gt; filename=new.new.some&gt; name=$&#123;filename/new/hi&#125; #new替换成hi，值替换一次&gt; echo $namehi.new.some&gt; name=$&#123;filename//new/hi&#125; &gt; echo $namehi.hi.some 抄一张图，懒得挨个试了 rename mv cp12345678#!/bin/bashcount=1;for img in `find . -maxdepth 1 -iname "*.jpg" -o -iname "*.png" -type f`;do new=image-$count.$&#123;img##*.&#125; #重命名 mv "$img" "$new" # 移动 let count++done 123&gt; rename JPG jpg *.JPG&gt; lsnew.jpg old.jpg 在我的服务器上rename正则使用失败，网上查不到原因1234567891011&gt; mkdir pic&gt; mv new.jpg ./pic&gt; lsold.jpg pic&gt; (cd pic;ls)new.jpg&gt; cp old.jpg ./pic&gt; (cd pic;ls)new.jpg old.jpg&gt; lsold.jpg pic look read12345678&gt; cat word.txtabcbcdcde&gt; look bc word.txt #寻找bc开头的行bcd&gt; grep "^a" word.txt #寻找a开头的行abc 123#!/bin/bashread -p "Enter your name:" nameecho "you name is $name" 12345&gt; echo -e "hello\n" | ./hello.shyou name is hello&gt; echo -e "simon\n" &gt; input&gt; ./hello.sh &lt;inputyou name is simon &amp;后台执行12345678#!/bin/bashpidarray=()for file in File1.iso File2.iso;do md5sum $file &amp; #后台运行 pidarray+=("$!") #获取进程piddonewait $&#123;pidarray[@]&#125; 以文件之名]]></content>
       <categories>
-        <category>overview</category>
+        <category>shell</category>
       </categories>
   </entry>
   <entry>
@@ -33,17 +38,17 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[学会快捷键的骚操作]]></title>
-    <url>%2F2018%2F11%2F06%2F2018%2Fshortcut%2F</url>
-    <content type="text"><![CDATA[[TOC] 本文默认win10系统 触摸板你可能不知道的触摸板使用方法当然这些还可以自己设置(在你的设置里，自己挖掘一下) 鼠标下面讲一下鼠标鼠标其实除了左键右键其实还有中键什么，中键？对，就是那个滚轮，他还可以向下按，向下按啊（如果你的鼠标够高级，它还可以向左拨，向右拨） 向下按 浏览器链接在新标签中打开 关闭标签（在浏览器标签上点击） 点击任务栏预览页关闭程序（当你把鼠标放在任务栏上程序图标上时，会出现一个预览的小窗口，中键点击这个小窗口关闭这个程序） 打开一个新的程序窗口（当一个程序已经打开，这时你想要再打开一个相同程序的时候） 查看 QQ 聊天信息的准确时间向左拨 浏览器返回前一个页面 文件资源管理器返回上一个位置向右拨 撤销刚刚向左拨的操作 感谢旺隆https://zhuanlan.zhihu.com/p/32564388 键盘小白注意： 笔记本上的Fn键是为了配合F1-F12键上右下角的小图标使用的。使用Fn+Esc组合键可以切换Fn+F1..F12和F1..F12的功能，如果你按了F5并没有刷新页面，那么按Fn+Esc切换后再按F5或者按一下Fn+F5就可以了； Tab缩进与n个空格不一样； 左边Alt旁边的那个窗口键叫Win键。 好了下面正式开始 单键Esc：退出 F1：帮助 F2：选中文件时重命名 F3：搜索 F4：文件资源管理器中光标移至地址栏 F5：刷新、重新整理 F6：浏览器光标移至地址栏 F8：开机时进入安全模式 F11: 全屏显示 F12：浏览器中打开开发者页面 PrtScr：PrintScreen的缩写，按一下可以截屏，然后Ctrl+V粘贴，不过我更喜欢用qq的截屏功能 Insert：切换输入时的插入与替换操作 Delete：移动文件到回收站、删除光标右侧的一个字符 Tab：页面移动 CapsLock：大写锁定 Shift：按住时点击鼠标连续多选 Ctrl：按住时点击鼠标间隔多选 组合键只罗列一些比较常用的，如果需要全部整理的话，请留言 Ctrl+1,2,3：切换到从左边数起第1,2,3个标签 Ctrl+C：复制 Ctrl+X：剪切 Ctrl+V：粘贴 Ctrl+A：全选 Ctrl+Z：撤销 Ctrl+S：保存 Ctrl+O：打开 Ctrl+P: 打印 Ctrl+F：搜索 Ctrl+W：关闭当前页面 Ctrl+Shift+W：关闭所有页面 Ctrl+T：打开新的页面 Ctrl+Shift+T：打开刚刚关闭的页面 Ctrl+F5：强制刷新 Ctrl+Tab：切换页面 Ctrl+Shift+Tab：反向切换页面 Ctrl+N：生成新程序页面 Ctrl+Shift+N：新建文件夹 Ctrl+Alt+A：QQ截图 Alt+F4：关闭当前程序 Alt+Tab：切换程序 Alt+Shift+Tab：反向切换程序 Win+Tab：激活任务视图 Win+A：激活操作中心 Win+D：显示桌面 Win+E：打开文件资源管理器 Win+I：打开设置 Win+L：锁定屏幕 Win+P：投影屏幕 Win+R：运行 Win+X：打开高级用户功能 Win+1/2/3：打开任务栏中固定的程序 win+空格：输入法切换 Shift+Delete：永久删除文件 Ctrl+Shift+Esc：打开任务资源管理器 Ctrl+Alt+Delete：终结计算机的异常状态 拖动某一项时按CTRL复制所选项目 感谢每天学点电脑知识电脑快捷键使用大全，秒变电脑大神！ - 每天学点电脑知识的文章 - 知乎https://zhuanlan.zhihu.com/p/38998190 最后小常识：中文输入时的标点符号和英文输入时的标点符号不一样，不一样！看一下中文：12·-=【】、；‘，。/~！@#￥%……&amp;*（）——+&#123;&#125;|：“《》？ 英文：12`-=[]\;&apos;,./~!@#$%^&amp;*()_+&#123;&#125;|:&quot;&lt;&gt;? 除了少数几个其他基本上都不一样，写代码的时候一定要小心噢！]]></content>
+    <title><![CDATA[onetab解放你的chrome多标签]]></title>
+    <url>%2F2018%2F11%2F06%2F2018%2Fonetab%2F</url>
+    <content type="text"><![CDATA[今天介绍一个Chrome插件 onetab其实具体来说呢, onetab的出现是为了解决像这样的问题哇，这么多标签！我每个标签都有用！我每个标签都不能关！啊啊啊！炸裂！ 当然如果你习惯性关标签请直接pass！ 在我的日常使用中是经常出现这种状况的，因为我经常为了解决一个技术问题打开很多页面，每个页面都有那么一点我需要的东西，所以不能关，但是开着也很烦人，还占内存，众所周知，Chrome是个占内存大户，怎么办捏！ 经过我的一番寻找，找到了onetab这个牛逼玩意官网在这看一下官网可以省95%内存，很棒再看一下具体介绍说是把所有页面汇集成一个list那我们用一下呗点击安装，装好之后点击这里面的右上角的onetab标签duang的一下就变成这样了所有的标签都汇集到了一起，需要的点开重新加载就好了当然每一次点onetab的标签列表是单独的像这样其实我还会把onetab当收藏夹用，把好的网址都放到一个标签列表里，这样chrome的书签栏就不会炸掉了 什么？你不是chrome用户，那有firefox吗，firefox浏览器也有这个插件什么？你用360、搜狗？换chrome吧chrome大法好，哈哈哈哈 什么？你不能科学上网装不了插件插件从这下https://www.chromefor.com/然后百度一波chrome怎么装本地插件Bingo！]]></content>
       <categories>
         <category>share</category>
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[onetab解放你的chrome多标签]]></title>
-    <url>%2F2018%2F11%2F06%2F2018%2Fonetab%2F</url>
-    <content type="text"><![CDATA[今天介绍一个Chrome插件 onetab其实具体来说呢, onetab的出现是为了解决像这样的问题哇，这么多标签！我每个标签都有用！我每个标签都不能关！啊啊啊！炸裂！ 当然如果你习惯性关标签请直接pass！ 在我的日常使用中是经常出现这种状况的，因为我经常为了解决一个技术问题打开很多页面，每个页面都有那么一点我需要的东西，所以不能关，但是开着也很烦人，还占内存，众所周知，Chrome是个占内存大户，怎么办捏！ 经过我的一番寻找，找到了onetab这个牛逼玩意官网在这看一下官网可以省95%内存，很棒再看一下具体介绍说是把所有页面汇集成一个list那我们用一下呗点击安装，装好之后点击这里面的右上角的onetab标签duang的一下就变成这样了所有的标签都汇集到了一起，需要的点开重新加载就好了当然每一次点onetab的标签列表是单独的像这样其实我还会把onetab当收藏夹用，把好的网址都放到一个标签列表里，这样chrome的书签栏就不会炸掉了 什么？你不是chrome用户，那有firefox吗，firefox浏览器也有这个插件什么？你用360、搜狗？换chrome吧chrome大法好，哈哈哈哈 什么？你不能科学上网装不了插件插件从这下https://www.chromefor.com/然后百度一波chrome怎么装本地插件Bingo！]]></content>
+    <title><![CDATA[学会快捷键的骚操作]]></title>
+    <url>%2F2018%2F11%2F06%2F2018%2Fshortcut%2F</url>
+    <content type="text"><![CDATA[本文默认win10系统 触摸板你可能不知道的触摸板使用方法当然这些还可以自己设置(在你的设置里，自己挖掘一下) 鼠标下面讲一下鼠标鼠标其实除了左键右键其实还有中键什么，中键？对，就是那个滚轮，他还可以向下按，向下按啊（如果你的鼠标够高级，它还可以向左拨，向右拨） 向下按 浏览器链接在新标签中打开 关闭标签（在浏览器标签上点击） 点击任务栏预览页关闭程序（当你把鼠标放在任务栏上程序图标上时，会出现一个预览的小窗口，中键点击这个小窗口关闭这个程序） 打开一个新的程序窗口（当一个程序已经打开，这时你想要再打开一个相同程序的时候） 查看 QQ 聊天信息的准确时间向左拨 浏览器返回前一个页面 文件资源管理器返回上一个位置向右拨 撤销刚刚向左拨的操作 感谢旺隆https://zhuanlan.zhihu.com/p/32564388 键盘小白注意： 笔记本上的Fn键是为了配合F1-F12键上右下角的小图标使用的。使用Fn+Esc组合键可以切换Fn+F1..F12和F1..F12的功能，如果你按了F5并没有刷新页面，那么按Fn+Esc切换后再按F5或者按一下Fn+F5就可以了； Tab缩进与n个空格不一样； 左边Alt旁边的那个窗口键叫Win键。 好了下面正式开始 单键Esc：退出 F1：帮助 F2：选中文件时重命名 F3：搜索 F4：文件资源管理器中光标移至地址栏 F5：刷新、重新整理 F6：浏览器光标移至地址栏 F8：开机时进入安全模式 F11: 全屏显示 F12：浏览器中打开开发者页面 PrtScr：PrintScreen的缩写，按一下可以截屏，然后Ctrl+V粘贴，不过我更喜欢用qq的截屏功能 Insert：切换输入时的插入与替换操作 Delete：移动文件到回收站、删除光标右侧的一个字符 Tab：页面移动 CapsLock：大写锁定 Shift：按住时点击鼠标连续多选 Ctrl：按住时点击鼠标间隔多选 组合键只罗列一些比较常用的，如果需要全部整理的话，请留言 Ctrl+1,2,3：切换到从左边数起第1,2,3个标签 Ctrl+C：复制 Ctrl+X：剪切 Ctrl+V：粘贴 Ctrl+A：全选 Ctrl+Z：撤销 Ctrl+S：保存 Ctrl+O：打开 Ctrl+P: 打印 Ctrl+F：搜索 Ctrl+W：关闭当前页面 Ctrl+Shift+W：关闭所有页面 Ctrl+T：打开新的页面 Ctrl+Shift+T：打开刚刚关闭的页面 Ctrl+F5：强制刷新 Ctrl+Tab：切换页面 Ctrl+Shift+Tab：反向切换页面 Ctrl+N：生成新程序页面 Ctrl+Shift+N：新建文件夹 Ctrl+Alt+A：QQ截图 Alt+F4：关闭当前程序 Alt+Tab：切换程序 Alt+Shift+Tab：反向切换程序 Win+Tab：激活任务视图 Win+A：激活操作中心 Win+D：显示桌面 Win+E：打开文件资源管理器 Win+I：打开设置 Win+L：锁定屏幕 Win+P：投影屏幕 Win+R：运行 Win+X：打开高级用户功能 Win+1/2/3：打开任务栏中固定的程序 win+空格：输入法切换 Shift+Delete：永久删除文件 Ctrl+Shift+Esc：打开任务资源管理器 Ctrl+Alt+Delete：终结计算机的异常状态 拖动某一项时按CTRL复制所选项目 感谢每天学点电脑知识电脑快捷键使用大全，秒变电脑大神！ - 每天学点电脑知识的文章 - 知乎https://zhuanlan.zhihu.com/p/38998190 最后小常识：中文输入时的标点符号和英文输入时的标点符号不一样，不一样！看一下中文：12·-=【】、；‘，。/~！@#￥%……&amp;*（）——+&#123;&#125;|：“《》？ 英文：12`-=[]\;&apos;,./~!@#$%^&amp;*()_+&#123;&#125;|:&quot;&lt;&gt;? 除了少数几个其他基本上都不一样，写代码的时候一定要小心噢！]]></content>
       <categories>
         <category>share</category>
       </categories>
@@ -73,14 +78,6 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[Office]]></title>
-    <url>%2F2018%2F09%2F09%2F2018%2FOffice%2F</url>
-    <content type="text"><![CDATA[资源来源为MSDN,我告诉你office2016 专业版 链接：https://pan.baidu.com/s/1GhT6q6caArSgp44cqwfWYg 密码：j3fl 资源来源为亦是美破解程序 链接：https://pan.baidu.com/s/1MPuqqas4qhxcdQWaG3Ff5Q 密码：we3v建议装完office之后重启一次再进行激活，激活前关闭windows defender，激活时需要联网，需要的话激活后再开启defender即可]]></content>
-      <categories>
-        <category>share</category>
-      </categories>
-  </entry>
-  <entry>
     <title><![CDATA[Multisim]]></title>
     <url>%2F2018%2F09%2F09%2F2018%2FMultisim%2F</url>
     <content type="text"><![CDATA[感谢信息青协支持，信息青协电脑交流群284933381 Multisim 13.0.1汉化破解版 链接：https://pan.baidu.com/s/1eXxn55auHOB-7rGuCb8KoQ 密码：t7xq]]></content>
@@ -92,6 +89,14 @@
     <title><![CDATA[Matlab]]></title>
     <url>%2F2018%2F09%2F09%2F2018%2FMatlab%2F</url>
     <content type="text"><![CDATA[感谢信息青协支持，信息青协电脑交流群284933381 matlab软件资源matlab2018 链接：https://pan.baidu.com/s/1WNkzz4XKHElqTdi35QyZ-Q 密码：zstxmatlab2016 链接：https://pan.baidu.com/s/1cx72VimXuhW8RChy70HcSw 密码：vvyj两个文件均内含破解教程 matlab]]></content>
+      <categories>
+        <category>share</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[Office]]></title>
+    <url>%2F2018%2F09%2F09%2F2018%2FOffice%2F</url>
+    <content type="text"><![CDATA[资源来源为MSDN,我告诉你office2016 专业版 链接：https://pan.baidu.com/s/1GhT6q6caArSgp44cqwfWYg 密码：j3fl 资源来源为亦是美破解程序 链接：https://pan.baidu.com/s/1MPuqqas4qhxcdQWaG3Ff5Q 密码：we3v建议装完office之后重启一次再进行激活，激活前关闭windows defender，激活时需要联网，需要的话激活后再开启defender即可]]></content>
       <categories>
         <category>share</category>
       </categories>
@@ -113,41 +118,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[资源分享总览]]></title>
-    <url>%2F2018%2F09%2F08%2Fshare%2F</url>
-    <content type="text"><![CDATA[更新ing MatlabMultisimOfficeVC++]]></content>
-      <categories>
-        <category>overview</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[齐契古风社]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E9%BD%90%E5%A5%91%E5%8F%A4%E9%A3%8E%E7%A4%BE%2F</url>
-    <content type="text"><![CDATA[齐契古风社【公众号】齐契古风社【社团简介】西南交通大学齐契古风社成立于2015年，由校图书馆指导，是以校内喜爱古风文化的同学为基础而创建的社团组织。“齐契”二字取自《兰亭序》中“乃携齐契，散怀一丘”，意为志同道合之人。社团旨在为校内古风爱好者搭建一个学习交流的平台，并通过现代人更容易接受的方式，宣扬中华传统文化，提高同学们的文化归属感和民族自豪感。【社团宗旨】以对古风的热爱为奠基，结识知己，钻研同好，宣传发扬以中华传统文化为基调的新型古风文化，弘扬民族个性。【品牌活动】古风晚会，手作沙龙【已举办】“风华暗飞声”古风晚会“古旧人间”古风晚会“青丝一绺绾流年”读书分享与手作沙龙重阳线上歌会5·20手工活动【文案】 乃携齐契，散怀一丘，在这里我们因古风文化相知相遇。无论你是喜欢古风音乐、古风知识，亦或是诗词歌赋，妆容服饰等等，来到齐契古风社，畅所欲言，展现自我。给自己的热爱一个寄托，感受传统文化与现代文明的碰撞，遇见那个充满才情的自己吧！【邮箱】1055192699@qq.com【公众号】齐契古风社 招新微信推送链接 活动风华暗飞声古风晚会古旧人间古风晚会青丝一绺绾流年青丝一绺绾流年读书分享与手作沙龙换届大会]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[国际关系研究会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%9B%BD%E9%99%85%E5%85%B3%E7%B3%BB%E7%A0%94%E7%A9%B6%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[国际关系研究会国际关系研究会招新群：774377875 国际关系研究会微信招新推送 国际关系研究会介绍]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[雾都天文社]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E9%9B%BE%E9%83%BD%E5%A4%A9%E6%96%87%E7%A4%BE%2F</url>
-    <content type="text"><![CDATA[雾都天文社想加入雾都天文社的小星星们集合啦！总群QQ号：225881407 浩瀚星空，无垠宇宙，漫漫星河，迢迢银汉，世间有一种浪漫叫做天文，我们探寻每一颗星星的故事，我们静候每一场盛世流星雨，我们目光所及处在遥远的光年之外，这是一封来自雾都天文社的邀请函，邀你共赴一场无与伦比的天文盛宴！天文之“大”，囊括宇宙星辰。天文之“长”，横亘万载岁月。在这里，有一群志趣相投的小伙伴们共同探讨天文知识，相约观测天文现象。我们看遍了天府之都的夜~~ 西南交大雾都天文社成立于2012年，由于筹建初期成都多雾而得名。天文社是一个以普及天文知识为宗旨的社团，是交大的特色社团之一，是一个天文爱好者学习交流的平台。在社团成立的7年中，天文社不断探索活动形式，举办丰富精彩的天文活动，不仅提高了会员们的天文兴趣和知识水平，增强社团的凝聚力；还通过比赛和讲座，进行天文科普，燃起了交大学子们的天文热情！轩辕北斗，遥望盛世繁华；猎户雄狮，笑傲寰宇苍穹。羽翼渐丰的天文社，带领我们遨游在浩瀚宇宙中，穿越到平行时空里，邂逅绮丽的星云！ 1.校外观测来到光污染较小的川西，登上海拔3000多米的高原，穿梭于崇山峻岭之间，欣赏从未看见过的壮美的星空。星座，银河，皎月，雪山，白云……一切的壮美与纯净你都可以在这里欣赏。PS：然而每次都会有出门必下雨的BUG。但是不用担心，云雾终将散去，星河自在前方。 活动Part1马家沟 Part2四姑娘山 Part3天文camp（天文知识科普） Part4“星语星座” 蜡烛摆星座摆个心形蜡烛用来表白太老套了，天文社的小伙伴要玩出新高度——用蜡烛摆出12个星座，是不是更罗曼蒂克呢？你的星座我的心，表白新技能get！ 这就是我们雾都天文社这一大家庭！欢迎小鲜肉们加入我们天文社这个有爱的大家庭！以后一起去看星星看月亮，从诗词歌赋谈到人生哲学~快来加入我们吧~~ 招新总群QQ号：225881407关注雾都天文社微信公众号，随时了解天文资讯。]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[镜湖文学社]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E9%95%9C%E6%B9%96%E6%96%87%E5%AD%A6%E7%A4%BE%2F</url>
-    <content type="text"><![CDATA[镜湖文学社镜湖文学社QQ：2196421655【社团简介】西南交通大学镜湖文学社，创建于1996年，因交大九里校区的镜湖而得名。在一所以工科见长的学府里，镜湖文学社是最具有文学特色的社团，陪伴交大走过了20多年的风雨历程，见证了交大的发展。镜湖文学社的指导单位是西南交通大学人文学院，管理单位是共青团西南交通大学委员会，监督单位是西南交通大学社团联合会，有自己独立的社团内部组成机构和特有的运作模式。【社团宗旨】一直以来，镜湖文学社秉承着“心明如镜，心静如湖；文墨繁华，学思甚笃”的办社思想，结合“缤纷校园，绿化心灵”的宗旨和“培养交大学子人文情怀，提高交大校园文化底蕴，为文学爱好者提供交流平台”的基本目标，为交大学子提供丰富多彩的活动和展示自己的舞台【品牌活动】文学大爆炸，等你的情书征文活动，一站到底挑战赛【邮箱】 jhwxs@qq.com【QQ】 2196421655【微博】 西南交大镜湖文学社【微信公众号】 交大镜湖 招新镜湖文学社微信招新推送]]></content>
+    <title><![CDATA[动植物协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%8A%A8%E6%A4%8D%E7%89%A9%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[动植物协会 动植物协会成立于2013年，提倡对环境，野生动物和人类社会进行关心和爱护。通过各种活动的开展，培植我们对自然关爱、对动植物保护的环境友好意识。以关爱野生动植物为出发点，放眼全世界，透过自然教育、野生动物救助行动，推动野生动植物保护工作，期许让每个人将自然美好的感动转化为环境守护的行动，保护我们的地球母亲。关注所有野生动植物的生存需求，包括我们人类自己。通过每年举办各种各样的活动，走进自然，体验大自然的奇妙。 协会内部管理设主席团，分管办公室、活动部、公关部、宣传部和学术部，五个部门各司其职，团结奋进，统筹安排协会内的相关事务。从建会到现在，本协会先后举办的各项与动植物相关的活动均得到校领导及校内师生的认可。协会将教大家制作叶雕书签、琥珀标本，还会举办苔藓造景大赛等活动，丰富大家的课余生活。作为新兴协会之一，本协会秉承不断学习的原则，不仅积极学习动植物的相关知识，同时也向各大社团吸取经验，不断进取，为协会的发展努力。愿和我们一样热爱自然的你加入我们！ 一花一世界，一蝶一千秋。我们热爱自然，用心感受每个生命和每份成长，一起去湖边见证木芙蓉的盛放，学会制作有爱的叶雕书签和琥珀标本，在微景观大赛中发现自己创造美的能力。这样的我们在这里等待这样的你的加入！]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -161,25 +134,33 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[I&F电子竞技协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2FI%26F%E7%94%B5%E5%AD%90%E7%AB%9E%E6%8A%80%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[I&amp;F电子竞技协会2018级新生群:856356526你是否想过要唤醒你那因高考而沉睡的电竞梦想？是否想站在聚光灯下用自己的操作迎来一次次喝彩？是否想获得与职业圈接触的机会？大神指导，比赛交流，你想要的这里都有。如果你对电竞有足够的热情，I&amp;F电子竞技协会将是你最好的选择。欢迎加入！ 关于竞技项目设置本社从客观条件和能力出发，目前设有英雄联盟和王者荣耀两个项目的竞技训练和校队。其他竞技项目我们提供交流平台与活动通告支持，若有能者有创建校队的想法也可带方案前来商议。非竞技项目我们也欢迎各位前来交流在此可以找到一起玩的小伙伴。 部门要求本社目前设有竞技部，组织部，解说部，媒体部四大部门竞技部不设门槛，只要是热情足够的玩家都可以加入，我们会为水平较低的玩家们提供教学指导和开黑娱乐赛等活动，但要组建队伍进行正式训练要求LOL电一白金五水平起步（特殊情况可以放宽限制，择优录取），王者荣耀王者段位起步，其他部门要求宽松，只要有相关技能或足够的热情就可以另：英雄联盟校队招募顶尖玩家，要求上单位电一钻三水平起步，中野位电一钻二水平起步，下路辅助位电一大师水平起步。有特殊情况可以放宽限制。有意者可以将简历发送至电竞社邮箱swjtuesport@163.com简历内容包括段位场次胜率截图，英雄池介绍，自己游戏风格理解介绍，比赛经历，对电竞的看法。 我社已与RNG俱乐部建立高校合作伙伴关系，有各种周边、参加RNG各种活动、参观俱乐部与职业选手近距离接触、顶尖玩家青训渠道等多种福利。 活动nest高校联赛全国总决赛现场（同济大学礼堂）S7为lpl加油活动部分会员与RNG战队交流合照电竞社2017年新生杯因特尔大师挑战赛现场庆祝RNG夺冠横幅会徽]]></content>
+    <title><![CDATA[跆拳道协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%B7%86%E6%8B%B3%E9%81%93%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[跆拳道协会 招兵买马，求萌妹，求御姐，求正太，求大叔云集各类精英，跆拳道协会，期待你的到来。有人的地方就有生活，有生活的地方就有咱们。如果你热爱青春，期望展示自我，快来加入咱们吧！年轻活力是我们的资本，张扬个性凸显胆识是我们的超越。加入我们，我们会帮你发现自己的闪光点，让你变得更加自信和充实。追不到女神？跆协祝你成功。当不了女神？跆协教你成长。 活动第二届“临战不退”跆拳道争霸赛图]]></content>
       <categories>
         <category>社团</category>
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[MARS动漫同人社]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2FMARS%E5%8A%A8%E6%BC%AB%E5%90%8C%E4%BA%BA%E7%A4%BE%2F</url>
-    <content type="text"><![CDATA[MARS动漫同人社2018年MARS迎新总群：346744380这里是二次元的世界，聚集了一批喜欢ACGN的小伙伴们，我们有COS部，LIVE部、CV部、技术部、原创部以及漫讯部。无论是你想找到志同道合的朋友，想参加有趣的活动，还是想学到酷炫的各项技能，在这里都能实现。LIVE歌舞祭，COSPLAY嘉年华，MAD红白合战，笔稿大赛……在这里，你甚至可以学到如何化妆、道具与穿小裙子（划掉）。如果你对ACGN文化感兴趣的话，MARS动漫同人社是你不容错过的选择！快来加入我们, 一起享受快乐肥宅的生活吧！ 招新 MARS动漫同人社B站视频 MARS动漫同人社招新推送]]></content>
+    <title><![CDATA[贫困地区教育观念救助会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%B4%AB%E5%9B%B0%E5%9C%B0%E5%8C%BA%E6%95%99%E8%82%B2%E8%A7%82%E5%BF%B5%E6%95%91%E5%8A%A9%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[贫困地区教育观念救助会 新生QQ交流群 西南交通大学贫困地区教育观念救助会，简称为“救助会”，成立于2002年5月17日，由一位来自于凉山的学长发起组建。正如协会的名字，作为公益类社团，协会以“自救者人恒救之”为理念，致力于改变贫困地区的落后教育观念。目前协会由会长团和五个部门组成。协会在凉山有三所基地小学，在校内有教职工子女40人左右的授课学生群，各类校级活动以快乐助学为主题，围绕小学生与大学生和社会的联系展开。协会的主要工作分为三块：校级活动（基地小学）、义教、支教。校级活动：目前协会已经举办了九届快乐助学活动，E课讲堂，Ta说，给你的画，和他一起写本书，毕业季微公益······义教:每周末按时早期，为校内教职工子女辅导功课，开设专题课程。支教：短暂的寒暑假，去需要我们的地方，认识一群可爱的学生。协会自成立至今，都以做公益为工作目标，如果你对公益感兴趣，如果你热心于帮助他人，那么欢迎你了解救助会，加入救助会，和我们一起为公益事业发光发热！ 宣传视频 部门介绍义教部综合事务部网络部宣传部外联部 招新贫困地区教育观念救助会微信招新链接 新生QQ交流群微信公众号 活动2016年给你的画2017年ta说2.02018会员大会2018暑假夏令营基地小学周末义教]]></content>
       <categories>
         <category>社团</category>
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[西南交大雷锋公司]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%A5%BF%E5%8D%97%E4%BA%A4%E5%A4%A7%E9%9B%B7%E9%94%8B%E5%85%AC%E5%8F%B8%2F</url>
-    <content type="text"><![CDATA[西南交大雷锋公司 微信推送链接 雷锋公司协会具体资料请戳这里！！]]></content>
+    <title><![CDATA[大学生伙食管理委员会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BC%99%E9%A3%9F%E7%AE%A1%E7%90%86%E5%A7%94%E5%91%98%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[大学生伙食管理委员会【微信公众号】西南交大伙食管理委员会又是一年开学季，西南交大伙食管理委员会前来报道！这里不仅是交大“吃货”们的聚集地，还是与交大食堂息息相关的服务类社团。你想深入探索交大食堂么？想在交大展露你的精湛厨艺么？想与志同道合的朋友一起举办各类美食活动么？我们在交大伙管会，期待每一个有想法有创意爱美食的你加入! 社团简介【社团简介】想全方位探索交大食堂么？想获得更多饮食服务中心相关活动和精品课堂的新鲜资讯么？这里是大学生伙食管理委员会，架起学生与食堂之间的沟通桥梁，收集你的任何建议与吐槽，满足你对大学食堂的期望，近距离接触厨艺绝佳又可爱的食堂师傅，创造属于你的带不走的“交大味道”！食神大赛，让你发现潜藏在身边的厨神；食堂师傅技能大赛，带你大饱口福！在这里，我们给你交流厨艺的机会与平台，交大这么大，我们的相遇一定是对于美食的心有灵犀。西南交通大学大学生伙食管理委员会等待你们的加入！【社团宗旨】面向全校师生，构建学生与食堂之间的沟通平台，协助交大饮食服务中心一起提高食堂知名度，营造良好的交大饮食文化。【品牌活动】食神烹饪大赛，光盘行动，失物招领，蛋糕DIY 等【邮箱】1060628972@qq.com【微信公众号】西南交大伙食管理委员会 活动食话食说课堂记录蛋糕DIY会员大会食神大赛初赛食神大赛决赛]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[雾都天文社]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E9%9B%BE%E9%83%BD%E5%A4%A9%E6%96%87%E7%A4%BE%2F</url>
+    <content type="text"><![CDATA[雾都天文社想加入雾都天文社的小星星们集合啦！总群QQ号：225881407 浩瀚星空，无垠宇宙，漫漫星河，迢迢银汉，世间有一种浪漫叫做天文，我们探寻每一颗星星的故事，我们静候每一场盛世流星雨，我们目光所及处在遥远的光年之外，这是一封来自雾都天文社的邀请函，邀你共赴一场无与伦比的天文盛宴！天文之“大”，囊括宇宙星辰。天文之“长”，横亘万载岁月。在这里，有一群志趣相投的小伙伴们共同探讨天文知识，相约观测天文现象。我们看遍了天府之都的夜~~ 西南交大雾都天文社成立于2012年，由于筹建初期成都多雾而得名。天文社是一个以普及天文知识为宗旨的社团，是交大的特色社团之一，是一个天文爱好者学习交流的平台。在社团成立的7年中，天文社不断探索活动形式，举办丰富精彩的天文活动，不仅提高了会员们的天文兴趣和知识水平，增强社团的凝聚力；还通过比赛和讲座，进行天文科普，燃起了交大学子们的天文热情！轩辕北斗，遥望盛世繁华；猎户雄狮，笑傲寰宇苍穹。羽翼渐丰的天文社，带领我们遨游在浩瀚宇宙中，穿越到平行时空里，邂逅绮丽的星云！ 1.校外观测来到光污染较小的川西，登上海拔3000多米的高原，穿梭于崇山峻岭之间，欣赏从未看见过的壮美的星空。星座，银河，皎月，雪山，白云……一切的壮美与纯净你都可以在这里欣赏。PS：然而每次都会有出门必下雨的BUG。但是不用担心，云雾终将散去，星河自在前方。 活动Part1马家沟 Part2四姑娘山 Part3天文camp（天文知识科普） Part4“星语星座” 蜡烛摆星座摆个心形蜡烛用来表白太老套了，天文社的小伙伴要玩出新高度——用蜡烛摆出12个星座，是不是更罗曼蒂克呢？你的星座我的心，表白新技能get！ 这就是我们雾都天文社这一大家庭！欢迎小鲜肉们加入我们天文社这个有爱的大家庭！以后一起去看星星看月亮，从诗词歌赋谈到人生哲学~快来加入我们吧~~ 招新总群QQ号：225881407关注雾都天文社微信公众号，随时了解天文资讯。]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -201,9 +182,17 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[未收录，待补充]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2Ftemp%2F</url>
-    <content type="text"><![CDATA[未收录，待补充 返回社团总览 联系站主]]></content>
+    <title><![CDATA[I&F电子竞技协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2FI%26F%E7%94%B5%E5%AD%90%E7%AB%9E%E6%8A%80%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[I&amp;F电子竞技协会2018级新生群:856356526你是否想过要唤醒你那因高考而沉睡的电竞梦想？是否想站在聚光灯下用自己的操作迎来一次次喝彩？是否想获得与职业圈接触的机会？大神指导，比赛交流，你想要的这里都有。如果你对电竞有足够的热情，I&amp;F电子竞技协会将是你最好的选择。欢迎加入！ 关于竞技项目设置本社从客观条件和能力出发，目前设有英雄联盟和王者荣耀两个项目的竞技训练和校队。其他竞技项目我们提供交流平台与活动通告支持，若有能者有创建校队的想法也可带方案前来商议。非竞技项目我们也欢迎各位前来交流在此可以找到一起玩的小伙伴。 部门要求本社目前设有竞技部，组织部，解说部，媒体部四大部门竞技部不设门槛，只要是热情足够的玩家都可以加入，我们会为水平较低的玩家们提供教学指导和开黑娱乐赛等活动，但要组建队伍进行正式训练要求LOL电一白金五水平起步（特殊情况可以放宽限制，择优录取），王者荣耀王者段位起步，其他部门要求宽松，只要有相关技能或足够的热情就可以另：英雄联盟校队招募顶尖玩家，要求上单位电一钻三水平起步，中野位电一钻二水平起步，下路辅助位电一大师水平起步。有特殊情况可以放宽限制。有意者可以将简历发送至电竞社邮箱swjtuesport@163.com简历内容包括段位场次胜率截图，英雄池介绍，自己游戏风格理解介绍，比赛经历，对电竞的看法。 我社已与RNG俱乐部建立高校合作伙伴关系，有各种周边、参加RNG各种活动、参观俱乐部与职业选手近距离接触、顶尖玩家青训渠道等多种福利。 活动nest高校联赛全国总决赛现场（同济大学礼堂）S7为lpl加油活动部分会员与RNG战队交流合照电竞社2017年新生杯因特尔大师挑战赛现场庆祝RNG夺冠横幅会徽]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[MARS动漫同人社]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2FMARS%E5%8A%A8%E6%BC%AB%E5%90%8C%E4%BA%BA%E7%A4%BE%2F</url>
+    <content type="text"><![CDATA[MARS动漫同人社2018年MARS迎新总群：346744380这里是二次元的世界，聚集了一批喜欢ACGN的小伙伴们，我们有COS部，LIVE部、CV部、技术部、原创部以及漫讯部。无论是你想找到志同道合的朋友，想参加有趣的活动，还是想学到酷炫的各项技能，在这里都能实现。LIVE歌舞祭，COSPLAY嘉年华，MAD红白合战，笔稿大赛……在这里，你甚至可以学到如何化妆、道具与穿小裙子（划掉）。如果你对ACGN文化感兴趣的话，MARS动漫同人社是你不容错过的选择！快来加入我们, 一起享受快乐肥宅的生活吧！ 招新 MARS动漫同人社B站视频 MARS动漫同人社招新推送]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -217,17 +206,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[书画协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E4%B9%A6%E7%94%BB%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[书画协会欢迎喜欢书画的你们加入QQ群：487784822朝书暮画，斯如骑战马。激情笔笔注点划，应知情义无价。挥笔泼墨间尽展灵动、飘逸与风雅。在这里——他，能引一代之风流；她，能创一派之古典。他，是书法；她，是国画。西南交通大学大学生书画协会，创立于2002年，文化积淀16载春秋！工科学校，艺术殿堂！每周练笔+书画培训，教你秒变大神，作品展览+福利附送，带你领略书画风采！这个九月，书协等你！PS:欢迎喜欢书画的你们加入QQ群：487784822，更多精彩等你来哦！ 关注我们微信公众号 微博qq空间]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[习近平新时代中国特色社会主义思想研究会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E4%B9%A0%E8%BF%91%E5%B9%B3%E6%96%B0%E6%97%B6%E4%BB%A3%E4%B8%AD%E5%9B%BD%E7%89%B9%E8%89%B2%E7%A4%BE%E4%BC%9A%E4%B8%BB%E4%B9%89%E6%80%9D%E6%83%B3%E7%A0%94%E7%A9%B6%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[习近平新时代中国特色社会主义思想研究会 习思会讲土味情话给你听 习思会招新]]></content>
+    <title><![CDATA[未收录，待补充]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2Ftemp%2F</url>
+    <content type="text"><![CDATA[未收录，待补充 返回社团总览 联系站主]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -241,9 +222,17 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[体育舞蹈协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E4%BD%93%E8%82%B2%E8%88%9E%E8%B9%88%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[体育舞蹈协会欢迎加入体舞18大群 群号794300746西南交通大学体育舞蹈协会又名银杏之下舞蹈工作室，成立于1999年，至今已多次获得全校优秀社团、明星社团等称号。协会指导老师王彦老师为体育舞蹈国家级裁判，国标舞十项全能选手。 体育舞蹈，又称“国际标准舞”，即“国标舞”，可分为两大类，10个舞种。第一大类为摩登舞，包括华尔兹、探戈、狐步舞、快步舞、维也纳华尔兹；第二大类为拉丁舞，包括伦巴、恰恰、桑巴、斗牛舞、牛仔舞。 协会每周三和周日晚为常规舞蹈训练，由专业老师指导、资深学长学姐带领教学，训练从零基础开始，保证左右会员都能接受哦！协会每年举办国标舞大赛、迎新晚会等活动，在学校有相当大的影响力，在提高学校体育舞蹈水平，丰富在校同学的文化生活等方面有着举足轻重的作用。 简单说来，体舞协会是热爱跳舞、喜欢舞台的小伙伴们的基地。 交大之中，银杏之下，体舞就在那里，晴也盼你，雨也盼你。体舞协会欢迎每一个人！欢迎加入协会QQ大群，群号：794300476欢迎关注体舞微信公众号：JDTWXH 招新体育舞蹈协会微信招新链接 视频活动会员大会倾城之恋迎新晚会日常训练舞自由我国标舞大赛迎新晚会指导老师王彦]]></content>
+    <title><![CDATA[习近平新时代中国特色社会主义思想研究会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E4%B9%A0%E8%BF%91%E5%B9%B3%E6%96%B0%E6%97%B6%E4%BB%A3%E4%B8%AD%E5%9B%BD%E7%89%B9%E8%89%B2%E7%A4%BE%E4%BC%9A%E4%B8%BB%E4%B9%89%E6%80%9D%E6%83%B3%E7%A0%94%E7%A9%B6%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[习近平新时代中国特色社会主义思想研究会 习思会讲土味情话给你听 习思会招新]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[书画协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E4%B9%A6%E7%94%BB%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[书画协会欢迎喜欢书画的你们加入QQ群：487784822朝书暮画，斯如骑战马。激情笔笔注点划，应知情义无价。挥笔泼墨间尽展灵动、飘逸与风雅。在这里——他，能引一代之风流；她，能创一派之古典。他，是书法；她，是国画。西南交通大学大学生书画协会，创立于2002年，文化积淀16载春秋！工科学校，艺术殿堂！每周练笔+书画培训，教你秒变大神，作品展览+福利附送，带你领略书画风采！这个九月，书协等你！PS:欢迎喜欢书画的你们加入QQ群：487784822，更多精彩等你来哦！ 关注我们微信公众号 微博qq空间]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -265,9 +254,25 @@
       </categories>
   </entry>
   <entry>
+    <title><![CDATA[体育舞蹈协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E4%BD%93%E8%82%B2%E8%88%9E%E8%B9%88%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[体育舞蹈协会欢迎加入体舞18大群 群号794300746西南交通大学体育舞蹈协会又名银杏之下舞蹈工作室，成立于1999年，至今已多次获得全校优秀社团、明星社团等称号。协会指导老师王彦老师为体育舞蹈国家级裁判，国标舞十项全能选手。 体育舞蹈，又称“国际标准舞”，即“国标舞”，可分为两大类，10个舞种。第一大类为摩登舞，包括华尔兹、探戈、狐步舞、快步舞、维也纳华尔兹；第二大类为拉丁舞，包括伦巴、恰恰、桑巴、斗牛舞、牛仔舞。 协会每周三和周日晚为常规舞蹈训练，由专业老师指导、资深学长学姐带领教学，训练从零基础开始，保证左右会员都能接受哦！协会每年举办国标舞大赛、迎新晚会等活动，在学校有相当大的影响力，在提高学校体育舞蹈水平，丰富在校同学的文化生活等方面有着举足轻重的作用。 简单说来，体舞协会是热爱跳舞、喜欢舞台的小伙伴们的基地。 交大之中，银杏之下，体舞就在那里，晴也盼你，雨也盼你。体舞协会欢迎每一个人！欢迎加入协会QQ大群，群号：794300476欢迎关注体舞微信公众号：JDTWXH 招新体育舞蹈协会微信招新链接 视频活动会员大会倾城之恋迎新晚会日常训练舞自由我国标舞大赛迎新晚会指导老师王彦]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[化学协会]]></title>
     <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%8C%96%E5%AD%A6%E5%8D%8F%E4%BC%9A%2F</url>
     <content type="text"><![CDATA[化学协会18酷炫化协小萌新，群聊号码：863053012化学合成我们的激情，分解我们的快乐，置换我们的友谊,化学协会等待着你！打造化学舞台，创造灿烂人生是我们的宗旨,多元化的活动让我们的协会生机勃勃, 这是一个开放广阔的舞台,我们期待的你的意气风发!给心灵找个家,给化学找个伴,化学协会期待你的加入! 【社团简介】西南交通大学化学协会是依托于西南交通大学生命科学与工程学院、注重对全校学生的化学素质培养以及化学知识普及的学术类社团，成立于2014年，是一个注重实验与知识竞赛的校级社团组织。旨在为交大学子提供一个良好的平台，使其在大学能够继续热爱化学并且得到提升，丰富大家的校园文化生活；更多的是提高部员的实验动手能力，也为生命学院助力。一切服务于会员的基础之上，增强创新能力，提高活动质量，定期开展丰富多彩的活动，不断探索学生社团的发展，为活跃校园文化，加强校园文化建设贡献力量。 【社团宗旨】以实验为依托，开展化学知识竞赛与实验比赛。旨在提升大家的化学素养以及动手操作能力、实践能力，促进学生的发展。 【品牌活动】化学知识竞赛、实验比赛、化学猜字谜、内部实验、元素大乱斗等 【邮箱】SWJTUChemistryClub@163.com【微信公众号】酷炫化协【QQ】1546504844]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[镜湖文学社]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E9%95%9C%E6%B9%96%E6%96%87%E5%AD%A6%E7%A4%BE%2F</url>
+    <content type="text"><![CDATA[镜湖文学社镜湖文学社QQ：2196421655【社团简介】西南交通大学镜湖文学社，创建于1996年，因交大九里校区的镜湖而得名。在一所以工科见长的学府里，镜湖文学社是最具有文学特色的社团，陪伴交大走过了20多年的风雨历程，见证了交大的发展。镜湖文学社的指导单位是西南交通大学人文学院，管理单位是共青团西南交通大学委员会，监督单位是西南交通大学社团联合会，有自己独立的社团内部组成机构和特有的运作模式。【社团宗旨】一直以来，镜湖文学社秉承着“心明如镜，心静如湖；文墨繁华，学思甚笃”的办社思想，结合“缤纷校园，绿化心灵”的宗旨和“培养交大学子人文情怀，提高交大校园文化底蕴，为文学爱好者提供交流平台”的基本目标，为交大学子提供丰富多彩的活动和展示自己的舞台【品牌活动】文学大爆炸，等你的情书征文活动，一站到底挑战赛【邮箱】 jhwxs@qq.com【QQ】 2196421655【微博】 西南交大镜湖文学社【微信公众号】 交大镜湖 招新镜湖文学社微信招新推送]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -281,17 +286,17 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[动植物协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%8A%A8%E6%A4%8D%E7%89%A9%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[动植物协会 动植物协会成立于2013年，提倡对环境，野生动物和人类社会进行关心和爱护。通过各种活动的开展，培植我们对自然关爱、对动植物保护的环境友好意识。以关爱野生动植物为出发点，放眼全世界，透过自然教育、野生动物救助行动，推动野生动植物保护工作，期许让每个人将自然美好的感动转化为环境守护的行动，保护我们的地球母亲。关注所有野生动植物的生存需求，包括我们人类自己。通过每年举办各种各样的活动，走进自然，体验大自然的奇妙。 协会内部管理设主席团，分管办公室、活动部、公关部、宣传部和学术部，五个部门各司其职，团结奋进，统筹安排协会内的相关事务。从建会到现在，本协会先后举办的各项与动植物相关的活动均得到校领导及校内师生的认可。协会将教大家制作叶雕书签、琥珀标本，还会举办苔藓造景大赛等活动，丰富大家的课余生活。作为新兴协会之一，本协会秉承不断学习的原则，不仅积极学习动植物的相关知识，同时也向各大社团吸取经验，不断进取，为协会的发展努力。愿和我们一样热爱自然的你加入我们！ 一花一世界，一蝶一千秋。我们热爱自然，用心感受每个生命和每份成长，一起去湖边见证木芙蓉的盛放，学会制作有爱的叶雕书签和琥珀标本，在微景观大赛中发现自己创造美的能力。这样的我们在这里等待这样的你的加入！]]></content>
+    <title><![CDATA[双节棍协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%8F%8C%E8%8A%82%E6%A3%8D%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[双节棍协会微信公众号：交大棍协【社团简介】双节棍协会成立于2011年，受体育部指导。双节棍协会秉承着“强身健体，弘扬中华武术”的棍道精神，积极开展日常棍术训练，以武会友，踊跃参加校园内外活动，如高校联赛，内部棍术交流，以及教授外国友人双节棍套路，展示中华传统武术的魅力。在训练过程中本协会力求将动作的力度与优美结合以展示双节棍的刚柔并济之道。男生的阳刚之气与女生的飒爽英姿彼此交融，展示出了协会别具一格的活力。【社团宗旨】：推广时尚全民运动，弘扬中华棍道精神【品牌活动】：成都地区双节棍高校联赛、“棍舞龙魂”双节棍体验周、“青春无悔”双节棍主题晚会、“风云再起”古风武侠晚会【邮箱】：1055564427@qq.com【微信公众号】：交大棍协 活动2017物理学院迎新晚会表演健美操协会表演晚会表演冷焰火套路第七届高校双节棍交流赛物院迎新日常训练]]></content>
       <categories>
         <category>社团</category>
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[双节棍协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%8F%8C%E8%8A%82%E6%A3%8D%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[双节棍协会微信公众号：交大棍协【社团简介】双节棍协会成立于2011年，受体育部指导。双节棍协会秉承着“强身健体，弘扬中华武术”的棍道精神，积极开展日常棍术训练，以武会友，踊跃参加校园内外活动，如高校联赛，内部棍术交流，以及教授外国友人双节棍套路，展示中华传统武术的魅力。在训练过程中本协会力求将动作的力度与优美结合以展示双节棍的刚柔并济之道。男生的阳刚之气与女生的飒爽英姿彼此交融，展示出了协会别具一格的活力。【社团宗旨】：推广时尚全民运动，弘扬中华棍道精神【品牌活动】：成都地区双节棍高校联赛、“棍舞龙魂”双节棍体验周、“青春无悔”双节棍主题晚会、“风云再起”古风武侠晚会【邮箱】：1055564427@qq.com【微信公众号】：交大棍协 活动2017物理学院迎新晚会表演健美操协会表演晚会表演冷焰火套路第七届高校双节棍交流赛物院迎新日常训练]]></content>
+    <title><![CDATA[国际关系研究会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%9B%BD%E9%99%85%E5%85%B3%E7%B3%BB%E7%A0%94%E7%A9%B6%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[国际关系研究会国际关系研究会招新群：774377875 国际关系研究会微信招新推送 国际关系研究会介绍]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -305,25 +310,17 @@
       </categories>
   </entry>
   <entry>
+    <title><![CDATA[齐契古风社]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E9%BD%90%E5%A5%91%E5%8F%A4%E9%A3%8E%E7%A4%BE%2F</url>
+    <content type="text"><![CDATA[齐契古风社【公众号】齐契古风社【社团简介】西南交通大学齐契古风社成立于2015年，由校图书馆指导，是以校内喜爱古风文化的同学为基础而创建的社团组织。“齐契”二字取自《兰亭序》中“乃携齐契，散怀一丘”，意为志同道合之人。社团旨在为校内古风爱好者搭建一个学习交流的平台，并通过现代人更容易接受的方式，宣扬中华传统文化，提高同学们的文化归属感和民族自豪感。【社团宗旨】以对古风的热爱为奠基，结识知己，钻研同好，宣传发扬以中华传统文化为基调的新型古风文化，弘扬民族个性。【品牌活动】古风晚会，手作沙龙【已举办】“风华暗飞声”古风晚会“古旧人间”古风晚会“青丝一绺绾流年”读书分享与手作沙龙重阳线上歌会5·20手工活动【文案】 乃携齐契，散怀一丘，在这里我们因古风文化相知相遇。无论你是喜欢古风音乐、古风知识，亦或是诗词歌赋，妆容服饰等等，来到齐契古风社，畅所欲言，展现自我。给自己的热爱一个寄托，感受传统文化与现代文明的碰撞，遇见那个充满才情的自己吧！【邮箱】1055192699@qq.com【公众号】齐契古风社 招新微信推送链接 活动风华暗飞声古风晚会古旧人间古风晚会青丝一绺绾流年青丝一绺绾流年读书分享与手作沙龙换届大会]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[大学生创新创业俱乐部]]></title>
     <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%A4%A7%E5%AD%A6%E7%94%9F%E5%88%9B%E6%96%B0%E5%88%9B%E4%B8%9A%E4%BF%B1%E4%B9%90%E9%83%A8%2F</url>
     <content type="text"><![CDATA[大学生创新创业俱乐部 总体介绍 场地介绍 活动介绍]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[大学生伙食管理委员会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BC%99%E9%A3%9F%E7%AE%A1%E7%90%86%E5%A7%94%E5%91%98%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[大学生伙食管理委员会【微信公众号】西南交大伙食管理委员会又是一年开学季，西南交大伙食管理委员会前来报道！这里不仅是交大“吃货”们的聚集地，还是与交大食堂息息相关的服务类社团。你想深入探索交大食堂么？想在交大展露你的精湛厨艺么？想与志同道合的朋友一起举办各类美食活动么？我们在交大伙管会，期待每一个有想法有创意爱美食的你加入! 社团简介【社团简介】想全方位探索交大食堂么？想获得更多饮食服务中心相关活动和精品课堂的新鲜资讯么？这里是大学生伙食管理委员会，架起学生与食堂之间的沟通桥梁，收集你的任何建议与吐槽，满足你对大学食堂的期望，近距离接触厨艺绝佳又可爱的食堂师傅，创造属于你的带不走的“交大味道”！食神大赛，让你发现潜藏在身边的厨神；食堂师傅技能大赛，带你大饱口福！在这里，我们给你交流厨艺的机会与平台，交大这么大，我们的相遇一定是对于美食的心有灵犀。西南交通大学大学生伙食管理委员会等待你们的加入！【社团宗旨】面向全校师生，构建学生与食堂之间的沟通平台，协助交大饮食服务中心一起提高食堂知名度，营造良好的交大饮食文化。【品牌活动】食神烹饪大赛，光盘行动，失物招领，蛋糕DIY 等【邮箱】1060628972@qq.com【微信公众号】西南交大伙食管理委员会 活动食话食说课堂记录蛋糕DIY会员大会食神大赛初赛食神大赛决赛]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[跆拳道协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%B7%86%E6%8B%B3%E9%81%93%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[跆拳道协会 招兵买马，求萌妹，求御姐，求正太，求大叔云集各类精英，跆拳道协会，期待你的到来。有人的地方就有生活，有生活的地方就有咱们。如果你热爱青春，期望展示自我，快来加入咱们吧！年轻活力是我们的资本，张扬个性凸显胆识是我们的超越。加入我们，我们会帮你发现自己的闪光点，让你变得更加自信和充实。追不到女神？跆协祝你成功。当不了女神？跆协教你成长。 活动第二届“临战不退”跆拳道争霸赛图]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -337,9 +334,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[大学生生命科学学会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%94%9F%E5%91%BD%E7%A7%91%E5%AD%A6%E5%AD%A6%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[大学生生命科学学会欢迎加入生科会2018一起学习鸭，群聊号码：873729074【社团简介】大学生生命科学学会是在生命科学与工程学院团委指导下的学术科技类社团，旨在聚集校内热爱生命科学的同学，为非生命专业同学提供认识和了解生命科学的平台，为生命学子的进一步成长添砖加瓦。通过知识讲座和比赛，感受生命的无限巧妙与魅力。【社团宗旨】提高生命相关专业的学术氛围，促进非生命专业同学对生命科学的了解和认识，增进广大同学对生命科学的热爱。【品牌活动】生晖讲坛、推免分享交流会、实验摄影比赛、实验室安全知识竞赛 等【邮箱】lsas_swjtu@163.com【微信公众号】西南交大生科会【QQ】3213605753（大学生生命科学学会）]]></content>
+    <title><![CDATA[大学生就业与创业协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%A4%A7%E5%AD%A6%E7%94%9F%E5%B0%B1%E4%B8%9A%E4%B8%8E%E5%88%9B%E4%B8%9A%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[大学生就业与创业协会 招新大学生就业与创业协会微信招新链接]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -353,17 +350,17 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[彝文化协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%BD%9D%E6%96%87%E5%8C%96%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[彝文化协会彝协2018招新咨询群号：478925868彝文化协会由热爱彝族文化的本校大学生组成，秉承弘扬民族文化、展示民族风采、彰显民族魅力、提升民族自信的宗旨，营造民族和谐文明的校园风气，搭建民族团结友爱的桥梁！学跳达体舞、彝族年晚会等活动。是我们对彝族文化的传承和弘扬；贫困地区支教、达体舞公益演出是我们对社会的责任和担当！在此说明一下，虽然我们是彝文化协会，但并不是只有彝族同学能加，而是所有同学都可以加入的；只要你对彝族文化感兴趣，想要了解彝族文化，那么就加入到彝协来吧，彝协热烈欢迎你的加入！ 联系我们彝协公众号： 彝协官方QQ： 部门介绍办公室：作为彝协中日常联系最紧密的部门，办公室能为你提供最好的锻炼机会，锻炼你团结合作、沟通交际的能力。联系社联、会议记录、日常工作安排需要思维敏捷的你，这是你放飞大学美好生活的开始。这里的人热情友好，我们等候着你们的到来。 外宣部：外宣部由原先的外联部和宣传部合并而成。外联部是彝文化协会与各高校、各社团、各个同学之间学习交流，传递友谊的桥梁。在组织协会活动时外联部是经济支柱；外联部能够将彝族的热情好客及爱结交四方朋友的优点体现出来。宣传部是协会对外交流的重要纽带，是协会对外组织和开展活动时宣传的窗口。宣传部关系到协会在外界的形象面貌，对协会的重要性不言而喻。我们以油彩水墨为武器，用细节展现精彩。我们凭借技能出彩，我们依靠智慧称霸，如果你想学习PS、视频剪辑等技术，还等什么？赶快来加入吧。 文艺部：这里有宛如天籁的歌喉，这里有演出时绝美的舞姿，这里还有许许多多的节目等着你出谋划策。你可以利用高科技调配伴奏与设备，为活动的成功举办做出贡献，你还可以大胆表现自己，参与节目的表演。总之，在这里你总会找到自己喜欢的事情，也会在每个闪光点中找到适合自己的工作，收获合作的喜悦并且享受成功组织节目的满足感哦！爱唱爱跳爱表演，或者擅长组织节目的同学，文艺部将是你最完美的舞台。 活动部：运筹帷幄之中，决胜千里之外是活动部工作的最佳写照。活动部是协会的中流砥柱，协会的一切活动均由活动部策划、组织和安排。你想成为一个伟大的决策者吗？你想锻炼自己掌控大局的能力吗？快来加入活动部吧！ 社团简介【社团名称】西南交通大学彝文化协会【社团简介】西南交通大学彝文化协会成立于2016年，由人文学院指导。作为一个少数民族文化类社团，协会旨在传承与发扬彝族文化，为同学们提供一个了解彝族文化的平台。同时，协会也积极在校内开展了一些有关彝族文化的学生活动，如“走进彝风“彝族年游园活动，以及”彝族文化节“活动，富含彝族文化特色的活动丰富了同学们的校园生活，也为校园文化的繁荣贡献出自己的力量。【社团宗旨】传承民族文化，丰富校园生活【品牌活动】彝族文化节【邮箱】1460290638@qq.com【微信公众号】索玛薇语 你：想了解更多的民族文化吗？想体验更多的民族风情吗？想感受更多的民族特色吗？彝族文化是中华文化宝库里重要组成部分之一，努力展现彝族文化特色也就是在努力宣扬源远流长博大精深的中华文化。我们的彝文化协会致力于宣扬民族文化、展现民族风采、彰显民族魅力。这里有：日常的彝族达体舞、多彩的彝文化节、喜庆的彝族年、丰趣的游园活动、愉悦的会员大会，你可以穿着彝族精美的服饰、品尝彝族特色美食、欣赏彝族手工制品、学习彝族语言文字，了解彝族特色节日。彝文化协会这个大家庭里最想给予个各位萌新的是来自于内心的温暖与热情，在这里你可以与我们交流、沟通，寻找自己的归属感，彝文化协会愿与你相伴并一同成长。索玛花——彝族族花，索玛花开的时候就是欢乐到来的时候，其花语是:永远属于你，期待着爱的重逢。 招新彝协热烈欢迎你！！！有意愿的同学请加彝协2018招新咨询群号：478925868 活动彝文化协会logo会员大会全家福周日舞蹈彝年做彝族特色菜彝年篝火达体舞彝族年彝族文化节彝族新年聚餐彝族餐歌曲表演特色菜索玛花节舞蹈表演迎新小游戏]]></content>
+    <title><![CDATA[大学生生命科学学会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%94%9F%E5%91%BD%E7%A7%91%E5%AD%A6%E5%AD%A6%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[大学生生命科学学会欢迎加入生科会2018一起学习鸭，群聊号码：873729074【社团简介】大学生生命科学学会是在生命科学与工程学院团委指导下的学术科技类社团，旨在聚集校内热爱生命科学的同学，为非生命专业同学提供认识和了解生命科学的平台，为生命学子的进一步成长添砖加瓦。通过知识讲座和比赛，感受生命的无限巧妙与魅力。【社团宗旨】提高生命相关专业的学术氛围，促进非生命专业同学对生命科学的了解和认识，增进广大同学对生命科学的热爱。【品牌活动】生晖讲坛、推免分享交流会、实验摄影比赛、实验室安全知识竞赛 等【邮箱】lsas_swjtu@163.com【微信公众号】西南交大生科会【QQ】3213605753（大学生生命科学学会）]]></content>
       <categories>
         <category>社团</category>
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[大学生就业与创业协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%A4%A7%E5%AD%A6%E7%94%9F%E5%B0%B1%E4%B8%9A%E4%B8%8E%E5%88%9B%E4%B8%9A%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[大学生就业与创业协会 招新大学生就业与创业协会微信招新链接]]></content>
+    <title><![CDATA[尊老敬老协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%B0%8A%E8%80%81%E6%95%AC%E8%80%81%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[尊老敬老协会 西南交通大学尊老敬老协会是依托于校离退处和校团委、主要西南交大退休老教授、老校友的学生组织，是学校中一个校园服务类的社团组织。我们协会旨在帮助老教授、老校友学习智能手机和电脑，通过与老教授的流与互相帮助丰富大学生的业余生活，获取志愿时间，鼓励同学们积极参加志愿活动，来提升自己，实现心理和知识双重发展。]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -385,9 +382,17 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[极限飞盘协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E6%9E%81%E9%99%90%E9%A3%9E%E7%9B%98%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[极限飞盘协会 协会介绍 微信招新 极限飞盘运动介绍]]></content>
+    <title><![CDATA[招生宣传志愿者协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E6%8B%9B%E7%94%9F%E5%AE%A3%E4%BC%A0%E5%BF%97%E6%84%BF%E8%80%85%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[招生宣传志愿者协会【微信公众号】交大小招社团介绍请猛戳这里！ 戳这里了解更多！！ 协会简介戳这里！！！ 社团简介 【社团简介】 西南交通大学招生宣传志愿者协会隶属于西南交通大学社团联合会，直属于西南交通大学招生就业处。协会以“提高西南交大知名度，让更多优秀学子选择交大”为宗旨，立足于交大，致力于宣传并服务于交大。我们的主要任务是招募、组织、培训志愿者回到中学母校与师弟师妹交流，介绍学院的招生报考等情况，协助学校招生办的招生宣传工作。作为一个新兴的十佳社团，协会发展前景很大，我们也将秉承不断学习的原则，向各大社团吸取经验，不断进取，继往开来。愿有志之士加入我们，一同为西南交大招生宣传志愿者协会的明天而奋斗，为西南交大的形象增彩！【社团宗旨】提高西南交大知名度，让更多优秀学子选择交大【特色活动】西南交通大学校园宣传大使选拔赛，寒假招生宣传系列活动，交大历险记系列活动，西南地区招宣联盟会议【邮箱】1208004894@qq.com【微信公众号】交大小招]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[彝文化协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%BD%9D%E6%96%87%E5%8C%96%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[彝文化协会彝协2018招新咨询群号：478925868彝文化协会由热爱彝族文化的本校大学生组成，秉承弘扬民族文化、展示民族风采、彰显民族魅力、提升民族自信的宗旨，营造民族和谐文明的校园风气，搭建民族团结友爱的桥梁！学跳达体舞、彝族年晚会等活动。是我们对彝族文化的传承和弘扬；贫困地区支教、达体舞公益演出是我们对社会的责任和担当！在此说明一下，虽然我们是彝文化协会，但并不是只有彝族同学能加，而是所有同学都可以加入的；只要你对彝族文化感兴趣，想要了解彝族文化，那么就加入到彝协来吧，彝协热烈欢迎你的加入！ 联系我们彝协公众号： 彝协官方QQ： 部门介绍办公室：作为彝协中日常联系最紧密的部门，办公室能为你提供最好的锻炼机会，锻炼你团结合作、沟通交际的能力。联系社联、会议记录、日常工作安排需要思维敏捷的你，这是你放飞大学美好生活的开始。这里的人热情友好，我们等候着你们的到来。 外宣部：外宣部由原先的外联部和宣传部合并而成。外联部是彝文化协会与各高校、各社团、各个同学之间学习交流，传递友谊的桥梁。在组织协会活动时外联部是经济支柱；外联部能够将彝族的热情好客及爱结交四方朋友的优点体现出来。宣传部是协会对外交流的重要纽带，是协会对外组织和开展活动时宣传的窗口。宣传部关系到协会在外界的形象面貌，对协会的重要性不言而喻。我们以油彩水墨为武器，用细节展现精彩。我们凭借技能出彩，我们依靠智慧称霸，如果你想学习PS、视频剪辑等技术，还等什么？赶快来加入吧。 文艺部：这里有宛如天籁的歌喉，这里有演出时绝美的舞姿，这里还有许许多多的节目等着你出谋划策。你可以利用高科技调配伴奏与设备，为活动的成功举办做出贡献，你还可以大胆表现自己，参与节目的表演。总之，在这里你总会找到自己喜欢的事情，也会在每个闪光点中找到适合自己的工作，收获合作的喜悦并且享受成功组织节目的满足感哦！爱唱爱跳爱表演，或者擅长组织节目的同学，文艺部将是你最完美的舞台。 活动部：运筹帷幄之中，决胜千里之外是活动部工作的最佳写照。活动部是协会的中流砥柱，协会的一切活动均由活动部策划、组织和安排。你想成为一个伟大的决策者吗？你想锻炼自己掌控大局的能力吗？快来加入活动部吧！ 社团简介【社团名称】西南交通大学彝文化协会【社团简介】西南交通大学彝文化协会成立于2016年，由人文学院指导。作为一个少数民族文化类社团，协会旨在传承与发扬彝族文化，为同学们提供一个了解彝族文化的平台。同时，协会也积极在校内开展了一些有关彝族文化的学生活动，如“走进彝风“彝族年游园活动，以及”彝族文化节“活动，富含彝族文化特色的活动丰富了同学们的校园生活，也为校园文化的繁荣贡献出自己的力量。【社团宗旨】传承民族文化，丰富校园生活【品牌活动】彝族文化节【邮箱】1460290638@qq.com【微信公众号】索玛薇语 你：想了解更多的民族文化吗？想体验更多的民族风情吗？想感受更多的民族特色吗？彝族文化是中华文化宝库里重要组成部分之一，努力展现彝族文化特色也就是在努力宣扬源远流长博大精深的中华文化。我们的彝文化协会致力于宣扬民族文化、展现民族风采、彰显民族魅力。这里有：日常的彝族达体舞、多彩的彝文化节、喜庆的彝族年、丰趣的游园活动、愉悦的会员大会，你可以穿着彝族精美的服饰、品尝彝族特色美食、欣赏彝族手工制品、学习彝族语言文字，了解彝族特色节日。彝文化协会这个大家庭里最想给予个各位萌新的是来自于内心的温暖与热情，在这里你可以与我们交流、沟通，寻找自己的归属感，彝文化协会愿与你相伴并一同成长。索玛花——彝族族花，索玛花开的时候就是欢乐到来的时候，其花语是:永远属于你，期待着爱的重逢。 招新彝协热烈欢迎你！！！有意愿的同学请加彝协2018招新咨询群号：478925868 活动彝文化协会logo会员大会全家福周日舞蹈彝年做彝族特色菜彝年篝火达体舞彝族年彝族文化节彝族新年聚餐彝族餐歌曲表演特色菜索玛花节舞蹈表演迎新小游戏]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -401,41 +406,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[尊老敬老协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%B0%8A%E8%80%81%E6%95%AC%E8%80%81%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[尊老敬老协会 西南交通大学尊老敬老协会是依托于校离退处和校团委、主要西南交大退休老教授、老校友的学生组织，是学校中一个校园服务类的社团组织。我们协会旨在帮助老教授、老校友学习智能手机和电脑，通过与老教授的流与互相帮助丰富大学生的业余生活，获取志愿时间，鼓励同学们积极参加志愿活动，来提升自己，实现心理和知识双重发展。]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[招生宣传志愿者协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E6%8B%9B%E7%94%9F%E5%AE%A3%E4%BC%A0%E5%BF%97%E6%84%BF%E8%80%85%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[招生宣传志愿者协会【微信公众号】交大小招社团介绍请猛戳这里！ 戳这里了解更多！！ 协会简介戳这里！！！ 社团简介 【社团简介】 西南交通大学招生宣传志愿者协会隶属于西南交通大学社团联合会，直属于西南交通大学招生就业处。协会以“提高西南交大知名度，让更多优秀学子选择交大”为宗旨，立足于交大，致力于宣传并服务于交大。我们的主要任务是招募、组织、培训志愿者回到中学母校与师弟师妹交流，介绍学院的招生报考等情况，协助学校招生办的招生宣传工作。作为一个新兴的十佳社团，协会发展前景很大，我们也将秉承不断学习的原则，向各大社团吸取经验，不断进取，继往开来。愿有志之士加入我们，一同为西南交大招生宣传志愿者协会的明天而奋斗，为西南交大的形象增彩！【社团宗旨】提高西南交大知名度，让更多优秀学子选择交大【特色活动】西南交通大学校园宣传大使选拔赛，寒假招生宣传系列活动，交大历险记系列活动，西南地区招宣联盟会议【邮箱】1208004894@qq.com【微信公众号】交大小招]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[测量协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E6%B5%8B%E9%87%8F%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[测量协会测量协会点击报名访奇山，造异谷，测遍天经地纬；跨深沟，越高垒，绘尽山高水长。想在专业学习中游刃有余吗？想玩转各种高端仪器吗？这里不仅有测绘、遥感、地信方面超酷的前沿知识，更有充分展示你想象力的三维建模大赛，和锻炼动手能力的测量大赛等你参加！让我用一台全站仪，与你一起测出梦想的距离、青春的高度。 社团简介【社团简介】西南交通大学测量协会由测绘学习爱好者自发组建，于2003年经校团委批准成立，是一个集自发性、趣味性、学术性、实践性于一体的校级学生社团。协会立足“测山川之行以知理，量地岳之貌而晓义”的指导理念，着力于提高会员对测绘科学技术专业知识的了解，搭建向外宣传测绘学科平台，努力推动测绘学科建设，助力交大“双一流”发展。自2003年成立以来，凭借其优异的内外部活动，连续多年荣获“西南交通大学明星社团”、“四星级社团”称号，屡次跻身“西南交通大学十佳社团”行列。【社团宗旨】以宣传测绘学科为目的，立足校园，服务校园，促进师生交流，丰富会员大学生活，推进测绘学科建设。【品牌活动】测量仪器系列培训、“测绘法”知识竞赛、三维模型设计大赛、测绘技能大赛、测绘知识讲座【微信公众号】西南交大测协【微博】西南交通大学测量协会【QQ】1764595941【招新】报名链接 招新测量协会微信招新推送]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[电影协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E7%94%B5%E5%BD%B1%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[电影协会欢迎加入白日梦影社招新群:663701825 @下一个“电影人”，「白日梦影社」剧组进组了。你好，你喜欢电影吗？我们是白日梦影社，我们爱看电影，观影会，交大人专属包场电影；我们爱聊电影，电影沙龙，百影讲堂；我们想学电影，理论知识，影评写作；我们还想拍电影，剪辑后期，剧本构思，编剧导演。(?￣▽￣)? 部门介绍【影评部】你钟爱的电影都有我们独树一帜的讲解看了之后你会更加痴迷于它！【外联部】来到外联部，发挥你的社交才能吧！你们天马行空的想法，由我们来提供保障【宣策部】新鲜热点，笔转峰回，推送就此铺就。无限脑洞，精湛技艺，海报定格成相。【放映部】三位数阅片达人，亦或狂热偏好迷，对各类电影如数家珍。今天看什么？我说了算。 我们交流，互相安利，感受电影魅力。关于电影，你所想的都将成为可能，柏拉图洞穴寓言，电影是一个白日梦，你愿意和我们做一场电影梦吗？欢迎加入白日梦影社招新群:663701825?(?ω??) 招新线上报名链接 电影协会招新微信推送 欢迎关注电影协会公众号]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[磐石社]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E7%A3%90%E7%9F%B3%E7%A4%BE%2F</url>
-    <content type="text"><![CDATA[磐石社 我们攀登，因为我们不愿停止脚步；我们徒步，只为寻那夜空中最亮的星辰。走出校园，走进山川，在大山大水间找寻最真的自我。“山在那里，路在脚下”为了信仰，我们一路前行。北区体育场游泳馆一楼，磐石等着你！ 活动会员大会攀冰攀岩徒步]]></content>
+    <title><![CDATA[极限飞盘协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E6%9E%81%E9%99%90%E9%A3%9E%E7%9B%98%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[极限飞盘协会 协会介绍 微信招新 极限飞盘运动介绍]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -449,17 +422,25 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[粤语社]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E7%B2%A4%E8%AF%AD%E7%A4%BE%2F</url>
-    <content type="text"><![CDATA[粤语社 如果你也是陈奕迅张学友杨千嬅等一众香港歌手的不二粉丝；如果你对广式早茶粤式美食情有独钟；如果你想学粤语又苦于没有志同道合的伙伴；……那么，还不快快来到粤语社的怀抱！&gt;&lt;在粤语社，你将——：收获一群K歌挚友，带你去KTV放声高歌，做交大Eason/交大张学友！与会长团一道在粤语电影的世界里纵横四海！在粤语教学小分队的帮助下一步步探索粤语的奥秘。最棒的是跟一群社团小可爱们一同深入体验粤语文化的无边魅力！ 活动2018.5.20第三届粤语歌唱比赛合影2018.5.7粤语歌唱比赛照片4.1张国荣纪念活动合影张国荣纪念活动合影粤语课堂授课]]></content>
+    <title><![CDATA[电影协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E7%94%B5%E5%BD%B1%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[电影协会欢迎加入白日梦影社招新群:663701825 @下一个“电影人”，「白日梦影社」剧组进组了。你好，你喜欢电影吗？我们是白日梦影社，我们爱看电影，观影会，交大人专属包场电影；我们爱聊电影，电影沙龙，百影讲堂；我们想学电影，理论知识，影评写作；我们还想拍电影，剪辑后期，剧本构思，编剧导演。(?￣▽￣)? 部门介绍【影评部】你钟爱的电影都有我们独树一帜的讲解看了之后你会更加痴迷于它！【外联部】来到外联部，发挥你的社交才能吧！你们天马行空的想法，由我们来提供保障【宣策部】新鲜热点，笔转峰回，推送就此铺就。无限脑洞，精湛技艺，海报定格成相。【放映部】三位数阅片达人，亦或狂热偏好迷，对各类电影如数家珍。今天看什么？我说了算。 我们交流，互相安利，感受电影魅力。关于电影，你所想的都将成为可能，柏拉图洞穴寓言，电影是一个白日梦，你愿意和我们做一场电影梦吗？欢迎加入白日梦影社招新群:663701825?(?ω??) 招新线上报名链接 电影协会招新微信推送 欢迎关注电影协会公众号]]></content>
       <categories>
         <category>社团</category>
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[篮球协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E7%AF%AE%E7%90%83%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[篮球协会欢迎加入2018级交大篮协迎新群，群聊号码：560986342一球在手，天下交友。”要知道，篮球从不是一个人的运动。”无论萌妹子、钢铁直男还是邻家小哥哥，我们都需要你们来挑战地心引力，引爆篮球魅力！想认识交大最帅的小姐姐？成为犀浦流川枫，交大小皇帝？专业的国家级篮球裁判？脱贫脱单奔小康？Do you want to study crossover 、in and out and Euro step?保护好你的脚踝，只要你想来，只要你敢来，我们奉陪到底！人生如球，要投就投交大篮协！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;————西南交通大学篮球协会 小伙伴 活动Adidas校园火拼训练营AUBA大学生篮球联赛AUBA篮球联赛AUBA联赛总决赛扣篮王理查德贾森亲临总决赛篮协裁判吹罚比赛校庆社团嘉年华 部门介绍招新]]></content>
+    <title><![CDATA[测量协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E6%B5%8B%E9%87%8F%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[测量协会测量协会点击报名访奇山，造异谷，测遍天经地纬；跨深沟，越高垒，绘尽山高水长。想在专业学习中游刃有余吗？想玩转各种高端仪器吗？这里不仅有测绘、遥感、地信方面超酷的前沿知识，更有充分展示你想象力的三维建模大赛，和锻炼动手能力的测量大赛等你参加！让我用一台全站仪，与你一起测出梦想的距离、青春的高度。 社团简介【社团简介】西南交通大学测量协会由测绘学习爱好者自发组建，于2003年经校团委批准成立，是一个集自发性、趣味性、学术性、实践性于一体的校级学生社团。协会立足“测山川之行以知理，量地岳之貌而晓义”的指导理念，着力于提高会员对测绘科学技术专业知识的了解，搭建向外宣传测绘学科平台，努力推动测绘学科建设，助力交大“双一流”发展。自2003年成立以来，凭借其优异的内外部活动，连续多年荣获“西南交通大学明星社团”、“四星级社团”称号，屡次跻身“西南交通大学十佳社团”行列。【社团宗旨】以宣传测绘学科为目的，立足校园，服务校园，促进师生交流，丰富会员大学生活，推进测绘学科建设。【品牌活动】测量仪器系列培训、“测绘法”知识竞赛、三维模型设计大赛、测绘技能大赛、测绘知识讲座【微信公众号】西南交大测协【微博】西南交通大学测量协会【QQ】1764595941【招新】报名链接 招新测量协会微信招新推送]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[磐石社]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E7%A3%90%E7%9F%B3%E7%A4%BE%2F</url>
+    <content type="text"><![CDATA[磐石社 我们攀登，因为我们不愿停止脚步；我们徒步，只为寻那夜空中最亮的星辰。走出校园，走进山川，在大山大水间找寻最真的自我。“山在那里，路在脚下”为了信仰，我们一路前行。北区体育场游泳馆一楼，磐石等着你！ 活动会员大会攀冰攀岩徒步]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -473,9 +454,17 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[网球协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E7%BD%91%E7%90%83%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[网球协会欢迎加入qq群：776754183坚持不存在于血脉，而源于心中，这是网球独有的气场。截击、扣杀，热血竞技是你的快乐之源。You still have lots more to work on，只要努力，每个人都能成为越前龙马。真正的我就在这里，在这个和你对阵的球场上。想成为一颗被你打飞的球，然后听你在全场喊：“这是我的，我的，我的。”我知道你会来，所以我等，交大网协许你一网情深，我们一直在这里。 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-—交大网协，一路相伴 注：百团大战于9.23在北区体育场进行，网协在这等你 扫码关注网协（有很多好看的小哥哥小姐姐！！） 活动]]></content>
+    <title><![CDATA[篮球协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E7%AF%AE%E7%90%83%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[篮球协会欢迎加入2018级交大篮协迎新群，群聊号码：560986342一球在手，天下交友。”要知道，篮球从不是一个人的运动。”无论萌妹子、钢铁直男还是邻家小哥哥，我们都需要你们来挑战地心引力，引爆篮球魅力！想认识交大最帅的小姐姐？成为犀浦流川枫，交大小皇帝？专业的国家级篮球裁判？脱贫脱单奔小康？Do you want to study crossover 、in and out and Euro step?保护好你的脚踝，只要你想来，只要你敢来，我们奉陪到底！人生如球，要投就投交大篮协！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;————西南交通大学篮球协会 小伙伴 活动Adidas校园火拼训练营AUBA大学生篮球联赛AUBA篮球联赛AUBA联赛总决赛扣篮王理查德贾森亲临总决赛篮协裁判吹罚比赛校庆社团嘉年华 部门介绍招新]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[粤语社]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E7%B2%A4%E8%AF%AD%E7%A4%BE%2F</url>
+    <content type="text"><![CDATA[粤语社 如果你也是陈奕迅张学友杨千嬅等一众香港歌手的不二粉丝；如果你对广式早茶粤式美食情有独钟；如果你想学粤语又苦于没有志同道合的伙伴；……那么，还不快快来到粤语社的怀抱！&gt;&lt;在粤语社，你将——：收获一群K歌挚友，带你去KTV放声高歌，做交大Eason/交大张学友！与会长团一道在粤语电影的世界里纵横四海！在粤语教学小分队的帮助下一步步探索粤语的奥秘。最棒的是跟一群社团小可爱们一同深入体验粤语文化的无边魅力！ 活动2018.5.20第三届粤语歌唱比赛合影2018.5.7粤语歌唱比赛照片4.1张国荣纪念活动合影张国荣纪念活动合影粤语课堂授课]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -489,9 +478,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[花式跳绳协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%8A%B1%E5%BC%8F%E8%B7%B3%E7%BB%B3%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[花式跳绳协会【微信公众号】SWJUT花式跳绳社团简介【社团简介】花式跳绳协会成立于2014年，主要以花式跳绳团体表演培训和个人速度跳培训为主，每周开展训练。跳绳是一项对身体协调能力以及耐力要求较高的运动，通过跳绳我们可以提升自己的肢体协调能力，也可以通过连续跳绳达到高效减肥的目的。花式跳绳团体表演则强调团队协作与节奏掌握，整齐划一的团队表演具有非常高的观赏性和视觉冲击感。我们致力于推广跳绳运动，带领交大学生跳出健康、跳出活力、跳出精彩人生！【社团宗旨】跳出新花样，挑出健康与活力。【品牌活动】西南交通大学跳绳运动会、速度跳培训活动【邮箱】2033507420@qq.com【微信公众号】SWJUT花式跳绳]]></content>
+    <title><![CDATA[网球协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E7%BD%91%E7%90%83%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[网球协会欢迎加入qq群：776754183坚持不存在于血脉，而源于心中，这是网球独有的气场。截击、扣杀，热血竞技是你的快乐之源。You still have lots more to work on，只要努力，每个人都能成为越前龙马。真正的我就在这里，在这个和你对阵的球场上。想成为一颗被你打飞的球，然后听你在全场喊：“这是我的，我的，我的。”我知道你会来，所以我等，交大网协许你一网情深，我们一直在这里。 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-—交大网协，一路相伴 注：百团大战于9.23在北区体育场进行，网协在这等你 扫码关注网协（有很多好看的小哥哥小姐姐！！） 活动]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -505,9 +494,17 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[贫困地区教育观念救助会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%B4%AB%E5%9B%B0%E5%9C%B0%E5%8C%BA%E6%95%99%E8%82%B2%E8%A7%82%E5%BF%B5%E6%95%91%E5%8A%A9%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[贫困地区教育观念救助会 新生QQ交流群 西南交通大学贫困地区教育观念救助会，简称为“救助会”，成立于2002年5月17日，由一位来自于凉山的学长发起组建。正如协会的名字，作为公益类社团，协会以“自救者人恒救之”为理念，致力于改变贫困地区的落后教育观念。目前协会由会长团和五个部门组成。协会在凉山有三所基地小学，在校内有教职工子女40人左右的授课学生群，各类校级活动以快乐助学为主题，围绕小学生与大学生和社会的联系展开。协会的主要工作分为三块：校级活动（基地小学）、义教、支教。校级活动：目前协会已经举办了九届快乐助学活动，E课讲堂，Ta说，给你的画，和他一起写本书，毕业季微公益······义教:每周末按时早期，为校内教职工子女辅导功课，开设专题课程。支教：短暂的寒暑假，去需要我们的地方，认识一群可爱的学生。协会自成立至今，都以做公益为工作目标，如果你对公益感兴趣，如果你热心于帮助他人，那么欢迎你了解救助会，加入救助会，和我们一起为公益事业发光发热！ 宣传视频 部门介绍义教部综合事务部网络部宣传部外联部 招新贫困地区教育观念救助会微信招新链接 新生QQ交流群微信公众号 活动2016年给你的画2017年ta说2.02018会员大会2018暑假夏令营基地小学周末义教]]></content>
+    <title><![CDATA[西南交大雷锋公司]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%A5%BF%E5%8D%97%E4%BA%A4%E5%A4%A7%E9%9B%B7%E9%94%8B%E5%85%AC%E5%8F%B8%2F</url>
+    <content type="text"><![CDATA[西南交大雷锋公司 微信推送链接 雷锋公司协会具体资料请戳这里！！]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[花式跳绳协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%8A%B1%E5%BC%8F%E8%B7%B3%E7%BB%B3%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[花式跳绳协会【微信公众号】SWJUT花式跳绳社团简介【社团简介】花式跳绳协会成立于2014年，主要以花式跳绳团体表演培训和个人速度跳培训为主，每周开展训练。跳绳是一项对身体协调能力以及耐力要求较高的运动，通过跳绳我们可以提升自己的肢体协调能力，也可以通过连续跳绳达到高效减肥的目的。花式跳绳团体表演则强调团队协作与节奏掌握，整齐划一的团队表演具有非常高的观赏性和视觉冲击感。我们致力于推广跳绳运动，带领交大学生跳出健康、跳出活力、跳出精彩人生！【社团宗旨】跳出新花样，挑出健康与活力。【品牌活动】西南交通大学跳绳运动会、速度跳培训活动【邮箱】2033507420@qq.com【微信公众号】SWJUT花式跳绳]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -605,7 +602,7 @@
     <url>%2F2018%2F05%2F03%2F2018%2Fmirrors%2F</url>
     <content type="text"><![CDATA[企业类 搜狐开源镜像站 网易开源镜像站 首都在线科技股份有限公司 阿里云开源镜像 LUPA 常州贝特康姆软件技术有限公司 大学类 清华大学 大连理工大学 大连东软信息学院 浙江大学 兰州大学 北京理工大学 (IPv4 only) 北京理工大学 (IPv6 only) 北京交通大学 上海交通大学 (IPv4 only) 上海交通大学 (IPv6 only) 中国科学技术大学 东北大学 (IPv4 only) 东北大学 (IPv6 only) 华中科技大学 重庆大学 PyPi 镜像 豆瓣 RubyGems 镜像 淘宝网 npm 镜像 cnpmjs cdn bootcdn Staticfile CDN jsDelivr 又拍云JS库加速服务 cdnjs beecdn]]></content>
       <categories>
-        <category>记录</category>
+        <category>record</category>
       </categories>
   </entry>
   <entry>
@@ -613,7 +610,7 @@
     <url>%2F2018%2F04%2F27%2F2018%2Fbooks%2F</url>
     <content type="text"><![CDATA[机器学习 数学之美 稀疏统计学习与应用 应用随机过程概率模型导论 数据挖掘导论 深度学习 中文版(pdf) Python数据科学手册(pdf) Python机器学习基础教程(pdf) 机器学习实战(pdf) deep learning(English)(pdf) python数据科学手册(在线版)(English) 利用python进行数据分析(在线版)(English) 数学 程序员的数学(pdf) 程序员的数学2概率统计(pdf) 程序员的数学3线性代数(pdf) 具体数学-计算机科学基础(pdf) 统计学七支柱(pdf) Python Python袖珍指南 用Python写网络爬虫 Python数据分析与挖掘实战 Python数据分析 Python基础教程(第二版) Python编程实战 运用设计模式、并发和程序库创建高质量程序 编写高质量代码 改善Python程序的91个建议 Python Cookbook(pdf) Flask Web开发：基于Python的Web应用开发实战(pdf) Head First Python(pdf) Python编程：从入门到实践(pdf) Python基础教程(第三版)(pdf) Python网络数据采集(pdf) 流畅的Python(pdf) c C++ Primer Plus(pdf) C和指针(pdf) C陷阱与缺陷(pdf) C专家编程(pdf) Effective C(pdf) More Effective C(pdf) Java Java编程思想 Head First Java Android 第一行代码——Android(pdf) JavaScipt JavaScript高级语言程序设计 你不知道的JavasScript(上卷) Nodejs 深入浅出Node.js Haskell 魔力Haskell R R语言实战 ggplot2:数据分析与图形艺术 算法 算法(第4版) 算法导论(pdf) 网络 TCP/IP详解卷1:协议 HTTP_2基础教程(pdf) TCP-IP详解卷1：协议(pdf) TCP-IP详解卷2：实现(pdf) TCP-IP详解卷3：TCP事务协议，HTTP，NNTP和UNIX域协议(pdf) 图解HTTP(pdf) 网络是怎样连接的(pdf) 计算机 深入理解计算机系统 计算机程序的构造与解释 操作系统-精髓与设计原理 编码 隐匿在计算机软硬件背后的语言 程序是怎样跑起来的(pdf) 计算机是怎样跑起来的(pdf) 设计模式 Head First 设计模式 Bioinformatics 生物信息学(李霞,刘建波) 生物信息学(陈铭) Bioinformatics with Python Cookbook(English)(pdf) Bioinformatics Data Skills: Reproducible and Robust Research with Open Source Tools(English)(pdf) Linux 鸟哥的Linux私房菜基础学习篇(第三版)(Kindle) 数据库 SQL进阶教程(pdf) SQL基础教程(pdf) 安全 图解密码技术(图书馆)(已读) 杂 人工智能简史 得未曾有 一个人的朝圣 春宴]]></content>
       <categories>
-        <category>记录</category>
+        <category>books</category>
       </categories>
   </entry>
   <entry>
@@ -621,7 +618,7 @@
     <url>%2F2018%2F04%2F27%2F2018%2Fapache%2F</url>
     <content type="text"><![CDATA[本文假设读者具有一定的Linux命令行和python基础 运行环境 Centos-7.4 Anaconda-Python3.6.4 Django-2.0.4 httpd-2.4.33 服务器为腾讯云服务器，httpd是Apache中的服务，安装httpd需要依赖apr、apr-util、pcrepython选用anaconda并且使用conda虚拟环境 Apache首先安装gcc编译器，gcc为编译必须，c++编译器和expat-devel依赖为pcre安装所必须123yum install gccyum install gcc-c++yum install expat-devel 下载源码安装包，注意当使用apr-util，apr1.6版本编译安装httpd时出现xml错误，在/usr/local/httpd/目录下只有modules文件夹。因此1.6版本不适用于httpd的最新版，因此选用1.5版本 选用清华镜像下载速度更快12345wget http://archive.apache.org/dist/apr/apr-1.5.2.tar.gzwget http://archive.apache.org/dist/apr/apr-util-1.5.4.tar.gzwget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.40.tar.gzwget https://mirrors.tuna.tsinghua.edu.cn/apache/httpd/httpd-2.4.33.tar.gzwget https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-5.1.0-Linux-x86_64.sh 解压1234tar -xzf pcre-8.40.tar.gztar -xzf httpd-2.4.33.tar.gztar -xzf apr-util-1.5.4.tar.gztar -xzf apr-1.5.2.tar.gz 安装1234567891011121314151617181920cd apr-1.5.2./configure --prefix=/usr/local/aprmakemake installcd ../apr-util-1.5.4./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/aprmakemake installcd ../pcre-8.40./configure --prefix=/usr/local/pcre --with-apr=/usr/local/aprcd ../httpd-2.4.33./configure --prefix=/usr/local/httpd --with-pcre=/usr/local/pcre --with-apr=/usr/local/apr --with-apr-util=/usr/local/apr-utilmake make install cd ..bash Anaconda3-5.1.0-Linux-x86_64.sh 将Anaconda命令和httpd启动命令添加到path1vim /etc/profile 在最后添加两行12export PATH=/usr/local/httpd/bin:$PATHexport PATH=/root/anaconda3/bin:$PATH 使profile文件起作用1. /etc/profile 注意.和/之间有个空格试一下httpd行不行输入1httpd -k start 访问服务器的ip地址，可以看到页面显示it works 相应的，重新启动和停止的命令为12httpd -k restarthttpd -k stop Python Django下面开始配置python django conda添加清华源123conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/conda config --set show_channel_urls yes 创建django安装的python3.6环境123conda create -n django python=3.6source activate djangopip install django 安装mod_wsgi1pip install mod_wsgi 获取mod_wsgi1mod_wsgi-express module-config 12LoadModule wsgi_module &quot;/root/anaconda3/envs/django/lib/python3.6/site-packages/mod_wsgi/server/mod_wsgi-py36.cpython-36m-x86_64-linux-gnu.so&quot;WSGIPythonHome &quot;/root/anaconda3/envs/django&quot; 修改httpd配置文件12cd /usr/local/httpd/confvim httpd.conf LoadModule中添加一行1LoadModule wsgi_module &quot;/root/anaconda3/envs/django/lib/python3.6/site-packages/mod_wsgi/server/mod_wsgi-py36.cpython-36m-x86_64-linux-gnu.so&quot; 将这一行1Include conf/extra/httpd-vhosts.conf 取消注释相应的修改httpd-vhosts.conf文件12cd extravim httpd-vhosts.conf 全部注释掉之后添加下面部分12345678910111213WSGIPythonPath /root/anaconda3/envs/django/lib/python3.6/site-packages:/home/websiteWSGIPythonHome /root/anaconda3/envs/django&lt;VirtualHost *:80&gt;DocumentRoot /home/website/websiteServerName localhost:80ServerAdmin jstsyhyjk@163.comWSGIScriptAlias / /home/website/website/wsgi.pyAlias /static/ /home/website/static/&lt;Directory &quot;/home/website&quot;&gt;Require all granted&lt;/Directory&gt;&lt;/VirtualHost&gt; 先来看下我django项目的目录结构这是/home/website内的文件树形图（已省略一部分无关内容）123456789101112.|-- db.sqlite3|-- manage.py|-- static|-- templates| `-- index.html|-- website| |-- __init__.py| |-- settings.py| |-- urls.py| |-- view.py| `-- wsgi.py 配置wsgi.py12345import osfrom django.core.wsgi import get_wsgi_applicationos.environ[&apos;PYTHON_EGG_CACHE&apos;] = &apos;/tmp/.python-eggs&apos;os.environ.setdefault(&quot;DJANGO_SETTINGS_MODULE&quot;, &quot;website.settings&quot;)application = get_wsgi_application() 同时在settings.py中修改这一部分，如果不修改，django会拒绝外部的访问1ALLOWED_HOSTS = [&quot;your server ip&quot;] WSGIPythonPath 取上面mod_wsgi输出的路径的site-packages部分，/home/website是我django网站存放的路径WSGIPythonHome 与上面mod_wsgi输出的相同DocumentRoot 就是django主要文件存放的地方WSGIScriptAlias 将wsgi.py的地址映射为/Alias 将存放静态文件的文件姐映射到/static/Directory是为了提升所需要目录的权限 一切就绪之后,重新启动1httpd -k restart 访问域名，发现没成功查看error_log，默认位置在logs内1cat /usr/local/httpd/logs/error_log 可以看到123Permission denied: mod_wsgi (pid=6696): Unable to stat Python home /root/anaconda3/envs/django. Python interpreter may not be able to be initialized correctly. Verify the supplied path and access permissions for whole of the path.Fatal Python error: Py_Initialize: Unable to get the locale encodingModuleNotFoundError: No module named &apos;encodings&apos; 表示权限不够。因此提升权限，亲测仅提升anaconda文件夹权限不能解决，因此12chmod 755 /roothttpd -k start 访问成功error_log在网站内部代码运行错误时还会存放错误信息,用于查到代码运行中可能出现的bug（注意配置中的所有路径信息，如果其中包含括号，则需要在两侧加上引号）]]></content>
       <categories>
-        <category>服务器</category>
+        <category>server</category>
       </categories>
   </entry>
   <entry>
@@ -629,7 +626,7 @@
     <url>%2F2018%2F04%2F27%2F2018%2Furls%2F</url>
     <content type="text"><![CDATA[网站汇集 云端办公 编程相关 数据结构和算法可视化 代码运行可视化 程序员刷题 菜鸟教程 在线书籍 Python数据科学手册 深度学习 大数据比赛 天池 DataCastle DataFountain 科赛网 京东jddc 点石 工具 人工智能图片放答 搬瓦工 简历制作 资源 免费高清晰度照片 图标库 虫部落 Btbook 博客模板 stockholm pixelarity WordPress Themes html5up nextdesin chrome插件 汇总墙内可用 chrome extension downloader chrome for思维导图 SketchBoard 按键精灵 按键精灵 pdf及其他文档处理 lightPDF smallpdf 实时语音转文字 [搜狗听写app] 手机电脑合作 [袋鼠输入] [向日葵远程控制] 云端办公 uzer API文档集合 datacamp 艺术二维码 http://www.9thws.com/ 学习 Coursea 网易公开课 高清图片搜集 unsplash]]></content>
       <categories>
-        <category>记录</category>
+        <category>record</category>
       </categories>
   </entry>
   <entry>
@@ -637,7 +634,7 @@
     <url>%2F2018%2F04%2F26%2F2018%2Foverview%2F</url>
     <content type="text"><![CDATA[2018-03-26 武汉理工大学 陶崇园坠楼 2018-04-26 厦门大学 田佳良事件 2018-04-26 天津大学 学生体测猝死 2018-04-29 四川遂宁 男子公交车上殴打小孩 2018-04-28 淘宝网大面积刊登性别歧视广告 2018-05-03 小米集团 港交所提交招股说明书 2018-05-04 北大校长就口误事件道歉:我并不是一个完美的人 2018-05-11 空姐搭乘滴滴顺风车被杀害]]></content>
       <categories>
-        <category>大事记</category>
+        <category>big event</category>
         <category>2018</category>
       </categories>
   </entry>
