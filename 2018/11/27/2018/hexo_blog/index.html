@@ -110,7 +110,7 @@
 <meta property="og:description" content="Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。  本文默认操作系统为windows x64Mac用户安装node和git时选择对应版本即可Si tu m’aimes是我的用户名  安装Node.js和Git Node.js https://nodejs.org/en/ 选择LTS版本，然后安装，一路">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://cdn.simonyang.club/20181127-QQ截图20181127192542.jpg">
-<meta property="og:updated_time" content="2018-11-27T12:18:11.703Z">
+<meta property="og:updated_time" content="2018-11-28T15:12:04.126Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo博客搭建">
 <meta name="twitter:description" content="Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。  本文默认操作系统为windows x64Mac用户安装node和git时选择对应版本即可Si tu m’aimes是我的用户名  安装Node.js和Git Node.js https://nodejs.org/en/ 选择LTS版本，然后安装，一路">
@@ -376,12 +376,24 @@
                 
               
 
-              <time title="创建时间：2018-11-27 20:17:20 / 修改时间：20:18:11" itemprop="dateCreated datePublished" datetime="2018-11-27T20:17:20+08:00">2018-11-27</time>
+              <time title="创建时间：2018-11-27 20:17:20" itemprop="dateCreated datePublished" datetime="2018-11-27T20:17:20+08:00">2018-11-27</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-28 23:12:04" itemprop="dateModified" datetime="2018-11-28T23:12:04+08:00">2018-11-28</time>
               
             
           </span>
@@ -466,7 +478,7 @@
 <blockquote>
 <p>我的用户名是situmaimes，所以Repository Name就是<code>situmaimes.github.io</code>，博客地址也是这个</p>
 </blockquote>
-<p>Description选填,Pubic,Readme不要勾选<br>点击Create新建<br><code>https://github.com/&lt;your username&gt;/&lt;your username&gt;.github.io.git</code> 就是你的Repository地址<br>点击右侧Settings，拉到下面GitHub Pages，Source处选择master branch,然后save，保存后页面会变成<br><img src="http://cdn.simonyang.club/20181127-QQ截图20181127192542.jpg" alt="20181127-QQ截图20181127192542"><br>表明你的网站就是<code>https://&lt;your username&gt;.github.io</code></p>
+<p>Description处选填,勾选Pubic,不勾选Readme<br>点击Create新建<br><code>https://github.com/&lt;your username&gt;/&lt;your username&gt;.github.io.git</code> 就是你的Repository地址</p>
 <h1 id="向Repository传入内容"><a href="#向Repository传入内容" class="headerlink" title="向Repository传入内容"></a>向Repository传入内容</h1><p>打开<code>E:\MyFiles\blog\_config.yml</code><br>将deploy处更改如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/&lt;your username&gt;/&lt;your username&gt;.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>注意配置项的冒号后面要用空格隔开</p>
@@ -475,7 +487,8 @@
 <blockquote>
 <p>中途会出现登陆git的页面</p>
 </blockquote>
-<p>最后出现<code>INFO  Deploy done: git</code>即成功<br>打开 <code>https://&lt;your username&gt;.github.io</code> 即是博客页面，如果没有页面的话稍等片刻，如果还没有的话请留言</p>
+<p>最后出现<code>INFO  Deploy done: git</code>即成功</p>
+<h1 id="配置github-io"><a href="#配置github-io" class="headerlink" title="配置github.io"></a>配置github.io</h1><p>登陆github，进入<code>&lt;your username&gt;.github.io</code> 仓库<br>点击右侧Settings，拉到下面GitHub Pages，Source处选择master branch,然后save，保存后页面会变成<br><img src="http://cdn.simonyang.club/20181127-QQ截图20181127192542.jpg" alt="20181127-QQ截图20181127192542"><br>表明你的网站就是<code>https://&lt;your username&gt;.github.io</code><br>打开 <code>https://&lt;your username&gt;.github.io</code> 即是博客页面，如果没有页面的话稍等片刻</p>
 <h1 id="写博客，维护博客"><a href="#写博客，维护博客" class="headerlink" title="写博客，维护博客"></a>写博客，维护博客</h1><p>hexo 文档 <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/</a><br>新建博客<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E:\MyFiles\blog&gt;hexo new &lt;blog name&gt;</span><br></pre></td></tr></table></figure></p>
 <p><code>E:\MyFiles\blog\source\_posts\&lt;blog name&gt;.md</code> 即为博客文章<br>注意文章的编码应为utf-8<br>博客采用markdown语法<br>Markdown 文档 <a href="https://markdown-zh.readthedocs.io/en/latest/" target="_blank" rel="noopener">https://markdown-zh.readthedocs.io/en/latest/</a></p>
 <h1 id="进一步"><a href="#进一步" class="headerlink" title="进一步"></a>进一步</h1><p>不想隔一段时间<code>hexo d -g</code>就要重新登陆<br>cmd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Si tu m&apos;aimes&gt;ssh-keygen -t rsa -C &quot;&lt;your email&gt;&quot;</span><br></pre></td></tr></table></figure></p>
@@ -500,6 +513,9 @@
 <p>粘贴 保存<br>然后在我的电脑上，cmd中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Si tu m&apos;aimes&gt;ssh root@&lt;your server ip&gt; #输入yes</span><br></pre></td></tr></table></figure></p>
 <p>最后更改_config.yml内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: root@&lt;your server ip&gt;:/home/git/hexo.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
 <p><code>hexo d -g</code>结束，Bingo！</p>
+<blockquote>
+<p>有问题请留言</p>
+</blockquote>
 
       
     </div>
@@ -711,7 +727,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Node-js和Git"><span class="nav-number">1.</span> <span class="nav-text">安装Node.js和Git</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注册Github"><span class="nav-number">2.</span> <span class="nav-text">注册Github</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#向Repository传入内容"><span class="nav-number">3.</span> <span class="nav-text">向Repository传入内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写博客，维护博客"><span class="nav-number">4.</span> <span class="nav-text">写博客，维护博客</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进一步"><span class="nav-number">5.</span> <span class="nav-text">进一步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#换一个模板"><span class="nav-number">6.</span> <span class="nav-text">换一个模板</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#我有一台服务器，想把博客放到服务器上"><span class="nav-number">7.</span> <span class="nav-text">我有一台服务器，想把博客放到服务器上</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Node-js和Git"><span class="nav-number">1.</span> <span class="nav-text">安装Node.js和Git</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注册Github"><span class="nav-number">2.</span> <span class="nav-text">注册Github</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#向Repository传入内容"><span class="nav-number">3.</span> <span class="nav-text">向Repository传入内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置github-io"><span class="nav-number">4.</span> <span class="nav-text">配置github.io</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写博客，维护博客"><span class="nav-number">5.</span> <span class="nav-text">写博客，维护博客</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进一步"><span class="nav-number">6.</span> <span class="nav-text">进一步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#换一个模板"><span class="nav-number">7.</span> <span class="nav-text">换一个模板</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#我有一台服务器，想把博客放到服务器上"><span class="nav-number">8.</span> <span class="nav-text">我有一台服务器，想把博客放到服务器上</span></a></li></ol></div>
             
 
           </div>
