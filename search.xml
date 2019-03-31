@@ -1,22 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[some]]></title>
-    <url>%2F2019%2F03%2F31%2Fsome%2F</url>
-    <content type="text"></content>
-  </entry>
-  <entry>
     <title><![CDATA[C++ debug小技巧]]></title>
     <url>%2F2019%2F03%2F31%2F2019%2Fcppdebug%2F</url>
     <content type="text"><![CDATA[hello everyone！又到了春暖花开的季节大一的工科孩子也开始了c++（c艹——破音)的学习（折磨）这c++写起来就全都是bug啊但是，有那么难吗我不是什么c++大神，我就是单纯因为别人老是问我烦得慌在我这的宗旨就是自己的问题，自己解决，自己成长，才是最屌的今天就教你们debug大法书上绝口不提的编程小经验 跟我一起： Debug牛逼不过刚开始先不debug由于老师们建议大家使用vs先来谈一谈vs建工程的问题标准建工程步骤 文件-新建-项目-win32控制台应用程序-填写名称-位置-下一步-空项目在源文件上右键点击 添加-新建项-c++文件-填写名称-完成 小吐槽：VS是以解决方案为项目单位的，所以比较麻烦，适合大工程 下面我们正式开始debug从案例中学习debug技巧不谈错误是否低级，只谈如何迅速定位解决先来看最简单的 12345#include&lt;iostream&gt;using namespace std;int main()&#123; cot&lt;&lt;"hello world"&lt;&lt;endl;&#125; 第一种，名字错误Debug 1：查找错误行Debug 2：辨认错误类型根据调试结果显示，错误为第四行，原因为未声明的标识符，意即cot没有声明，为什么没有声明呢，因为你写的是cot，而这个变量是未定义的注意，c++所有的变量都应该定义后使用类似的还有1234#include&lt;iostream&gt;int main()&#123; cout&lt;&lt;"hello world"&lt;&lt;endl;&#125; 第三行，cout、endl未定义，因为你没有using namespace std;，所以现在的命名空间没有cout、endl IMPORTANT：不知道你发现没有，上面两例中的错误地方的下面都有红波浪线在vs中，你编写程序的时候，如果出现了语法错误，红波浪线的出现就是在提示你，这一个地方错了，所以，写代码一定要敏感 下面的辨认应该非常轻松了 12345#include&lt;iostream&gt;using namespace std;int main()&#123; cout&lt;&lt;"hello world"&lt;&lt;endl&#125; 第二种 分号错误debug结果显示第五行错误，信息显示}前缺少;,信息提示已经很充足了，加上分号就好不过我们还是学到了一点经验，如果调试结果显示第五行错误，则第四行和第五行都有可能错误 12345#include&lt;iostream&gt;using namespace std;int main()&#123; cout&lt;&lt;"hello world"&lt;&lt;endl； &#125; 乍一看，没错误啊第三种 符号错误在有经验的人看来，英文;和中文；是有很大不一样的，但是初学者往往没有这种敏感性，看不出来，就发现不了错误调试结果显示第五行有错误，中文；是未声明的，缺少英文;红波浪线也告诉了你错误在哪 Debug总结： 仔细阅读调试结果 时刻注意红波浪线 其他常见错误： 无错误地点，显示main已定义_main 已经在 xx.obj 中定义，提示你该项目下有多个main（一个项目不能有多个入口） 字符串和变量不清，即N和&#39;N&#39;不能分清（我遇到过） 拼写错误（常见） 符号错误，符号缺少或使用错误，使用英文输入法，使用IDE，注意所有的左括号都应该有对应的右括号 逻辑错误，变量使用错误，这个没办法，细心 逻辑错误，常见为for循环中更改i值，建议：在for循环中如何有意改变i值，将i值传给其他变量。逻辑错误是最难排查的错误，希望大家还是认真思考每一个循环每个变量都是什么值。 常见疑问： 乱码，vs左上侧 文件-高级保存选项 设置编码格式为utf-8带签名，另建议只要在学习编程，所有的程序文档格式均为utf-8 闪现，vs左上侧 调试-开始执行不调试(Ctrl+F5)或者在main里最后加一句 system(&quot;pause&quot;);,或者cin.get();(有兴趣的同学可以试一下调试里的逐语句 逐过程) 总的来说，建议以下： 使用IDE，使用大括号和缩进 查看调试结果，阅读调试信息 时刻注意使用英文符号，好好学习英语（像vs这样对中文这么友好的IDE不多了） 小提醒：想提问请发全部的程序图截图和执行情况截图正确提问方法，下一篇推送见你还遇见过什么奇葩错误，后台留言告诉我吧]]></content>
       <categories>
         <category>C++</category>
       </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[temp]]></title>
-    <url>%2F2018%2F12%2F01%2Ftemp%2F</url>
-    <content type="text"><![CDATA[somesoem]]></content>
   </entry>
   <entry>
     <title><![CDATA[Python复习（一）]]></title>
@@ -59,19 +49,19 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[C++二级提醒]]></title>
-    <url>%2F2018%2F11%2F08%2F2019%2FKindreminder%2F</url>
-    <content type="text"><![CDATA[友情提醒：有些人呐，学了一个学期的计算机程序设计基础，就自以为掌握了cpp大法，于是看到了计算机二级有cpp，于是那么一报等到快考试临阵磨枪的时候才发现整张卷子都是什么构造函数 析构函数 private public 友元函数，然后去考，挂了所以划重点，没认真学过cpp面向对象部分的同学不要抱cpp的二级，如果对指针数组掌握较好想混个二级证可以去报c的]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-  </entry>
-  <entry>
     <title><![CDATA[问问题竟然也有方法论]]></title>
     <url>%2F2018%2F11%2F08%2F2019%2Fhowtoaskquestion%2F</url>
     <content type="text"><![CDATA[这篇推文的出现原因是长期帮助别人解决问题的帮助人对需要帮助的人的一些好的建议这些建议有助于更有效地沟通和提升解决问题的效率 你已经开始学习程序设计了你已经开始写一些代码并且还获得附赠的bug了 众所周知，解决bug是提升能力的好机会遇到每一个bug都认真解决才能在未来写更少的bug那么如何去更好的解决你的程序bug来提升呢First你应该仔细查看你的程序异常返回信息几乎所有的程序设计语言都会在报错的时候附带一些信息这些信息涵盖了涵盖了你的出错行，出错原因注意，不要因为他是英文而不愿意看实话告诉你，你早晚要看 Second异常返回信息看了，但是还是解决不了搜索，成千上万的人在学习编程，你在初期所遇到的错误百分之百在网络上有答案你只需要准确简短的描述你的状况，例如: python3中range返回的对象索引取值报错然后在无数的返回结果中迅速挑选能够解决你问题的答案不要怕试错，这也是一种学习的过程我推荐谷歌，但是国内百度也还可以接受如果英文良好可以尝试去stackoverflow和github寻找答案 有一点要说的是，有些人在长时间的搜索后还没有解决问题会怀疑，是不是该编程语言的编写有问题很遗憾的告诉你，这种概率几乎为0 Third如果百度也未能成功的帮助到你就到了最不推荐也是最后一个选项求助他人但是，问问题也要讲究方法，这就是我写这篇文章的缘由 帮助人希望被帮助人能够独立进行以上的所有步骤以及进行必要的思考这会极大的提升帮助人的好感 帮助人希望被帮助人能够提供清晰有效的信息，例如，程序的目的是什么，你的期望输出是什么样子，全部错误代码的清晰图像，执行结果的清晰图像，代码运行环境版本信息这将有助于帮助人判断到底是哪里出了问题 一个例子是，我在搭建服务器的时候遇到了一个问题，花费了两天都未能解决，无奈在python大群里咨询，一个人私聊要了我的服务器帮我改好了，我给他发了五元红包，然后他没要，叮嘱我记得修改服务器密码 最后还有小建议是 如果双方在网上交流且关系不熟，切忌提太过于空泛的问题，例如，python如何学习，这类问题难于详解且让人觉得很伸手党 女生找个男朋友以上问题均不存在 点击阅读原文查看github上广泛传阅的 提问的智慧]]></content>
       <categories>
         <category>方法论</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[C++二级提醒]]></title>
+    <url>%2F2018%2F11%2F08%2F2019%2FKindreminder%2F</url>
+    <content type="text"><![CDATA[友情提醒：有些人呐，学了一个学期的计算机程序设计基础，就自以为掌握了cpp大法，于是看到了计算机二级有cpp，于是那么一报等到快考试临阵磨枪的时候才发现整张卷子都是什么构造函数 析构函数 private public 友元函数，然后去考，挂了所以划重点，没认真学过cpp面向对象部分的同学不要抱cpp的二级，如果对指针数组掌握较好想混个二级证可以去报c的]]></content>
+      <categories>
+        <category>C++</category>
       </categories>
   </entry>
   <entry>
@@ -83,17 +73,17 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[学会快捷键的骚操作]]></title>
-    <url>%2F2018%2F11%2F06%2F2018%2Fshortcut%2F</url>
-    <content type="text"><![CDATA[本文默认win10系统 触摸板你可能不知道的触摸板使用方法当然这些还可以自己设置(在你的设置里，自己挖掘一下) 鼠标下面讲一下鼠标鼠标其实除了左键右键其实还有中键什么，中键？对，就是那个滚轮，他还可以向下按，向下按啊（如果你的鼠标够高级，它还可以向左拨，向右拨） 向下按 浏览器链接在新标签中打开 关闭标签（在浏览器标签上点击） 点击任务栏预览页关闭程序（当你把鼠标放在任务栏上程序图标上时，会出现一个预览的小窗口，中键点击这个小窗口关闭这个程序） 打开一个新的程序窗口（当一个程序已经打开，这时你想要再打开一个相同程序的时候） 查看 QQ 聊天信息的准确时间向左拨 浏览器返回前一个页面 文件资源管理器返回上一个位置向右拨 撤销刚刚向左拨的操作 感谢旺隆https://zhuanlan.zhihu.com/p/32564388 键盘小白注意： 笔记本上的Fn键是为了配合F1-F12键上右下角的小图标使用的。使用Fn+Esc组合键可以切换Fn+F1..F12和F1..F12的功能，如果你按了F5并没有刷新页面，那么按Fn+Esc切换后再按F5或者按一下Fn+F5就可以了； Tab缩进与n个空格不一样； 左边Alt旁边的那个窗口键叫Win键。 好了下面正式开始 单键Esc：退出 F1：帮助 F2：选中文件时重命名 F3：搜索 F4：文件资源管理器中光标移至地址栏 F5：刷新、重新整理 F6：浏览器光标移至地址栏 F8：开机时进入安全模式 F11: 全屏显示 F12：浏览器中打开开发者页面 PrtScr：PrintScreen的缩写，按一下可以截屏，然后Ctrl+V粘贴，不过我更喜欢用qq的截屏功能 Insert：切换输入时的插入与替换操作 Delete：移动文件到回收站、删除光标右侧的一个字符 Tab：页面移动 CapsLock：大写锁定 Shift：按住时点击鼠标连续多选 Ctrl：按住时点击鼠标间隔多选 组合键只罗列一些比较常用的，如果需要全部整理的话，请留言 Ctrl+1,2,3：切换到从左边数起第1,2,3个标签 Ctrl+C：复制 Ctrl+X：剪切 Ctrl+V：粘贴 Ctrl+A：全选 Ctrl+Z：撤销 Ctrl+S：保存 Ctrl+O：打开 Ctrl+P: 打印 Ctrl+F：搜索 Ctrl+W：关闭当前页面 Ctrl+Shift+W：关闭所有页面 Ctrl+T：打开新的页面 Ctrl+Shift+T：打开刚刚关闭的页面 Ctrl+F5：强制刷新 Ctrl+Tab：切换页面 Ctrl+Shift+Tab：反向切换页面 Ctrl+N：生成新程序页面 Ctrl+Shift+N：新建文件夹 Ctrl+Alt+A：QQ截图 Alt+F4：关闭当前程序 Alt+Tab：切换程序 Alt+Shift+Tab：反向切换程序 Win+Tab：激活任务视图 Win+A：激活操作中心 Win+D：显示桌面 Win+E：打开文件资源管理器 Win+I：打开设置 Win+L：锁定屏幕 Win+P：投影屏幕 Win+R：运行 Win+X：打开高级用户功能 Win+1/2/3：打开任务栏中固定的程序 win+空格：输入法切换 Shift+Delete：永久删除文件 Ctrl+Shift+Esc：打开任务资源管理器 Ctrl+Alt+Delete：终结计算机的异常状态 拖动某一项时按CTRL复制所选项目 感谢每天学点电脑知识电脑快捷键使用大全，秒变电脑大神！ - 每天学点电脑知识的文章 - 知乎https://zhuanlan.zhihu.com/p/38998190 最后小常识：中文输入时的标点符号和英文输入时的标点符号不一样，不一样！看一下中文：12·-=【】、；‘，。/~！@#￥%……&amp;*（）——+&#123;&#125;|：“《》？ 英文：12`-=[]\;&apos;,./~!@#$%^&amp;*()_+&#123;&#125;|:&quot;&lt;&gt;? 除了少数几个其他基本上都不一样，写代码的时候一定要小心噢！]]></content>
+    <title><![CDATA[onetab解放你的chrome多标签]]></title>
+    <url>%2F2018%2F11%2F06%2F2018%2Fonetab%2F</url>
+    <content type="text"><![CDATA[今天介绍一个Chrome插件 onetab其实具体来说呢, onetab的出现是为了解决像这样的问题哇，这么多标签！我每个标签都有用！我每个标签都不能关！啊啊啊！炸裂！ 当然如果你习惯性关标签请直接pass！ 在我的日常使用中是经常出现这种状况的，因为我经常为了解决一个技术问题打开很多页面，每个页面都有那么一点我需要的东西，所以不能关，但是开着也很烦人，还占内存，众所周知，Chrome是个占内存大户，怎么办捏！ 经过我的一番寻找，找到了onetab这个牛逼玩意官网在这看一下官网可以省95%内存，很棒再看一下具体介绍说是把所有页面汇集成一个list那我们用一下呗点击安装，装好之后点击这里面的右上角的onetab标签duang的一下就变成这样了所有的标签都汇集到了一起，需要的点开重新加载就好了当然每一次点onetab的标签列表是单独的像这样其实我还会把onetab当收藏夹用，把好的网址都放到一个标签列表里，这样chrome的书签栏就不会炸掉了 什么？你不是chrome用户，那有firefox吗，firefox浏览器也有这个插件什么？你用360、搜狗？换chrome吧chrome大法好，哈哈哈哈 什么？你不能科学上网装不了插件插件从这下https://www.chromefor.com/然后百度一波chrome怎么装本地插件Bingo！]]></content>
       <categories>
         <category>share</category>
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[onetab解放你的chrome多标签]]></title>
-    <url>%2F2018%2F11%2F06%2F2018%2Fonetab%2F</url>
-    <content type="text"><![CDATA[今天介绍一个Chrome插件 onetab其实具体来说呢, onetab的出现是为了解决像这样的问题哇，这么多标签！我每个标签都有用！我每个标签都不能关！啊啊啊！炸裂！ 当然如果你习惯性关标签请直接pass！ 在我的日常使用中是经常出现这种状况的，因为我经常为了解决一个技术问题打开很多页面，每个页面都有那么一点我需要的东西，所以不能关，但是开着也很烦人，还占内存，众所周知，Chrome是个占内存大户，怎么办捏！ 经过我的一番寻找，找到了onetab这个牛逼玩意官网在这看一下官网可以省95%内存，很棒再看一下具体介绍说是把所有页面汇集成一个list那我们用一下呗点击安装，装好之后点击这里面的右上角的onetab标签duang的一下就变成这样了所有的标签都汇集到了一起，需要的点开重新加载就好了当然每一次点onetab的标签列表是单独的像这样其实我还会把onetab当收藏夹用，把好的网址都放到一个标签列表里，这样chrome的书签栏就不会炸掉了 什么？你不是chrome用户，那有firefox吗，firefox浏览器也有这个插件什么？你用360、搜狗？换chrome吧chrome大法好，哈哈哈哈 什么？你不能科学上网装不了插件插件从这下https://www.chromefor.com/然后百度一波chrome怎么装本地插件Bingo！]]></content>
+    <title><![CDATA[学会快捷键的骚操作]]></title>
+    <url>%2F2018%2F11%2F06%2F2018%2Fshortcut%2F</url>
+    <content type="text"><![CDATA[本文默认win10系统 触摸板你可能不知道的触摸板使用方法当然这些还可以自己设置(在你的设置里，自己挖掘一下) 鼠标下面讲一下鼠标鼠标其实除了左键右键其实还有中键什么，中键？对，就是那个滚轮，他还可以向下按，向下按啊（如果你的鼠标够高级，它还可以向左拨，向右拨） 向下按 浏览器链接在新标签中打开 关闭标签（在浏览器标签上点击） 点击任务栏预览页关闭程序（当你把鼠标放在任务栏上程序图标上时，会出现一个预览的小窗口，中键点击这个小窗口关闭这个程序） 打开一个新的程序窗口（当一个程序已经打开，这时你想要再打开一个相同程序的时候） 查看 QQ 聊天信息的准确时间向左拨 浏览器返回前一个页面 文件资源管理器返回上一个位置向右拨 撤销刚刚向左拨的操作 感谢旺隆https://zhuanlan.zhihu.com/p/32564388 键盘小白注意： 笔记本上的Fn键是为了配合F1-F12键上右下角的小图标使用的。使用Fn+Esc组合键可以切换Fn+F1..F12和F1..F12的功能，如果你按了F5并没有刷新页面，那么按Fn+Esc切换后再按F5或者按一下Fn+F5就可以了； Tab缩进与n个空格不一样； 左边Alt旁边的那个窗口键叫Win键。 好了下面正式开始 单键Esc：退出 F1：帮助 F2：选中文件时重命名 F3：搜索 F4：文件资源管理器中光标移至地址栏 F5：刷新、重新整理 F6：浏览器光标移至地址栏 F8：开机时进入安全模式 F11: 全屏显示 F12：浏览器中打开开发者页面 PrtScr：PrintScreen的缩写，按一下可以截屏，然后Ctrl+V粘贴，不过我更喜欢用qq的截屏功能 Insert：切换输入时的插入与替换操作 Delete：移动文件到回收站、删除光标右侧的一个字符 Tab：页面移动 CapsLock：大写锁定 Shift：按住时点击鼠标连续多选 Ctrl：按住时点击鼠标间隔多选 组合键只罗列一些比较常用的，如果需要全部整理的话，请留言 Ctrl+1,2,3：切换到从左边数起第1,2,3个标签 Ctrl+C：复制 Ctrl+X：剪切 Ctrl+V：粘贴 Ctrl+A：全选 Ctrl+Z：撤销 Ctrl+S：保存 Ctrl+O：打开 Ctrl+P: 打印 Ctrl+F：搜索 Ctrl+W：关闭当前页面 Ctrl+Shift+W：关闭所有页面 Ctrl+T：打开新的页面 Ctrl+Shift+T：打开刚刚关闭的页面 Ctrl+F5：强制刷新 Ctrl+Tab：切换页面 Ctrl+Shift+Tab：反向切换页面 Ctrl+N：生成新程序页面 Ctrl+Shift+N：新建文件夹 Ctrl+Alt+A：QQ截图 Alt+F4：关闭当前程序 Alt+Tab：切换程序 Alt+Shift+Tab：反向切换程序 Win+Tab：激活任务视图 Win+A：激活操作中心 Win+D：显示桌面 Win+E：打开文件资源管理器 Win+I：打开设置 Win+L：锁定屏幕 Win+P：投影屏幕 Win+R：运行 Win+X：打开高级用户功能 Win+1/2/3：打开任务栏中固定的程序 win+空格：输入法切换 Shift+Delete：永久删除文件 Ctrl+Shift+Esc：打开任务资源管理器 Ctrl+Alt+Delete：终结计算机的异常状态 拖动某一项时按CTRL复制所选项目 感谢每天学点电脑知识电脑快捷键使用大全，秒变电脑大神！ - 每天学点电脑知识的文章 - 知乎https://zhuanlan.zhihu.com/p/38998190 最后小常识：中文输入时的标点符号和英文输入时的标点符号不一样，不一样！看一下中文：12·-=【】、；‘，。/~！@#￥%……&amp;*（）——+&#123;&#125;|：“《》？ 英文：12`-=[]\;&apos;,./~!@#$%^&amp;*()_+&#123;&#125;|:&quot;&lt;&gt;? 除了少数几个其他基本上都不一样，写代码的时候一定要小心噢！]]></content>
       <categories>
         <category>share</category>
       </categories>
@@ -115,17 +105,17 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[VC++]]></title>
-    <url>%2F2018%2F09%2F09%2F2018%2FVC%2B%2B%2F</url>
-    <content type="text"><![CDATA[感谢信息青协支持，信息青协电脑交流群284933381 Visual_C++_6.0-win10 链接：https://pan.baidu.com/s/1WfY4Oz8u8nxKjMI-mJmpIw 密码：sje0]]></content>
+    <title><![CDATA[Matlab]]></title>
+    <url>%2F2018%2F09%2F09%2F2018%2FMatlab%2F</url>
+    <content type="text"><![CDATA[感谢信息青协支持，信息青协电脑交流群284933381 matlab软件资源matlab2018 链接：https://pan.baidu.com/s/1WNkzz4XKHElqTdi35QyZ-Q 密码：zstxmatlab2016 链接：https://pan.baidu.com/s/1cx72VimXuhW8RChy70HcSw 密码：vvyj两个文件均内含破解教程 matlab]]></content>
       <categories>
         <category>share</category>
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[Matlab]]></title>
-    <url>%2F2018%2F09%2F09%2F2018%2FMatlab%2F</url>
-    <content type="text"><![CDATA[感谢信息青协支持，信息青协电脑交流群284933381 matlab软件资源matlab2018 链接：https://pan.baidu.com/s/1WNkzz4XKHElqTdi35QyZ-Q 密码：zstxmatlab2016 链接：https://pan.baidu.com/s/1cx72VimXuhW8RChy70HcSw 密码：vvyj两个文件均内含破解教程 matlab]]></content>
+    <title><![CDATA[VC++]]></title>
+    <url>%2F2018%2F09%2F09%2F2018%2FVC%2B%2B%2F</url>
+    <content type="text"><![CDATA[感谢信息青协支持，信息青协电脑交流群284933381 Visual_C++_6.0-win10 链接：https://pan.baidu.com/s/1WfY4Oz8u8nxKjMI-mJmpIw 密码：sje0]]></content>
       <categories>
         <category>share</category>
       </categories>
@@ -163,17 +153,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[西南交大雷锋公司]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%A5%BF%E5%8D%97%E4%BA%A4%E5%A4%A7%E9%9B%B7%E9%94%8B%E5%85%AC%E5%8F%B8%2F</url>
-    <content type="text"><![CDATA[西南交大雷锋公司 微信推送链接 雷锋公司协会具体资料请戳这里！！]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[雾都天文社]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E9%9B%BE%E9%83%BD%E5%A4%A9%E6%96%87%E7%A4%BE%2F</url>
-    <content type="text"><![CDATA[雾都天文社想加入雾都天文社的小星星们集合啦！总群QQ号：225881407 浩瀚星空，无垠宇宙，漫漫星河，迢迢银汉，世间有一种浪漫叫做天文，我们探寻每一颗星星的故事，我们静候每一场盛世流星雨，我们目光所及处在遥远的光年之外，这是一封来自雾都天文社的邀请函，邀你共赴一场无与伦比的天文盛宴！天文之“大”，囊括宇宙星辰。天文之“长”，横亘万载岁月。在这里，有一群志趣相投的小伙伴们共同探讨天文知识，相约观测天文现象。我们看遍了天府之都的夜~~ 西南交大雾都天文社成立于2012年，由于筹建初期成都多雾而得名。天文社是一个以普及天文知识为宗旨的社团，是交大的特色社团之一，是一个天文爱好者学习交流的平台。在社团成立的7年中，天文社不断探索活动形式，举办丰富精彩的天文活动，不仅提高了会员们的天文兴趣和知识水平，增强社团的凝聚力；还通过比赛和讲座，进行天文科普，燃起了交大学子们的天文热情！轩辕北斗，遥望盛世繁华；猎户雄狮，笑傲寰宇苍穹。羽翼渐丰的天文社，带领我们遨游在浩瀚宇宙中，穿越到平行时空里，邂逅绮丽的星云！ 1.校外观测来到光污染较小的川西，登上海拔3000多米的高原，穿梭于崇山峻岭之间，欣赏从未看见过的壮美的星空。星座，银河，皎月，雪山，白云……一切的壮美与纯净你都可以在这里欣赏。PS：然而每次都会有出门必下雨的BUG。但是不用担心，云雾终将散去，星河自在前方。 活动Part1马家沟 Part2四姑娘山 Part3天文camp（天文知识科普） Part4“星语星座” 蜡烛摆星座摆个心形蜡烛用来表白太老套了，天文社的小伙伴要玩出新高度——用蜡烛摆出12个星座，是不是更罗曼蒂克呢？你的星座我的心，表白新技能get！ 这就是我们雾都天文社这一大家庭！欢迎小鲜肉们加入我们天文社这个有爱的大家庭！以后一起去看星星看月亮，从诗词歌赋谈到人生哲学~快来加入我们吧~~ 招新总群QQ号：225881407关注雾都天文社微信公众号，随时了解天文资讯。]]></content>
+    <title><![CDATA[节能协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%8A%82%E8%83%BD%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[节能协会 节能协会以“立足校园，服务同学”为宗旨。从协会建立到现在，节能协会在交大校园内已经举办多种形式的节能宣传活动，立志为交大的节能事业贡献一份力量。我们也举办了很多符合我们协会的特色的一些活动，有变废为宝、后勤活动、节能印象、地球熄灯一小时活动，节能协会会徽设计大赛，节能logo与标识标语设计大赛，利用一个又一个活动让大家在兴趣中去体会节能给大家带来的乐趣。目前节能协会在以往的基础上扩展广度和深度，以活动来发扬节能文化，以文化来提升活动质量。节能协会有着独有的社团建设思路，从成立开始就逐步开始建设我们的社团文化制度，包括内部文化氛围、社团指导章程、部门管理制度等，因为我们清楚的知道作为一个社团，如果要发展壮大、要做大做强、做好，必须有一套完整、科学、健全的社团文化制度。而我们就是在这一思想的指导下，一届一届节能协会人不懈的努力，不懈的奋斗，最终总结出了自己所独有的社团文化制度。这是指导我们思想和工作的精神向标。]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -195,22 +177,6 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[计财处助理团]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%AE%A1%E8%B4%A2%E5%A4%84%E5%8A%A9%E7%90%86%E5%9B%A2%2F</url>
-    <content type="text"><![CDATA[计财处助理团【QQ】西南交大计财处助理团（2649553091）外出办公、来校访问、科研立项、收入管理，财务一路相随。如何有效理解财务报销、正确把握收税政策，计财处助理团让你不在财务的路口迷茫。在这里，有学长学姐学姐手把手教你如何保账，有老师一对一辅导财会知识。这里，我们一同成长为一支懂财务，服务学校各单位财务事务的骨干团队。这只团队，期待你的加入! 社团简介【社团简介】计财处助理团是一支在计划财务处和校团委的指导下，面向全校师生的学生服务团队。本社团秉承“服务育人、管理育人”的理念，旨在让更多的人了解学校计财处相关政策与服务，减少师生办理财务业务的冗余程序，加强同学与学校计财处的沟通。是一支具备相关财会知识和操作技能，能够服务和指导学校各单位、各类人员快捷办理财务事务的学生骨干团队。【社团宗旨】以学生团队为依托，将具体的财务管理知识传授给学院和师生。旨在弘扬社会主义新风尚，促进大学生的精神文明建设和文化建设，提高大学生的基本技能，丰富校园生活。【品牌活动】财务业务导引、社团财务报销讲座、会计专业认知实习 等【邮箱】jcczltSWJTU@163.com【微信公众号】西南交大计财处助理团【QQ】西南交大计财处助理团（2649553091） 招新计财处助理团微信招新推送计财处助理团微信招新推送]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[跆拳道协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%B7%86%E6%8B%B3%E9%81%93%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[跆拳道协会 招兵买马，求萌妹，求御姐，求正太，求大叔云集各类精英，跆拳道协会，期待你的到来。有人的地方就有生活，有生活的地方就有咱们。如果你热爱青春，期望展示自我，快来加入咱们吧！年轻活力是我们的资本，张扬个性凸显胆识是我们的超越。加入我们，我们会帮你发现自己的闪光点，让你变得更加自信和充实。追不到女神？跆协祝你成功。当不了女神？跆协教你成长。 活动第二届“临战不退”跆拳道争霸赛图]]></content>
-      <categories>
-        <category>社团</category>
-      </categories>
-  </entry>
-  <entry>
     <title><![CDATA[贫困地区教育观念救助会]]></title>
     <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%B4%AB%E5%9B%B0%E5%9C%B0%E5%8C%BA%E6%95%99%E8%82%B2%E8%A7%82%E5%BF%B5%E6%95%91%E5%8A%A9%E4%BC%9A%2F</url>
     <content type="text"><![CDATA[贫困地区教育观念救助会 新生QQ交流群 西南交通大学贫困地区教育观念救助会，简称为“救助会”，成立于2002年5月17日，由一位来自于凉山的学长发起组建。正如协会的名字，作为公益类社团，协会以“自救者人恒救之”为理念，致力于改变贫困地区的落后教育观念。目前协会由会长团和五个部门组成。协会在凉山有三所基地小学，在校内有教职工子女40人左右的授课学生群，各类校级活动以快乐助学为主题，围绕小学生与大学生和社会的联系展开。协会的主要工作分为三块：校级活动（基地小学）、义教、支教。校级活动：目前协会已经举办了九届快乐助学活动，E课讲堂，Ta说，给你的画，和他一起写本书，毕业季微公益······义教:每周末按时早期，为校内教职工子女辅导功课，开设专题课程。支教：短暂的寒暑假，去需要我们的地方，认识一群可爱的学生。协会自成立至今，都以做公益为工作目标，如果你对公益感兴趣，如果你热心于帮助他人，那么欢迎你了解救助会，加入救助会，和我们一起为公益事业发光发热！ 宣传视频 部门介绍义教部综合事务部网络部宣传部外联部 招新贫困地区教育观念救助会微信招新链接 新生QQ交流群微信公众号 活动2016年给你的画2017年ta说2.02018会员大会2018暑假夏令营基地小学周末义教]]></content>
@@ -219,9 +185,33 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[双节棍协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%8F%8C%E8%8A%82%E6%A3%8D%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[双节棍协会微信公众号：交大棍协【社团简介】双节棍协会成立于2011年，受体育部指导。双节棍协会秉承着“强身健体，弘扬中华武术”的棍道精神，积极开展日常棍术训练，以武会友，踊跃参加校园内外活动，如高校联赛，内部棍术交流，以及教授外国友人双节棍套路，展示中华传统武术的魅力。在训练过程中本协会力求将动作的力度与优美结合以展示双节棍的刚柔并济之道。男生的阳刚之气与女生的飒爽英姿彼此交融，展示出了协会别具一格的活力。【社团宗旨】：推广时尚全民运动，弘扬中华棍道精神【品牌活动】：成都地区双节棍高校联赛、“棍舞龙魂”双节棍体验周、“青春无悔”双节棍主题晚会、“风云再起”古风武侠晚会【邮箱】：1055564427@qq.com【微信公众号】：交大棍协 活动2017物理学院迎新晚会表演健美操协会表演晚会表演冷焰火套路第七届高校双节棍交流赛物院迎新日常训练]]></content>
+    <title><![CDATA[计财处助理团]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%AE%A1%E8%B4%A2%E5%A4%84%E5%8A%A9%E7%90%86%E5%9B%A2%2F</url>
+    <content type="text"><![CDATA[计财处助理团【QQ】西南交大计财处助理团（2649553091）外出办公、来校访问、科研立项、收入管理，财务一路相随。如何有效理解财务报销、正确把握收税政策，计财处助理团让你不在财务的路口迷茫。在这里，有学长学姐学姐手把手教你如何保账，有老师一对一辅导财会知识。这里，我们一同成长为一支懂财务，服务学校各单位财务事务的骨干团队。这只团队，期待你的加入! 社团简介【社团简介】计财处助理团是一支在计划财务处和校团委的指导下，面向全校师生的学生服务团队。本社团秉承“服务育人、管理育人”的理念，旨在让更多的人了解学校计财处相关政策与服务，减少师生办理财务业务的冗余程序，加强同学与学校计财处的沟通。是一支具备相关财会知识和操作技能，能够服务和指导学校各单位、各类人员快捷办理财务事务的学生骨干团队。【社团宗旨】以学生团队为依托，将具体的财务管理知识传授给学院和师生。旨在弘扬社会主义新风尚，促进大学生的精神文明建设和文化建设，提高大学生的基本技能，丰富校园生活。【品牌活动】财务业务导引、社团财务报销讲座、会计专业认知实习 等【邮箱】jcczltSWJTU@163.com【微信公众号】西南交大计财处助理团【QQ】西南交大计财处助理团（2649553091） 招新计财处助理团微信招新推送计财处助理团微信招新推送]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[南国相声社]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%8D%97%E5%9B%BD%E7%9B%B8%E5%A3%B0%E7%A4%BE%2F</url>
+    <content type="text"><![CDATA[南国相声社2018南国迎新群：383847786南国相声社成立于2014年10月13日，发展至今已经四年之久，社员也由最初的7个人，发展至近百人 。南国相声社四年时间，蒸蒸日上，每年都有新突破，更在今年荣获十佳社团、五星社团等美誉。我们每学期都会有两次大型的相声专场，还有一次“小南国茶话会”让更多的社员拥有展现自我的机会。 部门介绍宣传部——这是一份聚集着大量技术“猴儿”的部门（因为这里的人大多跟宅毫无关系！），主要负责微信、微博等平台推送，海报传单的制作……在这里你将学到更多实用的微信、PS技术，以及各种各样的“黑科技”！ 外联部——外联部可以说是全社最不能得罪的部门了（谁叫人家是管钱的呢），主要负责活动场地的筹备，社团经费的管理……在这里你能锻炼出独树一帜的口才、框架清晰的思维，以及对RMB的最佳分配！ 活动部——作为南国最神秘的部门，除了负责演出活动的前前后后，还会负责一些秘密任务，至于是什么？欢迎来pick小南国，我们慢慢说！ 办公室——这是一个舞文弄墨的部门，主要负责文案编写，表格制作，演出视频上传……如果你想收获漂亮的文笔，那么办公室将是个不二之选！另外，办公室的小哥哥小姐姐，可是小南国少有的可爱又文静的哦！ 话不多说，欢迎各位喜欢相声、喜欢传统文化、喜欢欢乐的萌新们加入小南国，下一个交大“郭德纲”说不定就是你哦！相信爱笑的人，运气，不会差！南国相声社，等你来！PS：2018南国迎新群：383847786微信关注“南国相声社”微信公众号，获取南国第一手咨询 南国相声社微信公众号 活动2017年10月迎新专场2017年12月封箱专场2017年合唱大西厢2018年3月开箱专场2018年6月毕业专场小南国春游小南国茶话会2017毕业专场小南国全家福]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[雾都天文社]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E9%9B%BE%E9%83%BD%E5%A4%A9%E6%96%87%E7%A4%BE%2F</url>
+    <content type="text"><![CDATA[雾都天文社想加入雾都天文社的小星星们集合啦！总群QQ号：225881407 浩瀚星空，无垠宇宙，漫漫星河，迢迢银汉，世间有一种浪漫叫做天文，我们探寻每一颗星星的故事，我们静候每一场盛世流星雨，我们目光所及处在遥远的光年之外，这是一封来自雾都天文社的邀请函，邀你共赴一场无与伦比的天文盛宴！天文之“大”，囊括宇宙星辰。天文之“长”，横亘万载岁月。在这里，有一群志趣相投的小伙伴们共同探讨天文知识，相约观测天文现象。我们看遍了天府之都的夜~~ 西南交大雾都天文社成立于2012年，由于筹建初期成都多雾而得名。天文社是一个以普及天文知识为宗旨的社团，是交大的特色社团之一，是一个天文爱好者学习交流的平台。在社团成立的7年中，天文社不断探索活动形式，举办丰富精彩的天文活动，不仅提高了会员们的天文兴趣和知识水平，增强社团的凝聚力；还通过比赛和讲座，进行天文科普，燃起了交大学子们的天文热情！轩辕北斗，遥望盛世繁华；猎户雄狮，笑傲寰宇苍穹。羽翼渐丰的天文社，带领我们遨游在浩瀚宇宙中，穿越到平行时空里，邂逅绮丽的星云！ 1.校外观测来到光污染较小的川西，登上海拔3000多米的高原，穿梭于崇山峻岭之间，欣赏从未看见过的壮美的星空。星座，银河，皎月，雪山，白云……一切的壮美与纯净你都可以在这里欣赏。PS：然而每次都会有出门必下雨的BUG。但是不用担心，云雾终将散去，星河自在前方。 活动Part1马家沟 Part2四姑娘山 Part3天文camp（天文知识科普） Part4“星语星座” 蜡烛摆星座摆个心形蜡烛用来表白太老套了，天文社的小伙伴要玩出新高度——用蜡烛摆出12个星座，是不是更罗曼蒂克呢？你的星座我的心，表白新技能get！ 这就是我们雾都天文社这一大家庭！欢迎小鲜肉们加入我们天文社这个有爱的大家庭！以后一起去看星星看月亮，从诗词歌赋谈到人生哲学~快来加入我们吧~~ 招新总群QQ号：225881407关注雾都天文社微信公众号，随时了解天文资讯。]]></content>
+      <categories>
+        <category>社团</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[跆拳道协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%B7%86%E6%8B%B3%E9%81%93%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[跆拳道协会 招兵买马，求萌妹，求御姐，求正太，求大叔云集各类精英，跆拳道协会，期待你的到来。有人的地方就有生活，有生活的地方就有咱们。如果你热爱青春，期望展示自我，快来加入咱们吧！年轻活力是我们的资本，张扬个性凸显胆识是我们的超越。加入我们，我们会帮你发现自己的闪光点，让你变得更加自信和充实。追不到女神？跆协祝你成功。当不了女神？跆协教你成长。 活动第二届“临战不退”跆拳道争霸赛图]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -339,17 +329,17 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[节能协会]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%8A%82%E8%83%BD%E5%8D%8F%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[节能协会 节能协会以“立足校园，服务同学”为宗旨。从协会建立到现在，节能协会在交大校园内已经举办多种形式的节能宣传活动，立志为交大的节能事业贡献一份力量。我们也举办了很多符合我们协会的特色的一些活动，有变废为宝、后勤活动、节能印象、地球熄灯一小时活动，节能协会会徽设计大赛，节能logo与标识标语设计大赛，利用一个又一个活动让大家在兴趣中去体会节能给大家带来的乐趣。目前节能协会在以往的基础上扩展广度和深度，以活动来发扬节能文化，以文化来提升活动质量。节能协会有着独有的社团建设思路，从成立开始就逐步开始建设我们的社团文化制度，包括内部文化氛围、社团指导章程、部门管理制度等，因为我们清楚的知道作为一个社团，如果要发展壮大、要做大做强、做好，必须有一套完整、科学、健全的社团文化制度。而我们就是在这一思想的指导下，一届一届节能协会人不懈的努力，不懈的奋斗，最终总结出了自己所独有的社团文化制度。这是指导我们思想和工作的精神向标。]]></content>
+    <title><![CDATA[双节棍协会]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%8F%8C%E8%8A%82%E6%A3%8D%E5%8D%8F%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[双节棍协会微信公众号：交大棍协【社团简介】双节棍协会成立于2011年，受体育部指导。双节棍协会秉承着“强身健体，弘扬中华武术”的棍道精神，积极开展日常棍术训练，以武会友，踊跃参加校园内外活动，如高校联赛，内部棍术交流，以及教授外国友人双节棍套路，展示中华传统武术的魅力。在训练过程中本协会力求将动作的力度与优美结合以展示双节棍的刚柔并济之道。男生的阳刚之气与女生的飒爽英姿彼此交融，展示出了协会别具一格的活力。【社团宗旨】：推广时尚全民运动，弘扬中华棍道精神【品牌活动】：成都地区双节棍高校联赛、“棍舞龙魂”双节棍体验周、“青春无悔”双节棍主题晚会、“风云再起”古风武侠晚会【邮箱】：1055564427@qq.com【微信公众号】：交大棍协 活动2017物理学院迎新晚会表演健美操协会表演晚会表演冷焰火套路第七届高校双节棍交流赛物院迎新日常训练]]></content>
       <categories>
         <category>社团</category>
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[南国相声社]]></title>
-    <url>%2F2018%2F09%2F08%2Fassociation%2F%E5%8D%97%E5%9B%BD%E7%9B%B8%E5%A3%B0%E7%A4%BE%2F</url>
-    <content type="text"><![CDATA[南国相声社2018南国迎新群：383847786南国相声社成立于2014年10月13日，发展至今已经四年之久，社员也由最初的7个人，发展至近百人 。南国相声社四年时间，蒸蒸日上，每年都有新突破，更在今年荣获十佳社团、五星社团等美誉。我们每学期都会有两次大型的相声专场，还有一次“小南国茶话会”让更多的社员拥有展现自我的机会。 部门介绍宣传部——这是一份聚集着大量技术“猴儿”的部门（因为这里的人大多跟宅毫无关系！），主要负责微信、微博等平台推送，海报传单的制作……在这里你将学到更多实用的微信、PS技术，以及各种各样的“黑科技”！ 外联部——外联部可以说是全社最不能得罪的部门了（谁叫人家是管钱的呢），主要负责活动场地的筹备，社团经费的管理……在这里你能锻炼出独树一帜的口才、框架清晰的思维，以及对RMB的最佳分配！ 活动部——作为南国最神秘的部门，除了负责演出活动的前前后后，还会负责一些秘密任务，至于是什么？欢迎来pick小南国，我们慢慢说！ 办公室——这是一个舞文弄墨的部门，主要负责文案编写，表格制作，演出视频上传……如果你想收获漂亮的文笔，那么办公室将是个不二之选！另外，办公室的小哥哥小姐姐，可是小南国少有的可爱又文静的哦！ 话不多说，欢迎各位喜欢相声、喜欢传统文化、喜欢欢乐的萌新们加入小南国，下一个交大“郭德纲”说不定就是你哦！相信爱笑的人，运气，不会差！南国相声社，等你来！PS：2018南国迎新群：383847786微信关注“南国相声社”微信公众号，获取南国第一手咨询 南国相声社微信公众号 活动2017年10月迎新专场2017年12月封箱专场2017年合唱大西厢2018年3月开箱专场2018年6月毕业专场小南国春游小南国茶话会2017毕业专场小南国全家福]]></content>
+    <title><![CDATA[西南交大雷锋公司]]></title>
+    <url>%2F2018%2F09%2F08%2Fassociation%2F%E8%A5%BF%E5%8D%97%E4%BA%A4%E5%A4%A7%E9%9B%B7%E9%94%8B%E5%85%AC%E5%8F%B8%2F</url>
+    <content type="text"><![CDATA[西南交大雷锋公司 微信推送链接 雷锋公司协会具体资料请戳这里！！]]></content>
       <categories>
         <category>社团</category>
       </categories>
@@ -667,19 +657,19 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[有用的网站]]></title>
-    <url>%2F2018%2F04%2F27%2F2018%2Furls%2F</url>
-    <content type="text"><![CDATA[网站汇集 云端办公 编程相关 数据结构和算法可视化 代码运行可视化 程序员刷题 菜鸟教程 在线书籍 Python数据科学手册 深度学习 大数据比赛 天池 DataCastle DataFountain 科赛网 京东jddc 点石 工具 人工智能图片放答 搬瓦工 简历制作 资源 免费高清晰度照片 图标库 虫部落 Btbook 博客模板 stockholm pixelarity WordPress Themes html5up nextdesin chrome插件 汇总墙内可用 chrome extension downloader chrome for思维导图 SketchBoard 按键精灵 按键精灵 pdf及其他文档处理 lightPDF smallpdf 实时语音转文字 [搜狗听写app] 手机电脑合作 [袋鼠输入] [向日葵远程控制] 云端办公 uzer API文档集合 datacamp 艺术二维码 http://www.9thws.com/ 学习 Coursea 网易公开课 高清图片搜集 unsplash]]></content>
-      <categories>
-        <category>record</category>
-      </categories>
-  </entry>
-  <entry>
     <title><![CDATA[Apache Mod_wsgi Django Anaconda Python3 配置]]></title>
     <url>%2F2018%2F04%2F27%2F2018%2Fapache%2F</url>
     <content type="text"><![CDATA[本文假设读者具有一定的Linux命令行和python基础 运行环境 Centos-7.4 Anaconda-Python3.6.4 Django-2.0.4 httpd-2.4.33 服务器为腾讯云服务器，httpd是Apache中的服务，安装httpd需要依赖apr、apr-util、pcrepython选用anaconda并且使用conda虚拟环境 Apache首先安装gcc编译器，gcc为编译必须，c++编译器和expat-devel依赖为pcre安装所必须123yum install gccyum install gcc-c++yum install expat-devel 下载源码安装包，注意当使用apr-util，apr1.6版本编译安装httpd时出现xml错误，在/usr/local/httpd/目录下只有modules文件夹。因此1.6版本不适用于httpd的最新版，因此选用1.5版本 选用清华镜像下载速度更快12345wget http://archive.apache.org/dist/apr/apr-1.5.2.tar.gzwget http://archive.apache.org/dist/apr/apr-util-1.5.4.tar.gzwget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.40.tar.gzwget https://mirrors.tuna.tsinghua.edu.cn/apache/httpd/httpd-2.4.33.tar.gzwget https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-5.1.0-Linux-x86_64.sh 解压1234tar -xzf pcre-8.40.tar.gztar -xzf httpd-2.4.33.tar.gztar -xzf apr-util-1.5.4.tar.gztar -xzf apr-1.5.2.tar.gz 安装1234567891011121314151617181920cd apr-1.5.2./configure --prefix=/usr/local/aprmakemake installcd ../apr-util-1.5.4./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/aprmakemake installcd ../pcre-8.40./configure --prefix=/usr/local/pcre --with-apr=/usr/local/aprcd ../httpd-2.4.33./configure --prefix=/usr/local/httpd --with-pcre=/usr/local/pcre --with-apr=/usr/local/apr --with-apr-util=/usr/local/apr-utilmake make install cd ..bash Anaconda3-5.1.0-Linux-x86_64.sh 将Anaconda命令和httpd启动命令添加到path1vim /etc/profile 在最后添加两行12export PATH=/usr/local/httpd/bin:$PATHexport PATH=/root/anaconda3/bin:$PATH 使profile文件起作用1. /etc/profile 注意.和/之间有个空格试一下httpd行不行输入1httpd -k start 访问服务器的ip地址，可以看到页面显示it works 相应的，重新启动和停止的命令为12httpd -k restarthttpd -k stop Python Django下面开始配置python django conda添加清华源123conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/conda config --set show_channel_urls yes 创建django安装的python3.6环境123conda create -n django python=3.6source activate djangopip install django 安装mod_wsgi1pip install mod_wsgi 获取mod_wsgi1mod_wsgi-express module-config 12LoadModule wsgi_module &quot;/root/anaconda3/envs/django/lib/python3.6/site-packages/mod_wsgi/server/mod_wsgi-py36.cpython-36m-x86_64-linux-gnu.so&quot;WSGIPythonHome &quot;/root/anaconda3/envs/django&quot; 修改httpd配置文件12cd /usr/local/httpd/confvim httpd.conf LoadModule中添加一行1LoadModule wsgi_module &quot;/root/anaconda3/envs/django/lib/python3.6/site-packages/mod_wsgi/server/mod_wsgi-py36.cpython-36m-x86_64-linux-gnu.so&quot; 将这一行1Include conf/extra/httpd-vhosts.conf 取消注释相应的修改httpd-vhosts.conf文件12cd extravim httpd-vhosts.conf 全部注释掉之后添加下面部分12345678910111213WSGIPythonPath /root/anaconda3/envs/django/lib/python3.6/site-packages:/home/websiteWSGIPythonHome /root/anaconda3/envs/django&lt;VirtualHost *:80&gt;DocumentRoot /home/website/websiteServerName localhost:80ServerAdmin jstsyhyjk@163.comWSGIScriptAlias / /home/website/website/wsgi.pyAlias /static/ /home/website/static/&lt;Directory &quot;/home/website&quot;&gt;Require all granted&lt;/Directory&gt;&lt;/VirtualHost&gt; 先来看下我django项目的目录结构这是/home/website内的文件树形图（已省略一部分无关内容）123456789101112.|-- db.sqlite3|-- manage.py|-- static|-- templates| `-- index.html|-- website| |-- __init__.py| |-- settings.py| |-- urls.py| |-- view.py| `-- wsgi.py 配置wsgi.py12345import osfrom django.core.wsgi import get_wsgi_applicationos.environ[&apos;PYTHON_EGG_CACHE&apos;] = &apos;/tmp/.python-eggs&apos;os.environ.setdefault(&quot;DJANGO_SETTINGS_MODULE&quot;, &quot;website.settings&quot;)application = get_wsgi_application() 同时在settings.py中修改这一部分，如果不修改，django会拒绝外部的访问1ALLOWED_HOSTS = [&quot;your server ip&quot;] WSGIPythonPath 取上面mod_wsgi输出的路径的site-packages部分，/home/website是我django网站存放的路径WSGIPythonHome 与上面mod_wsgi输出的相同DocumentRoot 就是django主要文件存放的地方WSGIScriptAlias 将wsgi.py的地址映射为/Alias 将存放静态文件的文件姐映射到/static/Directory是为了提升所需要目录的权限 一切就绪之后,重新启动1httpd -k restart 访问域名，发现没成功查看error_log，默认位置在logs内1cat /usr/local/httpd/logs/error_log 可以看到123Permission denied: mod_wsgi (pid=6696): Unable to stat Python home /root/anaconda3/envs/django. Python interpreter may not be able to be initialized correctly. Verify the supplied path and access permissions for whole of the path.Fatal Python error: Py_Initialize: Unable to get the locale encodingModuleNotFoundError: No module named &apos;encodings&apos; 表示权限不够。因此提升权限，亲测仅提升anaconda文件夹权限不能解决，因此12chmod 755 /roothttpd -k start 访问成功error_log在网站内部代码运行错误时还会存放错误信息,用于查到代码运行中可能出现的bug（注意配置中的所有路径信息，如果其中包含括号，则需要在两侧加上引号）]]></content>
       <categories>
         <category>server</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[有用的网站]]></title>
+    <url>%2F2018%2F04%2F27%2F2018%2Furls%2F</url>
+    <content type="text"><![CDATA[网站汇集 云端办公 编程相关 数据结构和算法可视化 代码运行可视化 程序员刷题 菜鸟教程 在线书籍 Python数据科学手册 深度学习 大数据比赛 天池 DataCastle DataFountain 科赛网 京东jddc 点石 工具 人工智能图片放答 搬瓦工 简历制作 资源 免费高清晰度照片 图标库 虫部落 Btbook 博客模板 stockholm pixelarity WordPress Themes html5up nextdesin chrome插件 汇总墙内可用 chrome extension downloader chrome for思维导图 SketchBoard 按键精灵 按键精灵 pdf及其他文档处理 lightPDF smallpdf 实时语音转文字 [搜狗听写app] 手机电脑合作 [袋鼠输入] [向日葵远程控制] 云端办公 uzer API文档集合 datacamp 艺术二维码 http://www.9thws.com/ 学习 Coursea 网易公开课 高清图片搜集 unsplash]]></content>
+      <categories>
+        <category>record</category>
       </categories>
   </entry>
   <entry>
